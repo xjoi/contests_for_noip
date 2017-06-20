@@ -13,7 +13,7 @@ bool cmp1(data p,data q) {
 	if (p.w==q.w) return p.u<q.u;
 	return p.w<q.w;
 }
-bool cmp2(data p,data q){
+bool cmp2(data p,data q) {
 	return p.u<q.u;
 }
 int getf(int x) {
