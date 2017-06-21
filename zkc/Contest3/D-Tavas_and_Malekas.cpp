@@ -37,7 +37,7 @@ int main() {
     cin>>n>>m>>s;
     lens=strlen(s);
     KMPinit();
-    for(int i=1;i<=m;i++) {
+    for(int i=1; i<=m; i++) {
         cin>>a[i];
         if(i==1) {
             n-=lens;
@@ -58,9 +58,9 @@ int main() {
             }
             if(next[k]==q) n-=lens-q;
             else if(next[k]<q) {
-                    puts("0");
-                    exit(0);
-                }
+                puts("0");
+                exit(0);
+            }
         }
     }
     cout<<power(26,n)<<endl;
