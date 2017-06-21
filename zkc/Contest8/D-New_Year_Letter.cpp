@@ -59,17 +59,12 @@ void solve(int a,int b,int h1,int t1,int h2,int t2) {
         t[i]=t[i-1];
     }
     if(f[k]==x) {
-        /*for(int i=1;i<=k;i++) {
-            printf("[%d]%d[%d]\n",h[i],f[i],t[i]);
-        }
-        printf("\n%d %d %d %d %d %d\n",a,b,h1,t1,h2,t2);*/
         print(a,b,h1,t1,h2,t2);
     }
 }
 
 int main() {
     cin>>k>>x>>n>>m;
-    //solve(0,0,0,0,2,1); 
     for(int i=0;i<=n/2;i++) {
         for(int j=0;j<=m/2;j++) {
             for(int h1=0;h1<=2;h1++) {
@@ -78,10 +73,13 @@ int main() {
                         for(int t2=0;t2<=2;t2++){
                             if(n!=1&&i*2==n-1&&h1!=1&&t1!=2) continue;
                             if(m!=1&&j*2==m-1&&h2!=1&&t2!=2) continue;
+                            //特判：长度不为1且除去所有AC之后只剩一个空余字符的话，那么要满足头是A或者尾是C
                             if(n==1&&h1!=t1) continue;
                             if(m==1&&h2!=t2) continue;
+                            //特判：如果长度为1，那么前后字符必须相同
                             if(i*2==n&&(h1!=1||t1!=2)) continue;
                             if(j*2==m&&(h2!=1||t2!=2)) continue;
+                            //特判：如果全串都是AC，那么头必须是A，尾必须是C
                             solve(i,j,h1,t1,h2,t2);
                         }
                     }
