@@ -9,13 +9,13 @@
 >
 > 空间限制：  256MB
 >
-> 主要算法：  我不知道…
+> 主要算法：  
 
 ### 题意
 ### 题解
 
 
-## #B Tavas and SaDDas
+## #B -New Year Present
 
 > 时间限制：  1s
 >
@@ -27,37 +27,49 @@
 ### 题解
 
 
-## #C Tavas and Karafs
+## #C -New Year Ratings Change
 
-> 时间限制：  2s
+> 时间限制：  1s
 >
 > 空间限制：  256MB
 >
-> 主要算法：  二分答案 数学
+> 主要算法：  
 
 ### 题意
 ### 题解
 
 
-## #D Tavas and Malekas
-
-> 时间限制：  2s
->
-> 空间限制：  256MB
->
-> 主要算法：  字符串匹配（KMP）
-
-### 题意
-### 题解
-
-
-## #E Tavas and Pashmaks
+## #D -New Year Letter
 
 > 时间限制：  1s
 >
 > 空间限制：  256MB
 >
-> 主要算法：  计算几何 凸包
+> 主要算法：  
+
+### 题意
+### 题解
+
+
+## #E -New Year Tree Decorations
+
+> 时间限制：  1s
+>
+> 空间限制：  256MB
+>
+> 主要算法：  
+
+### 题意
+### 题解
+
+
+## #F -New Year Tree
+
+> 时间限制：  2s
+>
+> 空间限制：  256MB
+>
+> 主要算法：  
 
 ### 题意
 ### 题解
