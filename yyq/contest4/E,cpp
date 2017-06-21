@@ -1,0 +1,141 @@
+/*
+TLE on test 8...
+开O2，O3都过不去...
+*/
+%:pragma GCC optimize(2)
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<map>
+#include<set>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+#include<cstdlib>
+#include<climits>
+#define INF 2000000000
+#define MAXN 100005
+#define L(x) x<<1
+#define R(x) x<<1|1
+using namespace std;
+int tmp[4*MAXN],cnt;
+int ans[MAXN];
+set<pair<int,int> >::iterator it;
+struct Bus{
+    int s,f,t,id;
+    bool operator < (const Bus a) const
+	{
+        return s<a.s;
+    }
+}bus[MAXN];
+struct Person{
+    int l,r,b,id;
+    bool operator < (const Person a) const
+	{
+        return l<a.l;
+    }
+}p[MAXN];
+struct node
+{
+    int left,right,mid;
+    set<pair<int, int> >v;
+}tree[16 * MAXN];
+int bi_search(int v)
+{
+    int left=0,right=cnt-1;
+    while(left<=right)
+    {
+        int mid=(left+right)/2;
+        if(tmp[mid]>=v)
+			right=mid-1;
+        else
+			left=mid+1;
+    }
+    return left;
+}
+void make_tree(int s,int e,int C)
+{
+    tree[C].left=s;
+    tree[C].right=e;
+    tree[C].mid=(s+e)>>1;
+    tree[C].v.insert(make_pair(INF,-1));
+    if(s==e)
+		return;
+    make_tree(s,tree[C].mid,L(C));
+    make_tree(tree[C].mid+1,e,R(C));
+}
+void update(int p,pair<int,int> v,int C)
+{
+    if(tree[C].left<=p&&tree[C].right>=p)
+		tree[C].v.insert(v);
+    if(tree[C].left==tree[C].right)
+		return;
+    if(p<=tree[C].mid)
+		update(p,v,L(C));
+    else
+		update(p,v,R(C));
+}
+pair<int,int> query(int s,int e,int p,int C)
+{
+    if(tree[C].left>=s&&tree[C].right<=e)
+    {
+        it=tree[C].v.lower_bound(make_pair(p,-1));
+        return *it;
+    }
+    pair<int,int> x(INF,-1),y(INF,-1);
+    if(tree[C].mid>=s)
+		x=query(s,e,p,L(C));
+    if(tree[C].mid<e)
+		y=query(s,e,p,R(C));
+    return x.first<y.first?x:y;
+}
+int main()
+{
+    int n,m;
+    scanf("%d%d",&n,&m);
+    cnt=0;
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d%d%d",&bus[i].s,&bus[i].f,&bus[i].t);
+        bus[i].id=i+1;
+        tmp[cnt++]=bus[i].s;
+		tmp[cnt++]=bus[i].f;
+    }
+    for(int i=0;i<m;i++)
+    {
+        scanf("%d%d%d",&p[i].l,&p[i].r,&p[i].b);
+        p[i].id=i+1;
+        tmp[cnt++]=p[i].l;
+		tmp[cnt++]=p[i].r;
+    }
+    sort(tmp,tmp+cnt);
+    cnt=unique(tmp,tmp+cnt)-tmp;
+    make_tree(0,cnt-1,1);
+    for(int i=0;i<n;i++)
+    {
+        bus[i].s=bi_search(bus[i].s);
+        bus[i].f=bi_search(bus[i].f);
+    }
+    for(int i=0;i<m;i++)
+    {
+        p[i].l=bi_search(p[i].l);
+        p[i].r=bi_search(p[i].r);
+    }
+    int pos=0;
+    sort(bus,bus+n);
+    sort(p,p+m);
+    for(int i=0;i<m;i++)
+    {
+        while(pos<n&&bus[pos].s<=p[i].l)
+        {
+            update(bus[pos].f,make_pair(bus[pos].t,bus[pos].id),1);
+            pos++;
+        }
+        pair<int,int> t=query(p[i].r,cnt-1,p[i].b,1);
+        ans[p[i].id]=t.second;
+    }
+    for(int i=1;i<=m;i++)
+        printf("%d ",ans[i]);
+    printf("\n");
+    return 0;
+}
