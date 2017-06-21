@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 const double eps=1e-32;
-struct node{
+struct node {
     double x,y;
     int w;
-}a[200010],b[200010];
+} a[200010],b[200010];
 int f[200010],ans[200010],n,top=0;
 
 inline double dcmp(double x) {
@@ -33,7 +33,7 @@ bool same(node a,node b) {
 int main() {
     scanf("%d",&n);
     int jx,jy;
-    for(int i=1;i<=n;i++) {
+    for(int i=1; i<=n; i++) {
         scanf("%d %d",&jx,&jy);
         a[i].x=(double)(1.0/jx);
         a[i].y=(double)(1.0/jy);
@@ -51,13 +51,13 @@ int main() {
     sort(a+1,a+1+n,cmp);
     memset(f,0,sizeof f);
     top=0;
-    for(int i=0;i<=n+1;i++) {
+    for(int i=0; i<=n+1; i++) {
         while(top>1&&dcmp(cross(b[a[f[top]].w],b[a[f[top-1]].w],a[i],b[a[f[top-1]].w]))<=0) top--;
         top++;
         f[top]=i;
     }
     int tmp=top;
-    for(int i=1;i<=tmp;i++) {
+    for(int i=1; i<=tmp; i++) {
         if(f[i]==0||f[i]==n+1) continue;
         int j=f[i]-1;
         while(j>0&&same(b[a[j].w],b[a[j+1].w])) {
@@ -66,7 +66,7 @@ int main() {
             j--;
         }
     }
-    for(int i=1;i<=top;i++) f[i]=a[f[i]].w;
+    for(int i=1; i<=top; i++) f[i]=a[f[i]].w;
     sort(f+1,f+1+top);
-    for(int i=1;i<=top;i++) if(f[i]!=0&&f[i]!=n+1) printf("%d ",f[i]);
+    for(int i=1; i<=top; i++) if(f[i]!=0&&f[i]!=n+1) printf("%d ",f[i]);
 }
