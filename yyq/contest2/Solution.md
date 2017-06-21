@@ -1,8 +1,8 @@
 # Solution
 ```
 /******************
-  开始编辑时间：  18:55 21/06/15
-  结束编辑时间：  
+  开始编辑时间：  18:55 17/06/21
+  结束编辑时间：  19:40 17/06/21
 
     VJudge链接：  https://cn.vjudge.net/contest/167220
 CodeForces链接：  http://codeforces.com/contest/514
@@ -32,7 +32,7 @@ CodeForces链接：  http://codeforces.com/contest/514/problem/A
 ## #B Han Solo and Lazer Gun
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/E
+    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/D
 CodeForces链接：  http://codeforces.com/contest/514/problem/B
 
       时间限制：  1s
@@ -50,7 +50,7 @@ P.S. 注意当物品点和枪坐标点相同时加特判。
 ## #C Watto and Mechanism
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/C
+    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/E
 CodeForces链接：  http://codeforces.com/contest/514/problem/C
 
       时间限制：  3s
@@ -70,7 +70,7 @@ P.S. 我取的mod值为1000000000000000007。
 ## #D R2D2 and Droid Army
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/A
+    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/C
 CodeForces链接：  http://codeforces.com/contest/514/problem/D
 
       时间限制：  2s
@@ -87,7 +87,7 @@ CodeForces链接：  http://codeforces.com/contest/514/problem/D
 ## #E Darth Vader and Tree
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/D
+    VJudge链接：  https://cn.vjudge.net/contest/167220#problem/A
 CodeForces链接：  http://codeforces.com/contest/514/problem/E
 
       时间限制：  1s
