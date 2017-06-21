@@ -5,6 +5,7 @@ https://cn.vjudge.net/contest/167828
 [click here to enter codeforces](http://codeforces.com/contest/379)
 
 ##A -New Year Candles
+
 ###Problem
 Vasily the Programmer loves romance, so this year he decided to illuminate his room with candles.
 Vasily has a candles.When Vasily lights up a new candle, it first burns for an hour and then it goes out. Vasily is smart, so he can make b went out candles into a new candle. As a result, this new candle can be used like any other new candle.
