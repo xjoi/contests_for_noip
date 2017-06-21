@@ -10,7 +10,7 @@ inline bool check(long long r) {
 
 int main() {
     cin>>a>>b>>n;
-    for(int i=1;i<=n;i++) {
+    for(int i=1; i<=n; i++) {
         cin>>l>>t>>m;
         long long hl=a+l*b-b, dh=t-hl;
         long long rb=((dh/b)+l);
@@ -25,8 +25,7 @@ int main() {
             if(check(mid)) {
                 ans=mid;
                 lb=mid+1;
-            }
-            else rb=mid-1;
+            } else rb=mid-1;
         }
         cout<<ans<<endl;
     }
