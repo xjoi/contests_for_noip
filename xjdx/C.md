@@ -1,4 +1,4 @@
-#题目:[CodeForces - 514C](http://codeforces.com/problemset/problem/514/C)
+# 题目:[CodeForces - 514C](http://codeforces.com/problemset/problem/514/C)
 time limit per test3 seconds
 memory limit per test256 megabytes
 Watto, the owner of a spare parts store, has recently got an order for the mechanism that can process strings in a certain way. Initially the memory of the mechanism is filled with n strings. Then the mechanism should be able to process queries of the following type: "Given string s, determine if the memory of the mechanism contains string t that consists of the same number of characters as s and differs from s in exactly one position".
@@ -29,21 +29,21 @@ output
 YES
 NO
 NO
-#题意:
+# 题意:
 就是对于给定的n个字符串(n <= 3*10^5,n个字符串总长度<=6*10^5,并且只包含'a','b','c'), 对于接下来输入的m次字符串询问(m <= 3*10^5), 判断每一次询问的字符串在给定的n个字符串中是否存在长度相同且刚好有1处字符不同的字符串.
-#思路:
-##解法一:字符串哈希大法
+# 思路:
+## 解法一:字符串哈希大法
 将原字符串按照字符串哈希计算放到set中,对于询问串枚举修改位置,判断修改后的字符串哈希值是否在set中存在,存在即为yes.
 **unordered_set 不排序的set,插入和查询更快一点**
 **哈希大法好写,但是存在冲突的可能性!**
-##解法二:[Trie树](http://blog.csdn.net/hguisu/article/details/8131559)
+## 解法二:[Trie树](http://blog.csdn.net/hguisu/article/details/8131559)
 利用Trie树插入原字符串,然后查询的时候稍作修改,查询的时候允许有一次错误查询即可.具体见代码.
 **其实这样复杂度是没有保证的**,因为采用的是DFS.完全可以构造出数据卡掉.那么要让复杂度有保证应该怎么办呢?请看解法三.
-##解法三:分组+正反序Trie树+set查询
+## 解法三:分组+正反序Trie树+set查询
 　　先把原字符串按照长度分组,按组建Trie树,并且每组都建2颗Trie树,正序和反序字符串都建Trie树.然后从左到右枚举每个字符串的切断点k,把s[0..k-1]在正序trie树种的位置l1,以及s[end..k+1]在反序树的位置r1,以pair< l1,r1>保存到对应分组的set中。
 　　对于查询串，也是枚举切断点k，查询s[0..k-1]在正序trie树种的位置l1,以及s[end..k+1]在反序树的位置r1，若pair< l1,r1>在set中存在，则表示该查询串符合题意。
-#代码
-##解法一:
+# 代码
+## 解法一:
 ```c++
 #include <bits/stdc++.h>
 using namespace std;
@@ -96,7 +96,7 @@ int main() {
 	}
 }
 ```
-##解法二代码:
+## 解法二代码:
 ```c++
 #include <cstdio>
 #include <cstdlib>
@@ -180,4 +180,4 @@ int main( void ) {
     return 0;
 }
 ```
-##解法三代码（待补充）：
+## 解法三代码（待补充）：
