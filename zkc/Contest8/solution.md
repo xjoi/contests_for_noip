@@ -103,7 +103,7 @@ CodeForces链接：  http://codeforces.com/contest/379/problem/E
 ```
 ### 题意
 有n个宽为k的多边形叠在坐标系中，每个多边形下底面与x轴重合，，左侧与右侧和x轴垂直，顶面由一串数字y0,y1,y2...yk给出，表示顶面由点(0,y0),(1,y1),(2,y2)...(k,yk)组成……还是看图吧
-[!QAQ](http://codeforces.com/predownloaded/01/af/01af019d1a190491c4dab199d4785c4c9b1f3810.png)
+[!](http://codeforces.com/predownloaded/01/af/01af019d1a190491c4dab199d4785c4c9b1f3810.png)
 然后要求的是，每个多边形可见的面积。
 ### 题解
 还没A呐稍等。
