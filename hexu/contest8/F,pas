@@ -1,0 +1,37 @@
+var
+  fa:array[0..1000050,0..25]of longint;
+  dep:array[0..1000050]of longint;
+  n,i,j,k,tot,k1,k2,ans,x,c,s:longint;
+function LCA(x,y:longint):longint;
+var i:longint;
+begin
+  if dep[x]<dep[y] then begin x:=x+y; y:=x-y; x:=x-y; end;
+  for i:=25 downto 0 do if dep[fa[x][i]]>=dep[y] then x:=fa[x][i];
+  if x=y then exit(x);
+  for i:=25 downto 0 do if fa[x][i]<>fa[y][i] then
+    begin x:=fa[x][i]; y:=fa[y][i]; end;
+  exit(fa[x][0]);
+end;
+begin
+  readln(n);  tot:=4;
+  dep[1]:=0; dep[2]:=1; dep[3]:=1; dep[4]:=1;
+  fa[2,0]:=1; fa[3,0]:=1; fa[4,0]:=1;  k1:=2; k2:=3; ans:=2;
+  while n>0 do
+  begin
+    dec(n); readln(x);
+    inc(tot); fa[tot,0]:=x;  dep[tot]:=dep[x]+1;
+    for j:=1 to 25 do fa[tot,j]:=fa[fa[tot,j-1],j-1];
+
+
+    inc(tot); fa[tot,0]:=x;  dep[tot]:=dep[x]+1;
+    for j:=1 to 25 do fa[tot,j]:=fa[fa[tot,j-1],j-1];
+
+    c:=lca(k1,tot); s:=dep[k1]+dep[tot]-dep[c]*2;
+    if s>ans then begin k2:=tot; ans:=s; end;
+
+    c:=lca(k2,tot); s:= dep[k2]+dep[tot]-dep[c]*2;
+    if s>ans then begin k1:=tot; ans:=s; end;
+    writeln(ans);
+  end;
+end.
+end.
