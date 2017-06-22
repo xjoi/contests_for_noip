@@ -1,8 +1,11 @@
 # The Solution
-
+```
+/******************
 Source: Codeforces Round #179 (Div. 1)
-VJudge链接：  https://cn.vjudge.net/contest/167920#problem   
+    VJudge链接：  https://cn.vjudge.net/contest/167920#problem   
 CodeForces链接：  http://codeforces.com/problemset/problem/295
+******************/
+```
 
 ***
 ## #A Greg and Array
