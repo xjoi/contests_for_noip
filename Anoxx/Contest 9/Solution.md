@@ -8,11 +8,9 @@ CodeForces链接：  http://codeforces.com/problemset/problem/295
 ***
 ## #A Greg and Array
 ```
-/******************
 Time limit: 1500 ms
 Memory limit: 262144 kB
 Tags: 差分，线段树
-******************/
 ```
 ### 题意
 给你n个数，m个操作，每个操作包含l、r、d，表示区间[l,r]+d，再给你k个总操作，每个总操作包含x、y，表示做第x到第y个操作，问最后各个数的数值；
@@ -22,11 +20,9 @@ Tags: 差分，线段树
 ***
 ## #B Greg and Graph
 ```
-/******************
 Time limit： 3000 ms
 Memory limit： 262144 kB
 Tags： 最短路，逆向思维
-******************/
 ```
 ### 题意
 给你n个点，每两个不同的点间路的距离，n次操作，每次操作删除一个点，求每次操作前所有点对之间的最短路之和。
@@ -37,11 +33,9 @@ Tags： 最短路，逆向思维
 ***
 ## #C Greg and Friends
 ```
-/******************
 Time limit： 2000 ms
 Memory limit： 262144 kB
 Tags： dp，bfs
-******************/
 ```
 ### 题意
 有n个人在岸边，每个人不是50kg就是100kg，有一艘船，载重量为k，可以载人过河，但每次必须有人划船，问使所有人都到对岸的最少过河次数和这个次数的方案数。
@@ -52,11 +46,9 @@ Tags： dp，bfs
 ***
 ## #D New Year Letter
 ```
-/******************
 Time limit: 2000 ms
 Memory limit: 262144 kB
 Tags: dp
-******************/
 ```
 ### 题意
 对于一个n*m的黑白矩阵，存在cave当且仅当：
@@ -79,11 +71,9 @@ m-j+1则是因为这个区间可以左右移啊
 ***
 ## #E Yaroslav and Points
 ```
-/******************
  Time limit: 2000 ms
  Memory limit: 262144 kB
  Tags: 动态开点线段树
-******************/
 ```
 ### 题意
 给你n个x轴上的坐标，给你两个操作：
