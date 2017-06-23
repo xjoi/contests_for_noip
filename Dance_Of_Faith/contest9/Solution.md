@@ -49,7 +49,7 @@
 > 主要算法：  递推+前缀和优化
 
 ### 题意
-![the picture](file:///C:/Documents%20and%20Settings/Administrator/Application%20Data/Tencent/QQ/Temp/X)YOPKM%60%7BJM8L189D]$A%7DV8.png)
+![the picture](http://images2015.cnblogs.com/blog/1185618/201706/1185618-20170623082429929-2084157134.png)
 ### 题解
 
 
