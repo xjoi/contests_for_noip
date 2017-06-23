@@ -12,6 +12,7 @@
 > 主要算法：  差分
 
 ### 题意
+给定一个初始序列，给出M个操作，每个操作定义为将区间Li~Ri每个数都加上
 ### 题解
 
 
@@ -48,6 +49,7 @@
 > 主要算法：  递推+前缀和优化
 
 ### 题意
+![the picture](file:///C:/Documents%20and%20Settings/Administrator/Application%20Data/Tencent/QQ/Temp/X)YOPKM%60%7BJM8L189D]$A%7DV8.png)
 ### 题解
 
 
