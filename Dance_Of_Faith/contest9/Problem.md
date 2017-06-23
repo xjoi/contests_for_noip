@@ -57,7 +57,7 @@ Please, do not use the %lld specifier to read or write 64-bit integers in C++. I
 Greg has a weighed directed graph, consisting of n vertices. In this graph any pair of distinct vertices has an edge between them in both directions. Greg loves playing with the graph and now he has invented a new game:
 The game consists of n steps.
 On the i-th step Greg removes vertex number xi from the graph. As Greg removes a vertex, he also removes all the edges that go in and out of this vertex.
-Before executing each step, Greg wants to know the sum of lengths of the shortest paths between all pairs of the remaining vertices. The shortest path can go through any remaining vertex. In other words, if we assume that d(i, v, u) is the shortest path between vertices v and u in the graph that formed before deleting vertex xi, then Greg wants to know the value of the following sum: .
+Before executing each step, Greg wants to know the sum of lengths of the shortest paths between all pairs of the remaining vertices. The shortest path can go through any remaining vertex. In other words, if we assume that d(i, v, u) is the shortest path between vertices v and u in the graph that formed before deleting vertex xi, then Greg wants to know the value of the following sum: ![the picture](https://odzkskevi.qnssl.com/f40521a7ae4195e531270fd707d15b5d?v=1497834459)
 Help Greg, print the value of the required sum before each step.
 ### Input
 The first line contains integer n (1 ≤ n ≤ 500) — the number of vertices in the graph.
