@@ -63,7 +63,7 @@ Yes
 0 2 3 1
 #### Output
 No
-#### Note
+### Note
 In the first sample test when you push the button for the first time, the sequence of active teeth will be 2 2 1, when you push it for the second time, you get 0 1 2.
 
 ---------------------------------------
@@ -133,7 +133,7 @@ Yes
 2 9
 #### Output
 No
-####Input
+#### Input
 2 1
 1 1
 1000000000000000000 1000000000000000000
