@@ -202,8 +202,8 @@ Please, do not use the %lld specifier to read or write 64-bit integers in C++. I
 1 1 560
 2 635 644
 1 7 -677
-#### Output　
-176　
+#### Output
+176
 20
 406
 1046
