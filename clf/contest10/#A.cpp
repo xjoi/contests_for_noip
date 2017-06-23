@@ -1,4 +1,3 @@
-```cpp
 #include<cstdio>
 #include<iostream>
 #include<cstring>
@@ -17,4 +16,3 @@ int main() {
 	else printf("%d\n",a0-a1);
 	return 0;
 }
-```
