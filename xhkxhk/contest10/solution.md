@@ -1,25 +1,17 @@
-### C
-#
+### A
+#这是一道贪心，顺序什么的并不重要。因此本着贪到贪无可贪的原则，我们只需输出所有的0和1的个数再减一减就可以A掉了
 ```pas
 var
-a,b:array[1..100000] of longint;
-t,i,j,k,m,n,o:longint;
+s:array[1..200005] of char;
+i,j,n,k,m1,m2:longint;
 begin
-readln(m,n);
-o:=1;
+readln(n);
 for i:=1 to n do
 begin
-read(k);
-for j:=1 to k do
-begin
-a[j]:=0;
-read(a[j]);
+read(s[i]);
+if s[i]='1' then inc(m1);
+if s[i]='0' then inc(m2);
 end;
-while a[o]=o do inc(o);
-readln;
-end;
-dec(o);
-writeln(m-n+m+1-o*2);
+writeln(abs(m1-m2));
 end.
-
 ```
