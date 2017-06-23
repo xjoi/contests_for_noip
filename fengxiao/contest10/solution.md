@@ -43,9 +43,6 @@ CodeForces链接：  http://codeforces.com/contest/556
 ## #C Case of Matryoshkas
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167828#problem/C
-CodeForces链接：  http://codeforces.com/contest/379/problem/C
-
       时间限制：  1s
       空间限制：  256MB
       主要算法：  [划掉]俄罗斯套娃[/划掉] 还是模拟加点贪心
@@ -61,29 +58,23 @@ nxt数组表示它外面的一层是什么
 然后半贪心从1套到n一个个拆开来套进去处理就可以了
 
 ***
-## #D New Year Letter
+## #D Case of Fugitive
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167828#problem/D
-CodeForces链接：  http://codeforces.com/contest/379/problem/D
-
       时间限制：  2s
       空间限制：  256MB
-      主要算法：  模拟 枚举 暴力 递推
+      主要算法：  STL 贪心
 ******************/
 ```
 ### 题意
-求两个分别长为n和m的，均由小写字母组成的字符串，将其按类似斐波那契的方式**(s[n]=s[i-2]+s[i-1])**生成许多字符串，使得第k个字符串包含有x个“AC”~（想AC想疯了）~
+给你一堆区间（先处理一下就可简单得到），再给你一堆点，有没有方案使所有区间都能被匹配
 
 ### 题解
-字符串在拼接的时候可能有前一个字符串的末尾与后一个字符串的开头组合成一个“AC”，而中间的字符都不大要紧，所以只需要枚举初始字符串中的AC数，开头字母以及末尾字,母。AC数最多为长度/2，开头末尾字符只有A、C或其他字母三种情况。特判比较多，详见代码。然后递推出第k个字符串，满足要求的话就按枚举出的信息生成字符串即可。
+乍一眼看去 二分图呗，再一眼看去 woc匹配数怎么那么大，于是想到贪心，按区间右端点从大到小排序，并每次取距离左端点最近的点，如果都能取到就成立，否则不成立，其间注意STL中set的应用，注意用multiset。
 ***
 ## #E Case of Chocolate
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167828#problem/E
-CodeForces链接：  http://codeforces.com/contest/379/problem/E
-
       时间限制：  1s
       空间限制：  256MB
       主要算法：  STL 模拟 贪心
