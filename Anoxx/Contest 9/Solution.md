@@ -1,90 +1,72 @@
 # The Solution
 ```
-Source: Codeforces Round #179 (Div. 1)
-    VJudge链接：  https://cn.vjudge.net/contest/167920#problem   
-CodeForces链接：  http://codeforces.com/problemset/problem/295
+Source: Codeforces Round #310 (Div. 2)
+    VJudge链接：  https://cn.vjudge.net/contest/168038#problem
+CodeForces链接：  http://codeforces.com/contest/556
 ```
 
 ***
-## #A Greg and Array
+## #A Case of the Zeros and Ones
 ```
-Time limit: 1500 ms
+Time limit: 1000 ms
 Memory limit: 262144 kB
-Tags: 差分，线段树
+Tags: 贪心
 ```
 ### 题意
-给你n个数，m个操作，每个操作包含l、r、d，表示区间[l,r]+d，再给你k个总操作，每个总操作包含x、y，表示做第x到第y个操作，问最后各个数的数值；
+给你一个01串，‘01’或‘10’可以消掉，问最少剩余长度。
 ### 题解
-两次打标记（就是两次差分
+最后因为一定是全0或全1，所以ans=len-min(num0,num1)\*2;
 
 ***
-## #B Greg and Graph
-```
-Time limit： 3000 ms
-Memory limit： 262144 kB
-Tags： 最短路，逆向思维
-```
-### 题意
-给你n个点，每两个不同的点间路的距离，n次操作，每次操作删除一个点，求每次操作前所有点对之间的最短路之和。
-### 题解
-可以把每次操作删除一个点，看做从后面的操作到前面的操作依次加点，然后对于每次加点对其他所有点进行松弛；
-然后每次的答案即为已加入各点目前为止间的最短路之和，倒着输出即可；
-
-***
-## #C Greg and Friends
+## #B Case of Fake Numbers
 ```
 Time limit： 2000 ms
 Memory limit： 262144 kB
-Tags： dp，bfs
+Tags： 暴力
 ```
 ### 题意
-有n个人在岸边，每个人不是50kg就是100kg，有一艘船，载重量为k，可以载人过河，但每次必须有人划船，问使所有人都到对岸的最少过河次数和这个次数的方案数。
+给你n个数，每个数规定在[0,n-1]中循环，每次操作可以使第2\*n个数+1或第2\*n+1个数-1
 ### 题解
-最少过河次数bfs无脑求就行（好像都不用bfs……，设f[i][j][k]表示有i个50kg的人和j个100kg的人在原岸，船在（k==1？原岸：对面）的最少次数的方案数，
-显然这可以在bfs的时候通过组合数维护，注意bfs的判重即可；
+暴力
 
 ***
-## #D New Year Letter
+## #C Case of Matryoshkas
 ```
-Time limit: 2000 ms
+Time limit： 2000 ms
+Memory limit： 262144 kB
+Tags： 暴力
+```
+### 题意
+俄罗斯套娃，规则与现实一样（取套娃和套套娃都算一步），开始给一些初始情况，求全部套一起的最少步数
+### 题解
+注意只有1-k的初始情况不用拆开，其他都要拆开然后一个一个套
+
+***
+## #D Case of Fugitive
+```
+Time limit: 3000 ms
 Memory limit: 262144 kB
-Tags: dp
+Tags: STL,贪心
 ```
 ### 题意
-对于一个n行m列的黑白矩阵，存在cave当且仅当：
-    1、存在[l,r]使得第l行到第r行都有且仅有两个黑色格子，其他行没有；
-    2、存在一个行号t，使得：
-        1）对于任意存在黑色格子的行，设两个黑色格子的列号为x和y(x<y)，则设集合s(r)=[x,y]；
-        2）任意取t及t之上的两个有黑色格子行，令上方的行为u，下方的行为d，则s(u)属于s(d);
-        3）任意取t及t之下的两个有黑色格子行，令上方的行为u，下方的行为d，则s(d)属于s(u);
-求n行m列的黑白矩阵存在cave的方案数;
+有n个岛，m座桥，如果桥的长度能够满足能架在岛上，并且不超过岛的长度，那么可以，问所有的岛能不能联通起来 
+思路：
 
 ### 题解
-设f[i][j]表示前i行只让上面的行符合情况，第i行集合长度为j（可以看做两个黑色块一个在1，一个在j）的方案数，则：
-    1、f[i][j]=sigma(f[i-1][k](2<=k<=j))+f[i][j-1];
-前面的sigma是显然的，而f[i][j-1]是因为，f[i][j-1]的情况可以整体向右移一位并依然符合f[i][j]的定义；
-    2、ans=sigma((f[i][j]-f[i-1][j])*f[n-i+1][j]*(m-j+1))(1<=i<=n,2<=j<=m);
-f[i][j]-f[i-1][j]是因为第i-1行长度为j且第i行长度为j的方案可能重复计算，需要避免
-f[n-i+1][j]则是f[i][j]只算了上面符合情况的，我们需要和下面符合情况的方案数乘起来
-m-j+1则是因为这个区间可以左右移啊
+每个区间(l,r)，应该尽量找大于等于l，并且小于等于r，跟r相差最小的，那么可以对岛进行排序，然后维护一个set，用来找离r最近的是哪座桥。
 
 ***
-## #E Yaroslav and Points
+## #E Case of Chocolate
 ```
- Time limit: 2000 ms
+ Time limit: 3000 ms
  Memory limit: 262144 kB
- Tags: 动态开点线段树
+ Tags: 线段树，STL
 ```
 ### 题意
-给你n个x轴上的坐标，给你两个操作：
-    1、把输入的第j个点的坐标右移d
-    2、给定区间，输出区间内点之间的距离和
+上三角，每次可以从副对角线上选一个点，然后选择向上或者向左走，问每次能连续走多少个格子，走过的不能再走 
 ### 题解
-开一个-1e8到1e8的线段树，对于每一个点，就把含有这个点坐标的区间更新，cnt代表区间内的点数，sum是区间内的点的坐标和，ans就是答案：
-    c.sum=a.sum+b.sum;
-	  c.cnt=a.cnt+b.cnt;
-	  c.ans=a.ans+b.ans+a.cnt*b.sum-b.cnt*a.sum;
-（为什么这样？？手动模拟合并两个区间你就知道啦
-最后因为空间开不下那么多点，于是动态开点，要用到再标号，就可以啦
+注意到，对于一个点x向上的操作，我们只需要顺着副对角线往右边找到第一个被操作过的点y，若点y向上，则x能到的高度就是y到的高度，向左就是x轴间隔
+同样的，对向左的操作也有同样的规则，只不过是向左找罢了
+可以用map/set/线段树维护
 
 
