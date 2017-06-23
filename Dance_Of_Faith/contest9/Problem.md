@@ -57,7 +57,7 @@ Please, do not use the %lld specifier to read or write 64-bit integers in C++. I
 Greg has a weighed directed graph, consisting of n vertices. In this graph any pair of distinct vertices has an edge between them in both directions. Greg loves playing with the graph and now he has invented a new game:
 The game consists of n steps.
 On the i-th step Greg removes vertex number xi from the graph. As Greg removes a vertex, he also removes all the edges that go in and out of this vertex.
-Before executing each step, Greg wants to know the sum of lengths of the shortest paths between all pairs of the remaining vertices. The shortest path can go through any remaining vertex. In other words, if we assume that d(i, v, u) is the shortest path between vertices v and u in the graph that formed before deleting vertex xi, then Greg wants to know the value of the following sum: ![the picture](https://odzkskevi.qnssl.com/f40521a7ae4195e531270fd707d15b5d?v=1497834459)
+Before executing each step, Greg wants to know the sum of lengths of the shortest paths between all pairs of the remaining vertices. The shortest path can go through any remaining vertex. In other words, if we assume that d(i, v, u) is the shortest path between vertices v and u in the graph that formed before deleting vertex xi, then Greg wants to know the value of the following sum:  ![the picture](https://odzkskevi.qnssl.com/f40521a7ae4195e531270fd707d15b5d?v=1497834459)
 Help Greg, print the value of the required sum before each step.
 ### Input
 The first line contains integer n (1 ≤ n ≤ 500) — the number of vertices in the graph.
@@ -168,7 +168,7 @@ In the single line print the remainder after dividing the answer to the problem 
 ### Problem
 Yaroslav has n points that lie on the Ox axis. The coordinate of the first point is x1, the coordinate of the second point is x2, ..., the coordinate of the n-th point is — xn. Now Yaroslav wants to execute m queries, each of them is of one of the two following types:
 Move the pj-th point from position xpj to position xpj + dj. At that, it is guaranteed that after executing such query all coordinates of the points will be distinct.
-Count the sum of distances between all pairs of points that lie on the segment [lj, rj] (lj ≤ rj). In other words, you should count the sum of: .
+Count the sum of distances between all pairs of points that lie on the segment [lj, rj] (lj ≤ rj). In other words, you should count the sum of:  ![the picture](https://odzkskevi.qnssl.com/f549ece2520ed6d83e9826ea84e06c47?v=1498082179)
 Help Yaroslav.
 ### Input
 The first line contains integer n — the number of points (1 ≤ n ≤ 105). The second line contains distinct integers x1, x2, ..., xn — the coordinates of points (|xi| ≤ 109).
