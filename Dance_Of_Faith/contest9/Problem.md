@@ -131,6 +131,7 @@ In the second test you should follow the plan:
 3. transport one 100 kg. person;
 4. transport one 50 kg. person back;
 5. transport two 50 kg. people.
+
 That totals to 5 rides. Depending on which person to choose at step 2, we can get two distinct ways.
 
 -----------------------------------
@@ -179,8 +180,8 @@ Please, do not use the %lld specifier to read or write 64-bit integers in C++. I
 ### Example
 #### Input
 8
-36 50 28 -75 40 -60 -95 -48
-20
+36 50 28 -75 40 -60 -95 -48　
+20　
 2 -61 29
 1 5 -53
 1 1 429
@@ -200,9 +201,9 @@ Please, do not use the %lld specifier to read or write 64-bit integers in C++. I
 1 1 -730
 1 1 560
 2 635 644
-1 7 -677
-####　Output
-176
+1 7 -677　
+#### Output　
+176　
 20
 406
 1046
