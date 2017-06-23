@@ -1,5 +1,5 @@
-# A
-
+### C
+#
 ```pas
 var
 a,b:array[1..100000] of longint;
