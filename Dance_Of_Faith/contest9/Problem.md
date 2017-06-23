@@ -180,8 +180,8 @@ Please, do not use the %lld specifier to read or write 64-bit integers in C++. I
 ### Example
 #### Input
 8
-36 50 28 -75 40 -60 -95 -48　
-20　
+36 50 28 -75 40 -60 -95 -48
+20
 2 -61 29
 1 5 -53
 1 1 429
@@ -201,7 +201,7 @@ Please, do not use the %lld specifier to read or write 64-bit integers in C++. I
 1 1 -730
 1 1 560
 2 635 644
-1 7 -677　
+1 7 -677
 #### Output　
 176　
 20
