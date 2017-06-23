@@ -189,5 +189,6 @@ Print q lines, the i-th of them should contain the number of eaten pieces as a r
 ### Note
 Pictures to the sample tests:
 ![the picture](https://odzkskevi.qnssl.com/d10831d2a991e7d81a0ca97c6df9a896?v=1498176242)
+
 The pieces that were eaten in the same action are painted the same color. The pieces lying on the anti-diagonal contain the numbers of the action as a result of which these pieces were eaten.
 In the second sample test the Andrewid tries to start eating chocolate for the second time during his fifth action, starting from the cell at the intersection of the 10-th column and the 1-st row, but this cell is already empty, so he does not eat anything.
