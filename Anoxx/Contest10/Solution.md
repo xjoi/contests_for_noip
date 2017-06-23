@@ -42,7 +42,7 @@
  注意只有1-k的初始情况不用拆开，其他都要拆开然后一个一个套
   
   ***
- +## #D Case of Fugitive
+ ## #D Case of Fugitive
   ```
  Time limit: 3000 ms
   Memory limit: 262144 kB
@@ -54,7 +54,7 @@
  每个区间(l,r)，应该尽量找大于等于l，并且小于等于r，跟r相差最小的，那么可以对岛进行排序，然后维护一个set，用来找离r最近的是哪座桥。
   
   ***
- +## #E Case of Chocolate
+ ## #E Case of Chocolate
   ```
   Time limit: 3000 ms
    Memory limit: 262144 kB
