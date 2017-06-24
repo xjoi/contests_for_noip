@@ -1,6 +1,6 @@
 ## Todolist && contest history
 - [ ] contest3 problem D
-- [ ] contest4 problem D
+- [X] contest4 problem D
 - [ ] contest4 problem E
 - [ ] contest5 problem D
 - [ ] contest5 problem E
