@@ -4,9 +4,8 @@
   开始编辑时间：  18:32 21/06/17
   结束编辑时间：  19:40 21/06/17 [paused]
 
-    VJudge链接：  https://cn.vjudge.net/contest/167828
-CodeForces链接：  http://codeforces.com/contest/379
-  tutorial链接：  http://codeforces.com/blog/entry/10171
+    VJudge链接：  https://cn.vjudge.net/contest/167920
+CodeForces链接：  http://codeforces.com/contest/295
 
 题目按CF顺序排序
 ******************/
@@ -14,45 +13,34 @@ CodeForces链接：  http://codeforces.com/contest/379
 
 ***
 
-## #A New Year Candles
+## #A Greg and Array
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167828#problem/A
-CodeForces链接：  http://codeforces.com/contest/379/problem/A
-
       时间限制：  1s
       空间限制：  256MB
-      主要算法：  模拟
+      主要算法：  差分
 ******************/
 ```
 ### 题意
-有a支蜡烛，用b支蜡烛燃烧剩下的“梗”可以接成一支新蜡烛。问最多能用几支蜡烛。
+给你长度为n的初始数列，m种操作，k个步骤（包含x，y 意为执行一遍操作x->y），让你求最终的数组
 
 ### 题解
-随便模拟呗
+两次差分，分别差分操作数和ans数组
 
 ***
-## #B New Year Present
+## #B Greg and Graph
 ```
 /******************
-    VJudge链接：  https://cn.vjudge.net/contest/167828#problem/B
-CodeForces链接：  http://codeforces.com/contest/379/problem/B
-
       时间限制：  1s
       空间限制：  256MB
-      主要算法：  还是摸你？
+      主要算法：  floyd
 ******************/
 ```
 ### 题意
-有个一排n个礼物盒，需要在第i个盒子里放入ai个礼物。有个小机器人，共有三种操作：
-> `L` ：左移一个盒子 <br />
-> `R` ：右移一个盒子 <br />
- `P` ：在当前盒子放入一个礼物
-
-其中`P`指令不能连续执行；小机器人不能移出边界。输出任意一个指令数不超过1e6的操作指令序列即可。
+给你一幅图和删点的次序，求每次删点前所有点对的最短路之和
 
 ### 题解
-简单模拟，有礼物要求就RLP（醉后一个LRP）没有就R。
+需深度理解Floyd的原理。Floyd思想就是DP 以K为必选点进行，那么只需按照删点的逆序进行Floyd便可以达到无视删除节点的效果
 
 ***
 ## #C New Year Ratings Change
@@ -71,7 +59,7 @@ CodeForces链接：  http://codeforces.com/contest/379/problem/C
 任意合法答案均可。
 
 ### 题解
-sort之后扫一遍。
+唔，sort之后扫一遍嘛。
 
 ***
 ## #D New Year Letter
@@ -86,10 +74,10 @@ CodeForces链接：  http://codeforces.com/contest/379/problem/D
 ******************/
 ```
 ### 题意
-求两个分别长为n和m的，均由小写字母组成的字符串，将其按类似斐波那契的方式**(s[n]=s[i-2]+s[i-1])**生成许多字符串，使得第k个字符串包含有刚好x个“AC”
+求两个分别长为n和m的，均由小写字母组成的字符串，将其按类似斐波那契的方式**(s[n]=s[i-2]+s[i-1])**生成许多字符串，使得第k个字符串包含有x个“AC”~（想AC想疯了）~
 
 ### 题解
-首先可知除两端外中间的AC是不受顺序所影响的所以双重循环枚举就可以了。然而端点是需要分类讨论的，可能出现s1s2,s1s1,s2s1,s2s2这几种情况，所以先算出来各个情况可以增加AC的数量（a,b,c,d数组）然后再组合一下就可以了（比如既有s1s2,又有s1s1）。代码中c1[i],c2[i]->i层时s1和s2的个数 s1，s2->分别能塞下的最多AC数。注意if中边界条件和输出
+字符串在拼接的时候可能有前一个字符串的末尾与后一个字符串的开头组合成一个“AC”，而中间的字符都不大要紧，所以只需要枚举初始字符串中的AC数，开头字母以及末尾字,母。AC数最多为长度/2，开头末尾字符只有A、C或其他字母三种情况。特判比较多，详见代码。然后递推出第k个字符串，满足要求的话就按枚举出的信息生成字符串即可。
 ***
 ## #E New Year Tree Decorations
 ```
@@ -128,8 +116,10 @@ CodeForces链接：  http://codeforces.com/contest/379/problem/F
 
 ### 题解
 > Mr.wyq: “动态维护树的直径”
-记直径的两端点为u，v，则每次新增节点所生成的新的直径必过u，v中一点或两点，
-所以只需枚举u/v是否被选中就可以了，剩下的那个点就是新增的两个节点中的一个。
+
+倍增LCA，新增节点时处理出新节点的深度和倍增祖先。
+因为每次操作只加了一层节点，所以树的直径每次最多增加1。只要维护最深的节点，如果新节点的深度比原先最深节点多1，那么ans++；否则只要求出新节点到原先最深节点的路径长度，如果大于ans，那么就更新，不然ans不变。
+X和Y两节点之间的路径等于：X的深度 + Y的深度 - 2*（X和Y的LCA）
 
 ***
 ## #G New Year Cactus
@@ -144,7 +134,4 @@ CodeForces链接：  http://codeforces.com/contest/379/problem/G
 ******************/
 ```
 ### 题意
-给你一个树不像树环不像环的东西（就是带有简单不交叉环的树），让你在上面染两种颜色，
-两端点的颜色不能相同，问你白色从0到n时黑色的数量分别最多为多少。
-### 题解
-本来这只是一道简单的树DP，然而加了个恶心的环。。。。
+不会，任性
