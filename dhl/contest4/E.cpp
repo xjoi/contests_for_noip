@@ -47,7 +47,7 @@ int main()
 	sort(a+1,a+n+m+1,cmp);
 //	for(int i=1;i<=n+m;i++)
 //		cout<<a[i].l<<" "<<a[i].r<<" "<<a[i].t<<" "<<a[i].id<<"~\n";
-	sort(t+1,t+n+m+1);//ÀëÉ¢»¯£¬¶ÔÃ¿Ò»¸öÊ±¼äµã½¨Ê÷ 
+	sort(t+1,t+n+m+1);//离散化，对每一个时间点建树 
 	for(int i=1;i<=n+m;i++)
 	{
 		int pos=lower_bound(t+1,t+m+n+1,a[i].t)-t;
