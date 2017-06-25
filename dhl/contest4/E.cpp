@@ -1,3 +1,4 @@
+#pragma GCC optimize("O3")
 #include<iostream>
 #include<stdio.h>
 #include<string.h>
@@ -5,7 +6,7 @@
 #define ls rt<<1
 #define rs rt<<1|1
 #define mid (l+(r-l)/2)
-#define maxn 30000
+#define maxn 300000
 using namespace std;
 struct Nde{int l,r,t,id;}a[maxn];
 int tr[maxn<<2],id[maxn<<2],n,m,t[maxn],ans[maxn];
@@ -39,7 +40,7 @@ int main()
 	cin>>n>>m;
 	for(int i=1;i<=n+m;i++)
 	{
-		cin>>a[i].l>>a[i].r>>a[i].t;
+		scanf("%d%d%d",&a[i].l,&a[i].r,&a[i].t);
 		a[i].id=i;
 		t[i]=a[i].t;
 	}
@@ -55,7 +56,7 @@ int main()
 		else ans[a[i].id-n]=query(pos,a[i].r,1,n+m,1);
 	}
 	for(int i=1;i<=m;i++)
-		cout<<ans[i]<<" ";
+		printf("%d ",ans[i]);
 	return 0;
 	
 } 
