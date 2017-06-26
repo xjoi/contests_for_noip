@@ -54,7 +54,9 @@ Print the maximum number of bananas Okabe can get from the trees he cuts.
 #### Output
 25
 ### Note
+
 ![the picture](https://odzkskevi.qnssl.com/d6a7edeace63610feb73b4c78005481e?v=1498432796)
+
 The graph above corresponds to sample test 1. The optimal rectangle is shown in red and has 30 bananas.
 
 ---------------------------------------
@@ -155,9 +157,15 @@ Print the minimum number of coins Okabe needs to pay to complete his walk, or -1
 3
 ### Note
 In the first sample test, Okabe can take the path 
-![the path](https://odzkskevi.qnssl.com/93229b0c838b0a0af6a64dcf8fd75dad?v=1498432796), paying only when moving to (2, 3) and (4, 4).
+
+![the path](https://odzkskevi.qnssl.com/93229b0c838b0a0af6a64dcf8fd75dad?v=1498432796)
+
+, paying only when moving to (2, 3)and (4, 4).
 In the fourth sample, Okabe can take the path 
-![the path](https://odzkskevi.qnssl.com/e964aa5b27c98a22bc90ce85e2271f19?v=1498432796) , paying when moving to (1, 2), (3, 4), and (5, 4).
+
+![the path](https://odzkskevi.qnssl.com/e964aa5b27c98a22bc90ce85e2271f19?v=1498432796)
+
+, paying when moving to (1, 2), (3, 4),and (5, 4).
 
 -----------------------------------
 
@@ -185,18 +193,28 @@ Print the number of walks satisfying the conditions, modulo 1000000007 (109 +�
 #### Output
 4
 ### Note
+
 ![the picture](https://odzkskevi.qnssl.com/a89ae0e16313c93dc4f0161b4107107b?v=1498432796)
+
 The graph above corresponds to sample 1. The possible walks are:
+
 ![path1](https://odzkskevi.qnssl.com/6d642c218edf0f6ec30395a258e53c3a?v=1498432796)
+
 ![path2](https://odzkskevi.qnssl.com/4ff0be514a6a9d180717901b5db3f05c?v=1498432796)
+
 ![path3](https://odzkskevi.qnssl.com/92868db318c157b1abbf98e355708be7?v=1498432796)
+
 ![path4](https://odzkskevi.qnssl.com/aebf9e09a83c9540b1ed481e3369ba1b?v=1498432796)
 
 ![the picture](https://odzkskevi.qnssl.com/65d3a80b014f427e9f97489b0499dad1?v=1498432796)
 
 The graph above corresponds to sample 2. There is only one walk for Okabe to reach (3, 0). After this, the possible walks are:
+
 ![path1](https://odzkskevi.qnssl.com/0b1feb7b11bb176ae89eacdec09e64b4?v=1498432796)
+
 ![path2](https://odzkskevi.qnssl.com/c87fb4b8d346b4b3728ebad09672c2aa?v=1498432796)
+
 ![path3](https://odzkskevi.qnssl.com/a85f8a462b64a9ed8fb7089c2faf4511?v=1498432796)
+
 ![path4](https://odzkskevi.qnssl.com/05d908cbbb6edf0d7d1bb3972dcf44ee?v=1498432796)
 
