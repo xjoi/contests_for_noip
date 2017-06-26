@@ -11,9 +11,9 @@
 - [x] contest9
     - [x]  A 
     - [x]  B
-    - [x]  C \*
+    - [ ]  C
     - [x]  D \*
-    - [ ]  E
+    - [x]  E \*
 - [x] contest10
 	- [x]  A
 	- [x]  B
