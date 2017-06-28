@@ -24,11 +24,11 @@
 # 专题征程
 > * YES : solved in the contest
 > * WTM : solving
-
+> * NON : 查无此题...
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |  K  |  L  |  M  |  N  |  O  |  P  |  Q  |  R  |  S  |  T  |
 ---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---
-|最小生成树|YES|YES|YES|YES|YES|YES|
+|最小生成树|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|NON|NON|NON|NON|NON|
 |字典树   |YES|WTM|WTM|WTM|WTM|WTM|
 |AC自动机 |WTM|WTM|WTM|WTM|WTM|WTM|
 |线段树1.0|WTM|WTM|WTM|WTM|WTM|WTM|
