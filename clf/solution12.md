@@ -22,74 +22,6 @@ int main() {
 ### Problem description
 几个人围坐在圆桌边，第一个人必须坐在某个位置，某些人特别要求坐在某些人旁边，求总的方案数.
 
-## #B
-> 显然如果存在可能方案，要么是一个大环，要么是几条链.
-  如果人数为2，输出1即可（一个人必须坐在第一个位置）
-  在一条链中，显然可行的方案只有正反两种（对于长度为1的仅有一种）
-  若存在环且环外有点，则方案数为0.
-  由于一个人的位置已经固定，他所属于的链的位置已经固定，所以链的总排列方案是(n-1)!
-  对于每条链，若长度大于1，则需方案数*2
-  
-```cpp
-#include<cstdio>
-#include<iostream>
-#include<cstring>
-using namespace std;
-typedef long long LL;
-const int N=205;
-const LL mod=1e9+7;
-int cnt=0,du[N],mx=0,sz[N],tot=0;
-int n,m,p;
-bool vis[N],jud=1,G[N][N];
-inline void dfs(int x) {
-	vis[x]=1;
-	mx++;
-	for(int i=1;i<=n;i++) if(G[x][i]&&!vis[i]) dfs(i);
-}
-inline void dfs_1(int x,int pa) {
-	vis[x]=1;
-	sz[tot]++;
-	for(int i=1;i<=n;i++) if(G[x][i]&&i!=x&&i!=pa) {
-		if(vis[i]) jud=0;
-		if(!vis[i]) dfs_1(i,x);
-	}
-}
-int main() {
-	scanf("%d%d",&n,&m);
-	for(int i=1;i<=m;i++) {
-		scanf("%d",&p);
-		if(G[i][p]) continue;
-		du[i]++;
-		du[p]++;
-		G[i][p]=G[p][i]=1;
-	}
-	if(n==2) {
-		printf("1\n");
-		return 0;
-	}
-	for(int i=1;i<=n;i++) if(du[i]>2) {
-		printf("0\n");
-		return 0;
-	}
-	dfs(1);
-	if(mx==n) {
-		printf("2\n");
-		return 0;
-	}
-	memset(vis,0,sizeof(vis));
-	for(int i=1;i<=n;i++) if(!vis[i]) tot++,dfs_1(i,-1);
-	if(!jud) {
-		printf("0\n");
-		return 0;
-	}
-	LL ans=1ll;
-	for(int i=1;i<tot;i++) ans=(ans*(LL)i)%mod;
-	for(int i=1;i<=tot;i++) if(sz[i]>1) ans=(ans*2ll)%mod;
-	cout<<ans<<endl;
-	return 0;
-}
-```
-
 # C
 
 ### Problem description
@@ -164,6 +96,76 @@ int main() {
 	t=d[1];
 	for(int i=2;i<=n;i++) t=max(0ll,t+d[i]-k);
 	cout<<t<<endl;
+	return 0;
+}
+```
+
+# 赛后补题
+
+## #B
+> 显然如果存在可能方案，要么是一个大环，要么是几条链.
+  如果人数为2，输出1即可（一个人必须坐在第一个位置）
+  在一条链中，显然可行的方案只有正反两种（对于长度为1的仅有一种）
+  若存在环且环外有点，则方案数为0.
+  由于一个人的位置已经固定，他所属于的链的位置已经固定，所以链的总排列方案是(n-1)!
+  对于每条链，若长度大于1，则需方案数*2
+  
+```cpp
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+using namespace std;
+typedef long long LL;
+const int N=205;
+const LL mod=1e9+7;
+int cnt=0,du[N],mx=0,sz[N],tot=0;
+int n,m,p;
+bool vis[N],jud=1,G[N][N];
+inline void dfs(int x) {
+	vis[x]=1;
+	mx++;
+	for(int i=1;i<=n;i++) if(G[x][i]&&!vis[i]) dfs(i);
+}
+inline void dfs_1(int x,int pa) {
+	vis[x]=1;
+	sz[tot]++;
+	for(int i=1;i<=n;i++) if(G[x][i]&&i!=x&&i!=pa) {
+		if(vis[i]) jud=0;
+		if(!vis[i]) dfs_1(i,x);
+	}
+}
+int main() {
+	scanf("%d%d",&n,&m);
+	for(int i=1;i<=m;i++) {
+		scanf("%d",&p);
+		if(G[i][p]) continue;
+		du[i]++;
+		du[p]++;
+		G[i][p]=G[p][i]=1;
+	}
+	if(n==2) {
+		printf("1\n");
+		return 0;
+	}
+	for(int i=1;i<=n;i++) if(du[i]>2) {
+		printf("0\n");
+		return 0;
+	}
+	dfs(1);
+	if(mx==n) {
+		printf("2\n");
+		return 0;
+	}
+	memset(vis,0,sizeof(vis));
+	for(int i=1;i<=n;i++) if(!vis[i]) tot++,dfs_1(i,-1);
+	if(!jud) {
+		printf("0\n");
+		return 0;
+	}
+	LL ans=1ll;
+	for(int i=1;i<tot;i++) ans=(ans*(LL)i)%mod;
+	for(int i=1;i<=tot;i++) if(sz[i]>1) ans=(ans*2ll)%mod;
+	cout<<ans<<endl;
 	return 0;
 }
 ```
