@@ -1,0 +1,9 @@
+# 比赛征程
+> * YES : solved in the contest
+> * Accepted : solved after contest
+> * Waiting : solving
+
+| 比赛        | A   |  B  |  C  | D | E | F|G
+| --------    | -----:  | :----:  |
+|contest0|YES|  YES     | YES | Waiting | Waiting | X|X
+| contest1        | YES   |   YES   | YES|YES|Accepted|YES|Accepted
