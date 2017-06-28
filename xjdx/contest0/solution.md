@@ -1,4 +1,6 @@
 # C题[Shaass and Lights:CF294C](http://codeforces.com/problemset/problem/294/C)
+### 题意
+有N(N<=1000)盏灯，一开始都是暗的，只有其中M盏是亮的。Shaass想要点亮所有的灯，但是每次只能点亮已经点亮的灯的相邻的两盏灯中的一盏。现在Shaass想知道总共有多少种方法点亮所有的灯。结果mod 1e9+7。
 ### 代码
 ```c++
 #include<cstdio>
