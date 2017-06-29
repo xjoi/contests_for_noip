@@ -4,19 +4,25 @@
     - [x]  A
     - [x]  B
     - [x]  C
-    - [x]  D *
+    - [x]  D \*
     - [ ]  E
     - [ ]  F
     - [ ]  G
 - [x] contest9
     - [x]  A 
     - [x]  B
-    - [x]  C *
-    - [x]  D *
-    - [ ]  E
-- [X] contest10
+    - [ ]  C
+    - [x]  D \*
+    - [x]  E \*
+- [x] contest10
 	- [x]  A
 	- [x]  B
 	- [x]  C
-	- [x]  D *
-	- [x]  E *
+	- [x]  D \*
+	- [x]  E \*
+- [x] contest11
+	- [x]  A
+	- [x]  B
+	- [x]  C
+	- [x]  D \*
+	- [x]  E \*
