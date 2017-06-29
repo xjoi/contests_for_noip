@@ -1,6 +1,16 @@
 # 比赛记录contest13
 
 [比赛链接](https://vjudge.net/contest/168406#problem/)
+## 比赛征程
+> * YES : solved in the contest
+> * Accepted : solved after contest
+> * Waiting : solving
+
+
+  \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
+---|---|---|---|---|---|---|---
+|contest13|YES|  YES     | YES | YES | AC | AC|Waiting
+
 ## A
 ### Problem description
 > 就是说给你一个字符串，描述了一个天平，然后要求输出这个天平的平衡情况。
