@@ -9,13 +9,7 @@
 |contest0|YES|  YES     | YES | Waiting | Waiting | X|X
 | contest1 | YES   |   YES   | YES|YES|Accepted|YES|Accepted
 
-## 专题学习
-- [ ] [分块类专题](https://vjudge.net/contest/168545)
-- [ ] [AC自动机](https://vjudge.net/contest/167921)
-- [ ] [线段树入门](https://vjudge.net/contest/167923)
-- [ ] [线段树进阶](https://vjudge.net/contest/167922)
-- [ ] [字典树](https://vjudge.net/contest/167976)
-- [ ] [最小生成树](https://vjudge.net/contest/167924)
+
 
 ## 赛后好题推荐
 > * 作比赛的时候碰到了新的知识，假如增加专题，优先做下方的题目再去刷专题
