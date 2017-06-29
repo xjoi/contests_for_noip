@@ -1,6 +1,7 @@
 # 比赛记录
 
 [codeforces #221](https://www.codeforces.com)
+
 [vjudge](https://cn.vjudge.net/contest/168406)
 
 ## A -Lever
@@ -9,7 +10,6 @@
 
 ### Solution
 
-仔细分析一下，这个题可以用一个printf语句解决
 
 ```cpp
 #include<iostream>
@@ -21,12 +21,9 @@ char ss[5000000];
 main(){
 	scanf("%s",ss);
 	int dic=0,l=0,r=0,len=strlen(ss);
-	for (int i=0;i<len;++i)
-		if (ss[i]=='^'){dic=i;break;}
-	for (int i=dic-1;i>=0;--i)
-		if (ss[i]>='0'&&ss[i]<='9') l+=(dic-i)*(ss[i]-'0');
-	for (int i=dic+1;i<len;++i)
-		if (ss[i]>='0'&&ss[i]<='9') r+=(i-dic)*(ss[i]-'0');
+	for (int i=0;i<len;++i) if (ss[i]=='^'){dic=i;break;}
+	for (int i=dic-1;i>=0;--i) if (ss[i]>='0'&&ss[i]<='9') l+=(dic-i)*(ss[i]-'0');
+	for (int i=dic+1;i<len;++i) if (ss[i]>='0'&&ss[i]<='9') r+=(i-dic)*(ss[i]-'0');
 	if (l==r) puts("balance");
 	if (l<r) puts("right");
 	if (l>r) puts("left");
