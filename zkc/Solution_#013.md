@@ -1,15 +1,12 @@
 # Solution
 ```
-/******************
     VJudge链接：  (DIV.1)https://cn.vjudge.net/contest/168406
 CodeForces链接：  http://codeforces.com/contest/375
 
 题目按CF顺序排序
-******************/
 ```
 ## #A(DIV.2 A) Lever 
 ```
-/******************
     VJudge链接：  https://cn.vjudge.net/contest/168406#problem/A
 CodeForces链接：  http://codeforces.com/contest/376/problem/A
 
@@ -17,7 +14,6 @@ CodeForces链接：  http://codeforces.com/contest/376/problem/A
       空间限制：  256MB
       主要算法：  模拟 物理
       完成时间：  赛时
-******************/
 ```
 ### Description
 给出杠杆判断是否平衡。
@@ -27,7 +23,6 @@ CodeForces链接：  http://codeforces.com/contest/376/problem/A
 ***
 ## #B(DIV.2 B) I.O.U. 
 ```
-/******************
     VJudge链接：  https://cn.vjudge.net/contest/168406#problem/B
 CodeForces链接：  http://codeforces.com/contest/376/problem/B
 
@@ -35,7 +30,6 @@ CodeForces链接：  http://codeforces.com/contest/376/problem/B
       空间限制：  256MB
       主要算法：  模拟
       完成时间：  赛时
-******************/
 ```
 ### Description
 有N个人，他们之间互相欠钱。求简化之后每个人欠的钱数之和。
@@ -45,7 +39,6 @@ CodeForces链接：  http://codeforces.com/contest/376/problem/B
 ***
 ## #C(DIV.1 C) Divisible by Seven
 ```
-/******************
     VJudge链接：  https://cn.vjudge.net/contest/168406#problem/C
 CodeForces链接：  http://codeforces.com/contest/375/problem/A
 
@@ -53,7 +46,6 @@ CodeForces链接：  http://codeforces.com/contest/375/problem/A
       空间限制：  256MB
       主要算法：  数学
       完成时间：  赛时
-******************/
 ```
 ### Description
 给出一个数，其中一定包含1、6、8、9四个数。要求重新排列之后这个数能被7整除。
@@ -74,7 +66,6 @@ CodeForces链接：  http://codeforces.com/contest/375/problem/A
 ***
 ## #D(DIV.1 B) Maximum Submatrix 2
 ```
-/******************
     VJudge链接：  https://cn.vjudge.net/contest/168406#problem/D
 CodeForces链接：  http://codeforces.com/contest/375/problem/B
 
@@ -82,7 +73,6 @@ CodeForces链接：  http://codeforces.com/contest/375/problem/B
       空间限制：  512MB
       主要算法：  ...
       完成时间：  赛时
-******************/
 ```
 ### Description
 给出一个01矩阵，可以交换其中的行，求交换之后全为1的子矩阵的最大面积。
