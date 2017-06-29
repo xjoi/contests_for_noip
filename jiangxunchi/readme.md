@@ -8,3 +8,4 @@
 ---|---|---|---|---|---|---|---
 |contest11|YES|YES|YES|YES|Accepted|X|X
 |contest12|YES|  Waiting     | Waiting | YES | Waiting | Waiting|YES
+|contest13|YES|YES|YES|YES|Waiting|Accepted|Waiting
