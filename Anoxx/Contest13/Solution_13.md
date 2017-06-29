@@ -1,6 +1,6 @@
 # 比赛记录
 
-[比赛链接div1](http://codeforces.com/contest/375)
+[比赛链接div1](http://codeforces.com/contest/375)</br>
 [比赛链接div2](http://codeforces.com/contest/376)
 
 ## div 2:A
@@ -36,20 +36,20 @@ none
 ### Solution
 可以预处理出i行以j结尾的的连续的1的个数f[i,j]，然后对每一列j将f[i,j]排序，然后从大到小取矩阵大小最值即可
 ```cpp
-for(int i=1;i<=m;i++){
-　sort(f[i]+1,f[i]+1+n);
-　mx=0;mi=0x3f3f3f3f;
-　for(int j=n;j>=1;j--){
-　　mi=min(mi,f[i][j]);
-　　mx=max(mx,mi*(n-j+1));
+	for(int i=1;i<=m;i++){
+		sort(f[i]+1,f[i]+1+n);
+		mx=0;mi=0x3f3f3f3f;
+		for(int j=n;j>=1;j--){
+			mi=min(mi,f[i][j]);
+			mx=max(mx,mi*(n-j+1));
+		}
+		ans=max(mx,ans);
 	}
-　ans=max(mx,ans);
-}
 ```
 
 ## div 1:C(div 2:E)
 ### Problem description
-> 给你一个n*m的矩阵，矩阵包含空格，起点，炸弹，宝藏和障碍，每个宝藏有它的价值，获得宝藏的唯一途径是走出一条围住它的封闭路径
+> 给你一个n\*m的矩阵，矩阵包含空格，起点，炸弹，宝藏和障碍，每个宝藏有它的价值，获得宝藏的唯一途径是走出一条围住它的封闭路径
 > 你只能从起点出发走空格并回到起点，每走一步花费1，炸弹不能围进去，求最大获利，宝藏和炸弹数量和不超过8
 ### Solution
 注意到对于每一个宝藏或炸弹作出一条射线，若射线交路径奇数次则宝藏或炸弹必然会被路径围住，又因为数量和不超过8，所以可以用状压去做，bfs遍历即可
