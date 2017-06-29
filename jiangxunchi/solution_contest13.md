@@ -62,6 +62,66 @@ for(int l=1;l<=m;++l){
 ```
 ***** 
 # 赛后补题
+## E
+### Problem description
+给你一副图，让你求不包含所有的炸弹而包含一部分宝藏的最后价值的最大值。
+### Solution
+将炸弹也视为宝藏，并将价值设为-inf。对于每个宝藏向右引一条射线，用一个01串表示对于每一个宝藏穿过次数的奇偶性，然后将01串转化为数字保存。如果穿过一个宝藏奇数次就说明包含它。最后bfs就行了。
+```cpp
+#include<cstdio>
+#include<cctype>
+#include<queue>
+#include<cstring>
+using namespace std;
+const int inf=0x3f3f3f3f;
+const int dir[4][2]={0,1,1,0,0,-1,-1,0};
+int dis[21][21][256],n,m,stx,sty;
+int xx[9],yy[9],val[9],elnum=0,trnum=0,vval[9];
+bool a[21][21];
+struct data{int x,y,val;}; queue<data> Q; 
+int changebit(int val,int bit){
+	return val+((val&(1<<bit-1))?-1:1)*(1<<bit-1);
+}
+int main(){
+	scanf("%d%d",&n,&m);
+	for(int i=1;i<=n;++i) for(int j=1;j<=m;++j){
+		char c;
+		for(c=getchar();!isgraph(c);c=getchar());
+		if(c=='B'){
+			xx[++elnum]=i; yy[elnum]=j; val[elnum]=-1e7; a[i][j]=1;
+		}else if(isdigit(c)){
+			xx[++elnum]=i; yy[elnum]=j; val[elnum]=c-'0'; a[i][j]=1; ++trnum;
+		}else if(c=='S'){
+			stx=i; sty=j;
+		}else if(c=='#') a[i][j]=1;
+	}
+	for(int i=1;i<=trnum;++i) scanf("%d",&vval[i]);
+	for(int i=1;i<=elnum;++i) if(val[i]!=-1e7) val[i]=vval[val[i]];
+	memset(dis,0x3f,sizeof dis); dis[stx][sty][0]=0;
+	Q.push({stx,sty,0});
+	for(;!Q.empty();Q.pop()){
+		data x=Q.front();
+		for(int i=0;i<4;++i){
+			data e={x.x+dir[i][0],x.y+dir[i][1],x.val};
+			if(e.x<=0||e.x>n||e.y<=0||e.y>m||a[e.x][e.y]) continue;
+			for(int j=1;j<=elnum;++j)
+				if((i==1&&e.x==xx[j]&&e.y<yy[j])||(i==3&&e.x==xx[j]-1&&e.y<yy[j]))
+					e.val=changebit(e.val,j);
+			if(dis[e.x][e.y][e.val]==inf){
+				dis[e.x][e.y][e.val]=dis[x.x][x.y][x.val]+1;
+				Q.push(e);
+			}
+		}
+	}
+	int ans=0;
+	for(int i=0;i<(1<<elnum);++i){
+		int sum=0;
+		for(int j=0;j<elnum;++j) if(i&(1<<j)) sum+=val[j+1];
+		sum-=dis[stx][sty][i]; if(sum>ans) ans=sum;
+	}
+	printf("%d",ans); return 0;
+}
+```
 ## F
 ### Problem description
 给你一棵树，每个节点有一个颜色，再给你几个询问，求以v为根的子树中有多少种颜色出现次数大于等于k。
@@ -82,4 +142,3 @@ for(int i=1;i<=m;++i){
 		ans[a[i].id]=val[a[i].k];
 }
 ```
-
