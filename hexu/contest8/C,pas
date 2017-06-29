@@ -1,0 +1,36 @@
+var
+  n,i,j,k,now:longint;
+  a,id,ans:array[0..300000]of longint;
+function maX(A,B:longint):longint;
+begin
+  if a>b then exit(a) else exit(b);
+end;
+procedure sort(l,r: longint);
+var i,j,x,y: longint;
+begin
+  i:=l;j:=r;x:=a[random(R-L+1)+L];
+  repeat
+    while a[i]<x do inc(i);
+    while x<a[j] do dec(j);
+    if not(i>j) then
+    begin
+      y:=a[i];a[i]:=a[j];a[j]:=y;
+      y:=id[i];id[i]:=id[j];id[j]:=y;
+      inc(i);j:=j-1;
+    end;
+  until i>j;
+  if l<j then sort(l,j);
+  if i<r then sort(i,r);
+end;
+begin
+  readln(n);
+  for i:=1 to n do read(a[i]);
+  for i:=1 to n do id[i]:=i;
+  sort(1,n);
+  for i:=1 to n do
+  begin
+    now:=max(now+1,a[i]);
+    ans[id[i]]:=now;
+  end;
+  for i:=1 to n do write(ans[i],' ');
+end.
