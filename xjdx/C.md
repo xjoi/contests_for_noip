@@ -39,9 +39,9 @@ NO
 ### 解法二:[Trie树](http://blog.csdn.net/hguisu/article/details/8131559)
 利用Trie树插入原字符串,然后查询的时候稍作修改,查询的时候允许有一次错误查询即可.具体见代码.
 **其实这样复杂度是没有保证的**,因为采用的是DFS.完全可以构造出数据卡掉.那么要让复杂度有保证应该怎么办呢?请看解法三.
-## 解法三:分组+正反序Trie树+set查询
-　　先把原字符串按照长度分组,按组建Trie树,并且每组都建2颗Trie树,正序和反序字符串都建Trie树.然后从左到右枚举每个字符串的切断点k,把s[0..k-1]在正序trie树种的位置l1,以及s[end..k+1]在反序树的位置r1,以pair< l1,r1>保存到对应分组的set中。
-　　对于查询串，也是枚举切断点k，查询s[0..k-1]在正序trie树种的位置l1,以及s[end..k+1]在反序树的位置r1，若pair< l1,r1>在set中存在，则表示该查询串符合题意。
+## 解法三:正反序Trie树+set查询
+　　对于每个原串的正序和反序字符串都放到Trie树中.然后从左到右枚举每个字符串的切断点k,把s[0..k-1]在trie树中的位置l1,以及s[end..k+1]在trie树的位置r1,以pair< l1,r1,s[k]>保存到set中。
+　　对于查询串，也是枚举切断点k，查询s[0..k-1]在trie树中的位置l1,以及s[end..k+1]在树的位置r1，若pair< l1,r1,$s[k]\pm1$>在set中存在，则表示该查询串符合题意。
 # 代码
 ## 解法一:
 ```c++
@@ -180,4 +180,95 @@ int main( void ) {
     return 0;
 }
 ```
-## 解法三代码（待补充）：
+## 解法三代码：
+```c++
+#include <bits/stdc++.h>
+#define rep(i,a,b) for(int i=a;i<=b;++i)
+#define per(i,a,b) for(int i=a;i>=b;--i)
+using namespace std;
+
+struct Trie {
+	static const int MAX_C = 3;
+	struct Node {
+		Node* child[MAX_C],*fa;//bool exist;
+		Node() {
+			memset( child, 0, sizeof( child ) );/*exist = false;*/
+		}
+	} *root;
+	inline Node* add(char* s) {
+		int len = strlen(s);
+		Node* tmp = root;
+		for( int i = 0; i < len; ++i ) {
+			int ff = s[i] - 'a';
+			if( tmp -> child[ ff ] == NULL ) {tmp -> child[ ff ] = new Node();tmp -> child[ ff ]->fa = tmp;}
+			tmp = tmp -> child[ ff ];
+		}
+		return tmp;
+//		tmp -> exist = true;
+	}
+	inline Node* find(char* s,int pos,Node* tmp) {
+		int len=strlen(s),dd=s[pos]-'a';
+		for(; pos<len && tmp->child[dd]!=NULL; tmp=tmp->child[dd],++pos,dd=s[pos]-'a');
+		return pos==len?tmp:NULL;
+	}
+	Trie() {
+		root = new Node();
+		root->fa = NULL;
+	}
+	
+//-------------------------------------------------sturct Tire end
+	inline void revAdd(char* s) {
+		Node* tmp = root;
+		for( int i = strlen(s)-1; i>-1; --i ) {
+			int ff = s[i] - 'a';
+			if( tmp -> child[ ff ] == NULL ) {tmp -> child[ ff ] = new Node();tmp -> child[ ff ]->fa = tmp;}
+			tmp = tmp -> child[ ff ];
+		}
+//		tmp -> exist = true;
+	}
+};
+const int MAX_N = 600000 +3;
+set< pair<pair<Trie::Node*,Trie::Node*>,char> > strSet;
+int N,M;
+char s[MAX_N];
+Trie::Node* l[MAX_N],*r[MAX_N];
+
+int main()
+{
+	scanf("%d%d",&N,&M);
+	Trie tr;
+	rep(i,1,N) {
+		scanf("%s",&s);
+		Trie::Node* tmpl = tr.add(s),*tmpr=tr.root;
+		tr.revAdd(s);
+		per(j,strlen(s)-1,0) {
+			tmpl = tmpl->fa;
+			strSet.insert(make_pair(make_pair(tmpl,tmpr),s[j]));
+			tmpr = tmpr->child[s[j]-'a'];
+		}
+	}
+	rep(i,1,M) {
+		scanf("%s",&s);
+		int len = strlen(s);
+		l[0] = tr.root->child[s[0]-'a'];
+		for (int j=1; j<len; ++j )
+			l[j] = l[j-1]==NULL?NULL:l[j-1]->child[s[j]-'a'];
+		r[len] = tr.root;
+		for (int j=len-1; j>-1; --j) r[j] = r[j+1]==NULL?NULL:r[j+1]->child[s[j]-'a'];
+		bool flag=false;
+		Trie::Node* tmpl = r[len] = tr.root;
+		rep(j,0,len-1) {
+			if (tmpl==NULL) break;
+			if (r[j+1]!=NULL && (strSet.count(make_pair(make_pair(tmpl,r[j+1]),(s[j]-'a'+1)%3+'a'))
+				|| strSet.count(make_pair(make_pair(tmpl,r[j+1]),(s[j]-'a'+2)%3+'a')))) {
+				flag=true;
+				break;
+			}
+			tmpl = l[j];
+		}
+		puts(flag?"YES":"NO");
+	}
+
+	return 0;
+}
+```
