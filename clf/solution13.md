@@ -1,8 +1,8 @@
 # 比赛记录
 
-## # CodeForces - 376A
+# # CodeForces - 376A
 
-# Solution
+## Solution
 
 > 杠杆平衡，注意开long long.
 
@@ -31,9 +31,9 @@ int main() {
 }
 ```
 
-## # CodeForces - 376B
+# # CodeForces - 376B
 
-# Solution
+## Solution
 
 > 这玩意是能贪心的，统计每个人总共欠的和借被人的，然后贪心地尽量多的抵销即可
 
@@ -53,9 +53,9 @@ int main() {
 }
 ```
 
-## # CodeForces - 375C
+# # CodeForces - 375C
 
-# Solution
+## Solution
 
 > 我的是非正解乱搞，正解这么说的：1、6、8、9组成的四位数能够成7的完整的剩余系，然后把非零数全放在前面，1689组合一下，再放0.
 
@@ -96,9 +96,9 @@ int main() {
 }
 ```
 
-## # CodeForces - 375D
+# # CodeForces - 375D
 
-# Solution
+## Solution
 
 > 排个序，贪个心即可.
 
@@ -138,9 +138,9 @@ int main() {
 
 # 赛后补题
 
-## # CodeForces - 375E
+# # CodeForces - 375E
 
-# Solution
+## Solution
 
 > 类似SCOI的围豆豆，状态压缩数组要开大
 
@@ -222,9 +222,9 @@ int main() {
 }
 ```
 
-## # CodeForces - 375E
+# # CodeForces - 375E
 
-# Solution
+## Solution
 
 > 分块，然后用一下莫队的思想省时间.
 
