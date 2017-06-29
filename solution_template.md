@@ -1,11 +1,11 @@
-# ±ÈÈü¼ÇÂ¼
+# æ¯”èµ›è®°å½•
 
-[±ÈÈüÁ´½Ó](https://www.codeforces.com)
+[æ¯”èµ›é“¾æŽ¥](https://www.codeforces.com)
 ## A
 ### Problem description
-Êä³öÎÒÒªÅ°Ìâ
+> è¾“å‡ºæˆ‘è¦è™é¢˜
 ### Solution
-×ÐÏ¸·ÖÎöÒ»ÏÂ£¬Õâ¸öÌâ¿ÉÒÔÓÃÒ»¸öprintfÓï¾ä½â¾ö
+ä»”ç»†åˆ†æžä¸€ä¸‹ï¼Œè¿™ä¸ªé¢˜å¯ä»¥ç”¨ä¸€ä¸ªprintfè¯­å¥è§£å†³
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -15,13 +15,13 @@ int main () {
 ```
 
 ***** 
-# Èüºó²¹Ìâ
+# èµ›åŽè¡¥é¢˜
 
 ## B
 ### Problem description
-Êä³öÎÒÒª²¹Ìâ
+> è¾“å‡ºæˆ‘è¦è¡¥é¢˜
 ### Solution
-×ÐÏ¸·ÖÎöÒ»ÏÂ£¬Õâ¸öÌâ¿ÉÒÔÓÃÒ»¸öprintfÓï¾ä½â¾ö
+ä»”ç»†åˆ†æžä¸€ä¸‹ï¼Œè¿™ä¸ªé¢˜å¯ä»¥ç”¨ä¸€ä¸ªprintfè¯­å¥è§£å†³
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
