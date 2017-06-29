@@ -51,7 +51,7 @@ int main() {
 	printf("%d\n",ans/2);
 	return 0;
 }
-``·
+```
 
 ## # CodeForces - 375C
 
