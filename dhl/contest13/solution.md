@@ -86,7 +86,7 @@ for(int i=0;i<n;i++)
 然后根据小字的提示，暴力广搜。
 小技巧，我们判断是否在图形内部的时候可以向下引一条直线，这样子不会算重复  
 
-#### BFS
+## BFS
 ```cpp
 queue<Point> q;
 	memset(dp,-2,sizeof(dp));
@@ -120,7 +120,7 @@ queue<Point> q;
 		}
 	}
 ```
-#### answer
+## answer
 ```cpp
 for(int i=0;i<(1<<line.size());i++)
 	{
@@ -139,7 +139,7 @@ for(int i=0;i<(1<<line.size());i++)
 用莫队以及前缀和求出即可，具体分析可以见此
 [我是链接]<http://blog.csdn.net/auto_ac/article/details/22087707>
 我只会这里的第12种，先贴一个代码吧。
-#### DFS
+## DFS
 ```cpp
 void dfs(int x,int fa)
 {
@@ -154,7 +154,7 @@ void dfs(int x,int fa)
 	ri[x]=cnt;
 }
 ```
-#### 莫队
+## 莫队
 ```cpp
 int l=1,r=0;//左闭右闭的区间
 	for(int i=1;i<=m;i++)
@@ -170,4 +170,5 @@ int l=1,r=0;//左闭右闭的区间
 ## E
 ### Problem description
 > 还不会
-### Solution真的不会
+### Solution
+真的不会
