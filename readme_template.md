@@ -21,8 +21,8 @@
 > * 作比赛的时候碰到了新的知识，假如增加专题，优先做下方的题目再去刷专题
 
 
-### contest13 场外延伸
-#### 广搜包围圈(E题)
+### Contest13 场外延伸
+- [ ] 广搜包围圈(E题)
 - [ ] [SCOI2009围豆豆Bean](http://www.lydsy.com/JudgeOnline/problem.php?id=1294)
 - [ ] [The Grove](http://poj.org/problem?id=3182)
 #### 分块 （F题）
