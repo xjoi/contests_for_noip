@@ -9,6 +9,9 @@
 |contest0|YES|  YES     | YES | Waiting | Waiting | X|X
 | contest1 | YES   |   YES   | YES|YES|Accepted|YES|Accepted
 
+# 专题推荐
+- [ ] [分块类专题](https://vjudge.net/contest/168545)
+
 
 # 好题推荐
 > * 假如比赛延伸了专题，优先做本页面推荐的题目
@@ -20,7 +23,6 @@
 - [ ] [GERALD07](https://www.codechef.com/MARCH14/problems/GERALD07)
 - [ ] [Jeff and Removing Periods](http://codeforces.com/problemset/problem/351/D)
 - [ ] [2009国家集训队小Z的袜子](http://www.lydsy.com/JudgeOnline/problem.php?id=2038)
-- [ ] [分块类专题](https://vjudge.net/contest/168545)
 ### 控制类树dp （G题）
 - [ ] [Fire](http://poj.org/problem?id=2152)
 - [ ] [Information Reform](http://codeforces.com/contest/70/problem/E)
