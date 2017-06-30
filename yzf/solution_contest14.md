@@ -8,11 +8,11 @@ Problem description
 
 Solution
 直接暴力
+
 Code
 cin>>x; sum=1;
-for (int i=2;i<=n;++i){
-	cin>>y; if (y-x>c) sum=1; else sum++; x=y;
-}
+
+for (int i=2;i<=n;++i){cin>>y; if (y-x>c) sum=1; else sum++; x=y;}
 
 B
 主要算法：暴力，字符串
