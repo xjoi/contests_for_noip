@@ -112,16 +112,16 @@ void bfs(int x,int y){
 ### Problem description
 > 给你一颗n个节点带权树，每个节点有颜色红或黑，每个点必须且尽可以被距离小于等于D的黑点控制，你可以进行一个红点和一个黑点的交换，求使所有点都被控制的最小交换次数
 ### Solution
-首先以每个点为根遍历树，求出两点间的路径长度。而后进行树上dp，对于每一个节点，我们设：<\br>
-　　f[i][j][k]为第i号点被k控制且以i为根的子树有j个黑点的最小交换次数<\br>
-　　tmp[i][j]为对于一个点的儿子i，i与i之前的兄弟各自的子树全部被控制且这些子树和兄弟中共j个黑点的最小交换次数<\br>
-　　best[i][j]为i及i的子树被控制且i及i子树拥有j个黑点的最小交换次数<\br>
-于是对于每个点i都有两种情况：<\br>
-　　1、i的儿子p也被who控制：tmp[p+1][j+k]=min(tmp[p+1][j+k],tmp[p][j]+f[child[i][p]][k][who]);<\br>
-　　2、i的儿子p不被who控制：tmp[p+1][j+k]=min(tmp[p+1][j+k],tmp[p][j]+best[child[i][p]][k]);（其中k为p子树有的黑点数<\br>
-显然f[i][j][who]=tmp[sz][j];（sz为x的儿子个数<\br>
-相应的，best[i][j+1]=min(best[i][j+1],f[i][j][who]+(col[who]==0))<\br>
-答案即为best[1][totblack]<\br>
+首先以每个点为根遍历树，求出两点间的路径长度。而后进行树上dp，对于每一个节点，我们设：</br>
+　　f[i][j][k]为第i号点被k控制且以i为根的子树有j个黑点的最小交换次数</br>
+　　tmp[i][j]为对于一个点的儿子i，i与i之前的兄弟各自的子树全部被控制且这些子树和兄弟中共j个黑点的最小交换次数</br>
+　　best[i][j]为i及i的子树被控制且i及i子树拥有j个黑点的最小交换次数</br>
+于是对于每个点i都有两种情况：</br>
+　　1、i的儿子p也被who控制：tmp[p+1][j+k]=min(tmp[p+1][j+k],tmp[p][j]+f[child[i][p]][k][who]);</br>
+　　2、i的儿子p不被who控制：tmp[p+1][j+k]=min(tmp[p+1][j+k],tmp[p][j]+best[child[i][p]][k]);（其中k为p子树有的黑点数</br>
+显然f[i][j][who]=tmp[sz][j];（sz为x的儿子个数</br>
+相应的，best[i][j+1]=min(best[i][j+1],f[i][j][who]+(col[who]==0))</br>
+答案即为best[1][totblack]</br>
 ```cpp
         son[x]=1;
 	for(int i=fi[x];i;i=ne[i])if(a[i]!=fa){
