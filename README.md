@@ -8,5 +8,6 @@
 ## 补题  solution_contestid.md
 补题的记录写在solution_template.md里面，以分割线与比赛记录分开，具体格式请follow 模版
 ## 比赛结果记录 readme.md
+**在你的文件夹下增加一个readme.md文件**
 把比赛的成绩加到readme.md里面,请参考readme_template.md
 ## 每场比赛精华题解在第一个文件夹(all_contests)里面, 会选取各位同学的好的总结放进去
