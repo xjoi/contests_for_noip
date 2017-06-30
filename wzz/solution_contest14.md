@@ -1,6 +1,6 @@
 # 比赛记录contest14
 
-[比赛链接](https://vjudge.net/contest/168406#problem/)
+[比赛链接](https://vjudge.net/contest/168561#problem/)
 ## 比赛征程
 > * YES : solved in the contest
 > * Accepted : solved after contest
