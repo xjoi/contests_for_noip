@@ -206,40 +206,90 @@ int main()
 这道围豆豆利用这个思想，但为了防止特殊情况，必须规定单一的射线穿的方向，具体实现是取min。每次预处理就是给一列上的都打上标记。
 ```cpp
 using namespace std;
-#include<cstdio>
-#include<cstring>
-#include<iostream>
-#include<algorithm>
-#include<cstring>
-#include<cstdlib>
-#define N 5002
-int a[N][N];
-int hash[N];
-int k[N];
+#include<bits/stdc++.h>
+#define N 22
+char ma[N][N];
 int n,m;
-int ans=0;
+int dp[N][N][1<<9];
+bool vis[N][N][1<<9];
+int dx[]={0,0,1,-1};
+int dy[]={1,-1,0,0};
+int val[N];
 char s[N];
+int cnt;
+int ans;
+int en[N][N];
+int x,y;
+bool can[N][N];
+struct NODE{
+	int x,y,ty;
+}tmp;
+queue<NODE>q;
+void dodp()
+{ 
+	for(int i=1;i<=n;i++) for(int j=1;j<=m;j++) for(int k=1;k<=(1<<9);k++) {vis[i][j][k]=0;dp[i][j][k]=-2000000;}
+	dp[x][y][0]=0;
+	tmp.x=x;tmp.y=y;tmp.ty=0;
+	q.push(tmp);
+	while(!q.empty())
+	{
+		NODE ind=q.front();q.pop();
+		int xx=ind.x,yy=ind.y,t=ind.ty;
+		for(int i=0;i<4;i++)
+		{
+			int ty=t;
+			int xc=xx+dx[i],yc=yy+dy[i];
+			if(xc<=0||yc<=0||xc>n||yc>m)continue;
+			if(can[xc][yc])continue;
+			if(i<=1){ty=ty^(en[xx][min(yy,yc)]);}
+			if(vis[xc][yc][ty]) continue;
+			vis[xc][yc][ty]=1;
+			int res=dp[xx][yy][t];
+			for(int i=1;i<=9;i++){if(t&(1<<i))res-=val[i];}
+			for(int i=1;i<=9;i++){if(ty&(1<<i))res+=val[i];}
+			dp[xc][yc][ty]=res-1;
+			tmp.ty=ty;tmp.x=xc;tmp.y=yc;
+			q.push(tmp);
+		}
+	}
+}
 int main()
 {
-	scanf("%d%d",&n,&m);
+	cin>>n>>m;
 	for(int i=1;i<=n;i++)
 	{
 		scanf("%s",s);
-		for(int j=1;j<=m;j++) a[i][j]=s[j-1]-'0';
+		for(int j=1;j<=m;j++) ma[i][j]=s[j-1];
+		for(int j=1;j<=m;j++)
+		{
+			if(ma[i][j]>='1'&&ma[i][j]<='9')
+			{
+				cnt=max(cnt,ma[i][j]-'0');
+				can[i][j]=1;
+				for(int k=i;k>=1;k--)en[k][j]|=(1<<(ma[i][j]-'0'));
+			}
+			if(ma[i][j]=='S'){x=i;y=j;}
+			if(ma[i][j]=='#')can[i][j]=1;
+		}
 	}
-	for(int i=m;i>=1;i--)
+	for(int i=1;i<=cnt;i++) scanf("%d",&val[i]);
+	for(int i=1;i<=n;i++)
 	{
-		for(int j=1;j<=n;j++)
+		for(int j=1;j<=m;j++)
 		{
-			if(a[j][i]==1) {k[j]++;hash[k[j]-1]--;hash[k[j]]++;}
-			else{hash[k[j]]--;k[j]=0;hash[0]++;}
+			if(ma[i][j]=='B')
+			{
+				cnt++;
+				can[i][j]=1;
+				for(int k=i;k>=1;k--)en[k][j]|=(1<<(cnt));
+				val[cnt]=-2000000;
+			}
 		}
-		int cnt=0;
-		for(int j=m;j>=1;j--)
-		{
-			cnt+=hash[j];
-			ans=max(ans,cnt*j);
-		}
+	}
+	dodp();
+	for(int i=0;i<=(1<<9);i++)
+	{
+		ans=max(ans,dp[x][y][i]);
 	}
 	cout<<ans<<endl;
 }
