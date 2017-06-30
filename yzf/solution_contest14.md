@@ -1,6 +1,7 @@
 比赛中解决的问题
 
 A
+
 主要算法:暴力
 
 Problem description
@@ -15,19 +16,31 @@ cin>>x; sum=1;
 for (int i=2;i<=n;++i){cin>>y; if (y-x>c) sum=1; else sum++; x=y;}
 
 B
+
 主要算法：暴力，字符串
+
 Problem description
+
 输入一个字符串，其中含有问号和大写字母，问号代表任何大写字母，求是否能使字符串中含有26个连续字母中对应A-Z，并输出处理后字符串
+
 Solution
+
 循环0-（length-26），暴力求出以此位之后26个字母是否符合
+
 Code
+
 for (int j=i;j<i+26;++j) if (str[j]>='A'&&str[j]<='Z') bo[str[j]-'A']=1; else sum++;
+
 for (int j=0;j<26;++j) if (!bo[j]) a[++tot]=j;
+
 if (sum<tot) continue;
 
 C
+
 主要算法：数学
+
 Problem description
+
 最开始给你一个数字x = 2，有两种操作：
 第一种是+操作， 每操作一次可以让x + 一次k，可以操作无数次，k为当前等级，k的等级最开始为1；d
 第二种操作是开方，即把x开方，开方之后，你的等级k就会上升一个等级，即k++；
