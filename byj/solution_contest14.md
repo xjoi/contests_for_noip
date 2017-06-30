@@ -1,3 +1,4 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 [Contest Link](https://cn.vjudge.net/contest/168561)
 
 # Solved during contest
