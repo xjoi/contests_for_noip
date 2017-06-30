@@ -15,6 +15,7 @@ Con<b>#010</b>[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog
 Con<b>#011</b>[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](https://cn.vjudge.net/contest/168242)|CodeForces821[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](http://codeforces.com/contest/821)|Nan|Nan
 Con<b>#012</b>[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](https://cn.vjudge.net/contest/168242)|URAL1961~1970[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](http://acm.timus.ru/problem.aspx?space=1&num=1961)|Nan|Nan
 Con<b>#013</b>[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](https://cn.vjudge.net/contest/168242)|CodeForces375[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](http://codeforces.com/contest/375)376[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](http://codeforces.com/contest/376)|Nan|Nan
+Con<b>#013</b>[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](https://cn.vjudge.net/contest/168561)|CodeForces716[<img src="https://raw.githubusercontent.com/AnthonyLedger/OI-blog/master/blue-link.png" width="20px"></img>](http://codeforces.com/contest/716)|Nan|Nan
 
 # Specials
 
