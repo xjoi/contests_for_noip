@@ -1,4 +1,4 @@
-# Solution
+# Solution of contest 10
 ```
 /******************
     VJudge链接：  https://cn.vjudge.net/contest/168038
