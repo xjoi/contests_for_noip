@@ -1,4 +1,4 @@
-[比赛链接](https://www.codeforces.com)
+[比赛链接](https://cn.vjudge.net/contest/168561)
 
 # 比赛中解决的问题
 ## A
