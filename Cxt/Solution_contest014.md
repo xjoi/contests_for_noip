@@ -19,7 +19,7 @@ using namespace std;
 int n,m,c,tot,x,lx=-1e9;
 int main(){
     scanf("%d%d",&n,&c);
-	for (int i=1;i<=n;++i){
+    for (int i=1;i<=n;++i){
 		scanf("%d",&x);
 		if (x-lx<=c) ++tot;else tot=1;
 		lx=x;
@@ -103,7 +103,7 @@ main(){
 	return 0;
 }
 ```
-*****
----------------------
+*************
 <center>我是考前考后分割线
----------------------
+*************
+
