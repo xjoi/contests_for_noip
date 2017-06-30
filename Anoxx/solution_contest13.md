@@ -107,3 +107,49 @@ void bfs(int x,int y){
 		ans[q[i].id]=su[q[i].k];
 	}
 ```
+
+## div 1:E
+### Problem description
+> 给你一颗n个节点带权树，每个节点有颜色红或黑，每个点必须且尽可以被距离小于等于D的黑点控制，你可以进行一个红点和一个黑点的交换，求使所有点都被控制的最小交换次数
+### Solution
+首先以每个点为根遍历树，求出两点间的路径长度。而后进行树上dp，对于每一个节点，我们设：</br>
+　　f[i][j][k]为第i号点被k控制且以i为根的子树有j个黑点的最小交换次数</br>
+　　tmp[i][j]为对于一个点的儿子i，i与i之前的兄弟各自的子树全部被控制且这些子树和兄弟中共j个黑点的最小交换次数</br>
+　　best[i][j]为i及i的子树被控制且i及i子树拥有j个黑点的最小交换次数</br>
+于是对于每个点i都有两种情况：</br>
+　　1、i的儿子p也被who控制：tmp[p+1][j+k]=min(tmp[p+1][j+k],tmp[p][j]+f[child[i][p]][k][who]);</br>
+　　2、i的儿子p不被who控制：tmp[p+1][j+k]=min(tmp[p+1][j+k],tmp[p][j]+best[child[i][p]][k]);（其中k为p子树有的黑点数</br>
+显然f[i][j][who]=tmp[sz][j];（sz为x的儿子个数</br>
+相应的，best[i][j+1]=min(best[i][j+1],f[i][j][who]+(col[who]==0))</br>
+答案即为best[1][totblack]</br>
+```cpp
+        son[x]=1;
+	for(int i=fi[x];i;i=ne[i])if(a[i]!=fa){
+		dfs(a[i],x);
+		son[x]+=son[a[i]];
+		child[x].pb(a[i]);
+	}
+	int sz=child[x].size();
+	for(int who=1;who<=n;who++)
+	if(dis[x][who]<=D){
+		for(int i=0;i<=sz;i++)for(int j=0;j<=son[x];j++)tmp[i][j]=inf;//printf("%d %d\n",x,fa);
+		tmp[0][0]=tmp[0][1]=0;
+		int tott=1;
+		for(int i=0;i<sz;i++){
+			for(int j=0;j<=tott&&j<=totblack;j++)
+			for(int k=0;k<=son[child[x][i]]&&k+j<=totblack;k++)
+			if(tmp[i][j]!=inf){
+				if(f[child[x][i]][k][who]!=inf)tmp[i+1][j+k]=min(tmp[i+1][j+k]==inf?0x3f3f3f3f:tmp[i+1][j+k],tmp[i][j]+f[child[x][i]][k][who]);
+				if(best[child[x][i]][k]!=inf)tmp[i+1][j+k]=min(tmp[i+1][j+k]==inf?0x3f3f3f3f:tmp[i+1][j+k],tmp[i][j]+best[child[x][i]][k]);
+			}
+			tott+=son[child[x][i]];
+		}
+        for(int i=0;i<=son[x];i++)f[x][i][who]=tmp[sz][i];
+	}	
+	for(int i=0;i<=son[x]&&i<totblack;i++){
+		best[x][i+1]=inf;
+		for(int who=1;who<=n;who++)if(f[x][i][who]!=inf){
+			best[x][i+1]=min(best[x][i+1]==inf?0x3f3f3f3f:best[x][i+1],f[x][i][who]+(col[who]==0));
+		}
+	}
+```
