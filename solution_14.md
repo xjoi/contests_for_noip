@@ -26,7 +26,7 @@ int main()
 	}
 	printf("%d\n",ans);
 }
-```cpp
+```
 *****
 
 
@@ -82,7 +82,7 @@ int main()
 	}
 	printf("-1\n");
 }
-```cpp
+```
 *****
 
 # 赛后补题
@@ -108,7 +108,7 @@ int main()
 	for(i=3;i<=n+1;i++)
 		printf("%lld\n",i*i*(i-1)-i+2);
 }
-```cpp
+```
 *****
 
 ## D
@@ -223,7 +223,7 @@ signed main()
 	}
 	printf("NO\n");
 }
-```cpp
+```
 *****
 
 ## E
