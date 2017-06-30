@@ -1,7 +1,7 @@
 ## Result
 > * Yes : solved in the contest
 > * Accepted : solved after contest
-> * Waiting solving
+> * Waiting : solving
 
 \# | A | B | C | D | E | F | G
 ---|---|---|---|---|---|---|---
