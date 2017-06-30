@@ -2,8 +2,10 @@
 
 A
 主要算法:暴力
+
 Problem description
 输入n个数，当第i个数和第i-1个数的差大于c时，这个数之前的数全部清空，求最后剩下的数
+
 Solution
 直接暴力
 Code
