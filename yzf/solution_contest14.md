@@ -56,20 +56,98 @@
 
 ### Code
 ```cpp
+   for(i=2;i<=n;i++) cout<<(i+1)*(i+1)*i-i+1<<endl;
 ```
 *****
 
 # 赛后补题
 ## D
+>主要算法：最短路
 ### Problem description
-> 
+> 已知最短路长度，部分边权，求剩下的未知边权
 
 ### Solution
-> 
+> 首先把边权为0的边用vector存起来，其他该怎么建怎么建，然后跑一遍dij，如果最短路小于L，那么其他的0边无论怎么变化，最短路不会变化，这时输出NO，如果等于L，直接输出这个图，vector里面的0边搞成INF输出就行了。
+
+>最短路大于L的情况，这时就需要添加0边来看是否能找到最短路等于L的方案。具体的实现方法是把vector存的边一条一条的添加进原图中，添加的时候边权设为1。添加一条跑一次dij，如果添加到某条边使得最短路<=L，把最后添加进的这条边的权值加上L-dis[t]，然后记录下这条边在vector的位置，输出这个图，剩余的0边权值改为INF输出即可。如果添加了所有边进去还是找不到最短路<=L的方案，那么就不存在方案，输出NO。(摘自某大佬博客）
 
 ### Code
 ```cpp
-  for(i=2;i<=n;i++) cout<<(i+1)*(i+1)*i-i+1<<endl;
+void dij()      ///堆优化dij  
+{  
+    for(int i = 0;i < N;i++) dis[i] = INF,vis[i] = false;  
+    dis[s] = 0;  
+    priority_queue<Node> q;  
+    q.push(Node(s,0));  
+    while(!q.empty()){  
+        Node u = q.top();  
+        q.pop();  
+        if(vis[u.id]) continue;  
+        vis[u.id] = true;  
+        for(int i = head[u.id];i != -1;i = E[i].next){  
+            int v = E[i].v;  
+            if(!vis[v] && dis[v] > dis[u.id]+E[i].w){  
+                dis[v] = dis[u.id]+E[i].w;  
+                q.push(Node(v,dis[v]));  
+            }  
+        }  
+    }  
+}  
+  
+int main()  
+{  
+    memset(head,-1,sizeof head);  
+    cin>>n>>m>>L>>s>>t;
+    for(int i = 1;i <= m;i++){  
+        int u,v;  LL w;  
+        cin>>u>>v>>w;
+        if(w!=0){  
+            add(u,v,w); add(v,u,w);  
+        }  
+        else{  
+            node edge;  
+            edge.u = u,edge.v = v,edge.w = w,edge.next = -1;  
+            V.push_back(edge);  
+        }  
+    }  
+    dij();  
+    if(dis[t] < L){     
+        puts("NO");  return 0;  
+    }  
+    else if(dis[t] == L){ 
+        puts("YES");  
+        for(int i = 0;i < top;i += 2){  
+            cout<<E[i].u<<" "<<E[i].v<<" "<<E[i].w<<endl;
+        }  
+        for(int i = 0;i < V.size();i++){  
+            cout<<V[i].u<<" "<<V[i].v<<" "<<V[i].w<<endl;
+        }  
+    }  
+    int pos = -1;  
+    for(int i = 0;i < V.size();i++){  
+        add(V[i].u,V[i].v,1);  
+        add(V[i].v,V[i].u,1);  
+        dij();  
+        if(dis[t] <= L){  
+            E[top-2].w += L-dis[t];  
+            E[top-1].w += L-dis[t];  
+    		pos = i;  break;  
+        }  
+    }  
+    if(pos == -1){  
+        puts("NO");  
+        return 0;  
+    }  
+    puts("YES");  
+    for(int i = 0;i < top;i += 2){  
+        cout<<E[i].u<<" "<<E[i].v<<" "<<E[i].w<<endl;
+    }  
+    for(int i = pos+1;i < V.size();i++){  
+        cout<<E[i].u<<" "<<E[i].v<<" "<<INF<<endl;
+    }  
+    return 0;  
+}  
+
 ```
 *****
 
@@ -79,45 +157,3 @@
 
 ### Solution
 > 
-
-
-C
-
-主要算法：数学
-
-Problem description
-
-最开始给你一个数字x = 2，有两种操作：第一种是+操作， 每操作一次可以让x + 一次k，可以操作无数次，k为当前等级，k的等级最开始为1；d
-
-第二种操作是开方，即把x开方，开方之后，你的等级k就会上升一个等级，即k++；并且这时候你开方得到的数字必须是k+1之后的倍数 ，要让自己的等级k == n +1，问你每上升一级，要按多少次+；
-
-Solution
-
-通过对小数据的探究
-第一关 2+1*2=4 sqrt(4)=2=1*2
-第二关 2+2*17=36 sqrt(36)=6=2*3
-第三关 6+3*46=144 sqrt(144)=12=3*4
-...
-由此我们可以大胆猜测，每次的步数就是k*(k+1)*(k+1)-(k-1)
-
-Code
-for(i=2;i<=n;i++) cout<<(i+1)*(i+1)*i-i+1<<endl;
-
-
-赛后补题
-D
-主要算法：最短路
-Problem description
-已知最短路长度，部分边权，求剩下的未知边权
-Solution
-首先把边权为0的边用vector存起来，其他该怎么建怎么建，然后跑一遍dij，如果最短路小于L，那么其他的0边无论怎么变化，最短路不会变化，这时输出NO，如果等于L，直接输出这个图，vector里面的0边搞成INF输出就行了。
-最短路大于L的情况，这时就需要添加0边来看是否能找到最短路等于L的方案。具体的实现方法是把vector存的边一条一条的添加进原图中，添加的时候边权设为1。添加一条跑一次dij，如果添加到某条边使得最短路<=L，把最后添加进的这条边的权值加上L-dis[t]，然后记录下这条边在vector的位置，输出这个图，剩余的0边权值改为INF输出即可。如果添加了所有边进去还是找不到最短路<=L的方案，那么就不存在方案，输出NO。
-Code
-
-E
-
-Problem description
-
-Solution
-
-Code
