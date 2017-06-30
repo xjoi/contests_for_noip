@@ -4,7 +4,7 @@
 下面是详细操作指南
 ## 题解记录 solution_contestid.md
  训练赛结束后，将当天自己的比赛记录写成solution_contestid.md，模版参考solution_template.md，题意，题解一定要写，代码区域可粘贴关键代码即可
- 此文件直接放在你文件夹下面的一级目录，比如  name/solution_contestid.md
+ 此文件直接放在你文件夹下面的一级目录，比如  **name/solution_contestid.md**
 ## 补题  solution_contestid.md
 补题的记录写在solution_template.md里面，以分割线与比赛记录分开，具体格式请follow 模版
 ## 比赛结果记录 readme.md
