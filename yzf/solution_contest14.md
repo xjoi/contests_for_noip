@@ -1,21 +1,72 @@
-比赛中解决的问题
+# 比赛中解决的问题
+## A 
+>  主要算法:暴力
+### Problem description
+>  输入n个数，当第i个数和第i-1个数的差大于c时，这个数之前的数全部清空，求最后剩下的数
 
-A
+### Solution
+>  直接暴力
 
-主要算法:暴力
+### Code
+```cpp
+  cin>>x; sum=1;
+  for (int i=2;i<=n;++i){
+    cin>>y; if (y-x>c) sum=1; else sum++; x=y;
+  }
+```
+*****
 
-Problem description
 
-输入n个数，当第i个数和第i-1个数的差大于c时，这个数之前的数全部清空，求最后剩下的数
+## B
+> 主要算法：暴力，字符串
+### Problem description
+> 输入一个字符串，其中含有问号和大写字母，问号代表任何大写字母，求是否能使字符串中含有26个连续字母中对应A-Z，并输出处理后字符串
 
-Solution
+### Solution
+> 循环0-（length-26），暴力求出以此位之后26个字母是否符合
 
-直接暴力
+### Code
+```cpp
+  for (int j=i;j<i+26;++j) 
+    if (str[j]>='A'&&str[j]<='Z') bo[str[j]-'A']=1; else sum++;
+  for (int j=0;j<26;++j) if (!bo[j]) a[++tot]=j;
+  if (sum<tot) continue;
+```
+*****
 
-Code
+# 赛后补题
 
-cin>>x; sum=1;
-for (int i=2;i<=n;++i){cin>>y; if (y-x>c) sum=1; else sum++; x=y;}
+## C
+### Problem description
+> 
+
+### Solution
+> 
+
+### Code
+```cpp
+```
+*****
+
+
+## D
+### Problem description
+> 
+
+### Solution
+> 
+
+### Code
+```cpp
+```
+*****
+
+## E
+### Problem description
+> 
+
+### Solution
+> 
 
 B
 
@@ -77,4 +128,3 @@ Problem description
 Solution
 
 Code
-
