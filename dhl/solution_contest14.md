@@ -27,8 +27,8 @@ for(int i=n;i>=1;i--)
 
 ### Solution
 > 我们根据题意，很容易列一个方程
->$\sqrt{ni+k(i-1)}=b(i+1)$
->解得$n=i^{2}(i-1)-(i-2)$
+$\sqrt{ni+k(i-1)}=b(i+1)$
+解得$n=i^{2}(i-1)-(i-2)$
 
 ### Code
 ```cpp
