@@ -2,6 +2,7 @@
 > * Y : solved in the contest
 > * A : solved after contest
 > * W : solving
+> * X : tan90
 
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
@@ -20,3 +21,4 @@
 |contest11|Y|Y|Y|A|Y|X|X
 |contest12|Y|A|Y|Y|A|A|W
 |contest13|Y|Y|Y|Y|Y|A|A
+|contest14|Y|Y|Y|A|A|X|X
