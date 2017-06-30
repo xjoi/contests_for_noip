@@ -20,3 +20,4 @@
 ## Contest14
 ### 树分治
 - [ ] [D Tree](http://acm.hdu.edu.cn/showproblem.php?pid=4812)
+- [ ] [Tree](http://poj.org/problem?id=1741) 树分治入门题
