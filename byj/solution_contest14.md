@@ -28,7 +28,7 @@ int main()
     cout << n - p + 1 << endl;
     return 0;
 }
-```cpp
+```
 *****
 
 ### Tag
@@ -92,7 +92,7 @@ int main()
     else cout << -1 << endl;
     return 0;
 }
-```cpp
+```
 *****
 
 ### Tag
