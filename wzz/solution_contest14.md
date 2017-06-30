@@ -1,4 +1,4 @@
-# 比赛记录contest13
+# 比赛记录contest14
 
 [比赛链接](https://vjudge.net/contest/168406#problem/)
 ## 比赛征程
