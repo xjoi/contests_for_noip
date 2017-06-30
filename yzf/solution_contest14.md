@@ -69,6 +69,7 @@
 
 ### Code
 ```cpp
+  for(i=2;i<=n;i++) cout<<(i+1)*(i+1)*i-i+1<<endl;
 ```
 *****
 
