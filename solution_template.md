@@ -5,6 +5,8 @@
 ### Problem description
 > 输出我要成为高手
 
+### Data Limit：n <= 1e5  Time Limit: 1s
+
 ### Solution
 > I want to be a master
 
@@ -23,6 +25,7 @@ int main () {
 ### Problem description
 > 
 
+### Data Limit：n <= 1e5  Time Limit: 1s
 ### Solution
 > 
 
@@ -37,6 +40,8 @@ int main () {
 ### Problem description
 > 
 
+### Data Limit：n <= 1e5  Time Limit: 1s
+
 ### Solution
 > 
 
@@ -50,6 +55,7 @@ int main () {
 ### Problem description
 > 
 
+### Data Limit：n <= 1e5  Time Limit: 1s
 ### Solution
 > 
 
@@ -61,6 +67,8 @@ int main () {
 ## E
 ### Problem description
 > 
+
+### Data Limit：n <= 1e5  Time Limit: 1s
 
 ### Solution
 > 
