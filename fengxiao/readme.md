@@ -4,7 +4,7 @@
 > * WTM : solving
 
 
-  \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
+  \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
 ---|---|---|---|---|---|---|---
 |contest0|WTM|WTM|WTM|WTM|WTM|WTM|
 |contest1|WTM|WTM|WTM|WTM|WTM|WTM|
@@ -19,7 +19,7 @@
 |contest10|YES|YES|YES|QAQ|QAQ|QAQ|
 |contest11|YES|YES|YES|QAQ|QAQ|WTM|
 |contest12|YES|QAQ|QAQ|YES|WTM|QAQ|
-|contest13|YES|YES|YES|YES|QAQ|WTM|
+|contest13|YES|YES|YES|YES|QAQ|WTM|WTM|
 |contest14|YES|YES|QAQ|QAQ|WTM|NON|
 
 # 专题征程
