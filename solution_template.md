@@ -1,31 +1,70 @@
-# 比赛记录
-
 [比赛链接](https://www.codeforces.com)
+
+# 比赛中解决的问题
 ## A
 ### Problem description
-> 输出我要虐题
+> 输出我要成为高手
+
 ### Solution
-仔细分析一下，这个题可以用一个printf语句解决
+> I want to be a master
+
+### Code
 ```cpp
-#include <bits/stdc++.h>
+#include <bits/stdc+++.h>
 using namespace std;
 int main () {
-    printf("I want AC\n");
+    printf("I want to be a master\n");
 }
 ```
+*****
 
-***** 
-# 赛后补题
 
 ## B
 ### Problem description
-> 输出我要补题
+> 
+
 ### Solution
-仔细分析一下，这个题可以用一个printf语句解决
+> 
+
+### Code
 ```cpp
-#include <bits/stdc++.h>
-using namespace std;
-int main () {
-    printf("I want buti\n");
-}
+```
+*****
+
+# 赛后补题
+
+## C
+### Problem description
+> 
+
+### Solution
+> 
+
+### Code
+```cpp
+```
+*****
+
+
+## D
+### Problem description
+> 
+
+### Solution
+> 
+
+### Code
+```cpp
+```
+*****
+
+## E
+### Problem description
+> 
+
+### Solution
+> 
+
+### Code
+```cpp
 ```
