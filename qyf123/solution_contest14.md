@@ -228,11 +228,136 @@ signed main()
 
 ## E
 ### Problem description
-> 
+> 一棵边权均为个位数的树，求有多少条最短路径满足依次经过的边权连起来后组成的大整数是与10互质的M的倍数？
 
 ### Solution
-> 
+> 由于最多有100000个点，为了避免树退化成链，就使用树分治。设经过一个重心的数的左半部分为x，右半部分为y，设y的长度为L，那么x\*10^L+y≡0(mod M),因为L与y有关，所以我们把y和L放在一起，得到x≡-y\*10^-L(mod M)。因为L最大可能为99999，所以10^-L可以预处理。树分治计算经过某重心的方案数时，可以依次枚举将该重心去除后得到的子树，求出当前子树所有的y并通过map计算方案数后再求出它所有的x，并将x存入map中。之后再将x和y反一反统计，就不存在漏掉的情况了。由于偷懒使用了map，总时间复杂度为O(n\*log(n)^2)。
 
 ### Code
 ```cpp
+#include<cstdio>
+#include<iostream>
+#include<map>
+#define int long long
+#define maxn 200010
+using namespace std;
+map<int,int>mp1,mp2;
+int n,m,i,f[maxn],s[maxn],next[maxn],first[maxn],end[maxn],a[maxn],cnt,sum,root,t[maxn],tt[maxn],ans,x,y,z;
+bool bo[maxn];
+void add(int x,int y,int z)
+{
+	next[++cnt]=first[x];
+	first[x]=cnt;
+	end[cnt]=y;
+	a[cnt]=z;
+}
+void getroot(int u,int fa)
+{
+	int i,v;
+	s[u]=1;
+	f[u]=0;
+	for(i=first[u];i;i=next[i])
+	{
+		v=end[i];
+		if(v==fa||bo[v])continue;
+		getroot(v,u);
+		s[u]+=s[v];
+		f[u]=max(f[u],s[v]);
+	}
+	f[u]=max(f[u],sum-s[u]);
+	if(f[u]<f[root])root=u;
+}
+int search(int u,int fa,int depth,int now,int p)
+{
+	int i,v,ans=mp2[now];
+	if(p)mp1[now]++;
+	for(i=first[u];i;i=next[i])
+	{
+		v=end[i];
+		if(v==fa||bo[v])continue;
+		ans+=search(v,u,depth+1,(now+a[i]*tt[depth])%m,p);
+	}
+	return ans;
+}
+int calc(int u,int fa,int depth,int now,int p)
+{
+	int i,v,ans=mp1[(-(now*t[depth]%m)+m)%m];
+	if(p)mp2[(-(now*t[depth]%m)+m)%m]++;
+	for(i=first[u];i;i=next[i])
+	{
+		v=end[i];
+		if(v==fa||bo[v])continue;
+		ans+=calc(v,u,depth+1,(now*10+a[i])%m,p);
+	}
+	return ans;
+}
+void solve(int u)
+{
+	int i,v;
+	root=0;
+	getroot(u,0);
+	bo[root]=1;
+	mp1.clear();
+	mp2.clear();
+	mp1[0]=mp2[0]=1;
+	for(i=first[root];i;i=next[i])
+	{
+		v=end[i];
+		if(bo[v])continue;
+		ans+=calc(v,root,1,a[i]%m,0);
+		search(v,root,1,a[i]%m,1);
+	}
+	for(i=first[root];i;i=next[i])
+	{
+		v=end[i];
+		if(bo[v])continue;
+		ans+=search(v,root,1,a[i]%m,0);
+		calc(v,root,1,a[i]%m,1);
+	}
+	for(i=first[root];i;i=next[i])
+	{
+		v=end[i];
+		if(bo[v])continue;
+		sum=s[v];
+		solve(v);
+	}
+}
+void exgcd(int a,int b,int &x,int &y)
+{
+	if(!b)
+	{
+		x=1,y=0;
+		return;
+	}
+	exgcd(b,a%b,y,x);
+	y-=a/b*x;
+}
+int ni()
+{
+	int x,y;
+	exgcd(10,m,x,y);
+	while(x<0)x+=m;
+	return x;
+}
+signed main()
+{
+	f[0]=1e9;
+	scanf("%lld%lld",&n,&m);
+	t[0]=1;
+	tt[0]=1;
+	sum=n;
+	for(i=1;i<=n;i++)
+		tt[i]=tt[i-1]*10%m;
+	for(i=1;i<=n;i++)
+		t[i]=t[i-1]*ni()%m;
+	for(i=1;i<n;i++)
+	{
+		scanf("%lld%lld%lld",&x,&y,&z);
+		x++,y++;
+		add(x,y,z);
+		add(y,x,z);
+	}
+	solve(1);
+	printf("%lld\n",ans);
+}
 ```
