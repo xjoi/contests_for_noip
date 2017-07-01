@@ -6,6 +6,6 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-|contest14|YES|  YES     | Accepted | Accepted | Waiting | X|X
+|contest14|YES|  YES     | Accepted | Accepted | Accepted | X|X
 
 
