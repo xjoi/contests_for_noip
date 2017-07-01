@@ -66,102 +66,21 @@ for (long long i=2;i<=n;++i){
 ### Description
 给出一个无向图，其中一些边的权值被擦除了（初始值为0）。再给出起点S和终点T，要求给所有的被擦除的边赋上大于0的权值，使得S到T的最短路总权值恰好为L。
 ### Solution
-#### ● 方法1（暴力）
-
-先分别将未知边的权值设为1和无穷（分别为未知边取到的最小和最大值），跑一遍最短路（dijkstra或SPFA），得到的最短路长度为l1,l2.
-若l1>L,则无论如何增大未知边，所得最短路一定大于L，则无解。同理，若l2<L,也无解。（事实上我没有判无穷的情况，后面的操作可以将它给否了）
-（当然，若等于L则为答案）
-
-(将各未知边权值设为1,)接下来枚举每一条未知边，假设它在最短路上，则只需要将它增加L-l1，即现在的权值为1+L-l1。
-再跑一遍最短路，若现在的l1=L,则为答案，反之，说明它不在最短路上（或者还有一条比L短的路径），则继续枚举。
-
-最后若全部枚举完毕也无解，说明本身图上就有一条由已知边构成的最短路小于L，即无解。
-#### ● 方法2（巧妙解法）
-
-设未知边权值为1，先反向（从终点到起点）跑一遍最短路。设各点得到的最短长度为dis1[1..n]。
-
-接着正向跑最短路，到各点最短长度为dis2[1..n]，在扩展的同时（假设从a点扩展到b点），若扩展到未知边，跟法1相同，设它在最短路上，
-若现在不是长度为L的最短路这时需要增加(L-dis1[b]-dis2[a])才能使它的最短路长度为L，即现在的权值为(1+L-dis1[b]-dis2[a])，
-但考虑到它之前已经被更新过，已经被更新成了L长度的最短路，所以最终的权值w=max(w,1+L-dis1[b]-dis2[a]).更新完毕后继续跑最短路。
-
-此时所有经过未知边的l都>=L（否则它将会被更新）。
-
-则这时的最短路l1,若l1=L则为答案，否则若l1>L,则所有路径均大于L，无解；若l1<L,则存在只由已知边构成的路径，长度小于L，同样无解。
-
-``` cpp
-#include <iostream>
-#include <cstdio>
-#include <cmath>
-#include <cstring>
-#include <algorithm>
-#include <queue>
-#define Clear(s) memset(s,0,sizeof s)
-using namespace std;
-const int inf=1e9+7;
-
-struct node{
-	int E,v,next;
-}map[20001];
-int head[1001],tail;
-bool empty[20001];
-void ins(int u,int v,int w){
-	map[++tail].E=v;map[tail].v=w?w:1;map[tail].next=head[u];head[u]=tail;
-	empty[tail]=!w;
-}
-int n,m,L,s,t;
-int dis[1001];
-bool visit[1001];
-void min_path(){
-	queue <int> Q;
-	Q.push(s);
-	Clear(visit);
-	for (int i=0;i<n;i++) dis[i]=inf;
-	dis[s]=0;
-	while (!Q.empty()){
-		int t=Q.front();Q.pop();
-		visit[t]=0;
-		for (int i=head[t];i;i=map[i].next){
-			int e=map[i].E;
-			if (dis[t]+map[i].v<dis[e]){
-				dis[e]=dis[t]+map[i].v;
-				if (!visit[e]){
-					Q.push(e);
-					visit[e]=1;
-				}
-			}
-		}
-	}	
-}
-int main(){
-	scanf("%d%d%d%d%d",&n,&m,&L,&s,&t);
-	for (int i=1;i<=m;i++){
-		int u,v,w;
-		scanf("%d%d%d",&u,&v,&w);
-		ins(u,v,w);
-		ins(v,u,w);
-	}
-	min_path();
-	if (dis[t]>L) {
-		printf("NO");return 0;
-	}
-	bool flag=(dis[t]==L?1:0);
-	for (int i=1;i<=tail&&!flag;i+=2){
-		if (!empty[i]) continue;
-		map[i].v=map[i+1].v=map[i].v+L-dis[t];
-		min_path();
-		if (dis[t]==L){
-			flag=1;break;
-		}
-	}
-	if (!flag) {
-		printf("NO");return 0;
-	}
-	printf("YES\n");
-	for (int i=1;i<=tail;i+=2){
-		printf("%d %d %d\n",map[i+1].E,map[i].E,map[i].v);
-	}	
-}
-```
-
+解法非常多啦，我就把每一个解法简单提及以下   
+### NO的判断方法   
+>如果把所有边的权值设为1仍然大于L或者所有边都为INF仍然小于L，那就是不存在的，道理细细琢磨  
+### 判断YES的办法   
+#### 1.最暴力的方法。   
+>我们可以对所有不确定的边的权值都进行更改，每一次都加1，更新完之后都跑一边最短路，看是否满足条件，复杂度大概是nmlogn   
+#### 2.比较巧妙的办法  
+>初始未确定的边的权值为1.     
+我们先跑一次从终点到各个顶点的最短路，求出终点到各个点的距离，设为d[x,t]  
+然后再从出发点跑一边最短路，过程中更新权值，设这边的两个端点为x/y,让他等于L-d[s,x]-d[y,t]    
+于是我们在增大边权的时候，就构造了一条权值始终大于等于L的路。于是输出等于L的时候的每一条边的边权就可以了。
+>还有特殊情况，就是如果这个最短路是不经过未确定的边的，那就输出NO，也就是说不用判断上面的情况了
+#### 3.更为巧妙的二分
+>显然将所有边值都设为1若最短路大于L则无解，所有边值设为INF最短路小于L则无解。
+其他情况一定是有解的。可以想象成将所有的边一次加一，如此循环操作，最短路必定会慢慢加一必定能够到达L；
+那么假设总共有x条权值不确定的边，假设先对第一条边操作，将其不断加一，每加一次跑一遍最短路，始终不能到达L则说明经过第一条边的路必定始终大于L，同理对接>下来的边也如此操作。当然这样直接写会很复杂，可以用二分来模拟这个过程，具体就是代码中的cek()函数
 ***
 ## #E Digit Tree
