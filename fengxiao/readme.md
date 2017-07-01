@@ -19,7 +19,8 @@
 |contest10|YES|YES|YES|QAQ|QAQ|QAQ|
 |contest11|YES|YES|YES|QAQ|QAQ|WTM|
 |contest12|YES|QAQ|QAQ|YES|WTM|QAQ|
-|contest13|WTM|WTM|WTM|WTM|WTM|WTM|
+|contest13|YES|YES|YES|YES|QAQ|WTM|
+|contest14|YES|YES|QAQ|QAQ|WTM|NON|
 
 # 专题征程
 > * YES : solved in the contest
@@ -74,3 +75,9 @@
 - [ ] [Little Wish~ lyrical step~](http://acm.hdu.edu.cn/showproblem.php?pid=4735)
 #### 启发式合并(每个点最多被合并logn次) （F题）
 - [ ] [Boring Counting](http://acm.hdu.edu.cn/showproblem.php?pid=4358)
+## Contest14
+### 树分治
+- [ ] [D Tree](http://acm.hdu.edu.cn/showproblem.php?pid=4812)
+- [ ] [Tree](http://poj.org/problem?id=1741) 树分治入门题
+- [ ] [Query on the subtree](http://acm.hdu.edu.cn/showproblem.php?pid=4918)
+
