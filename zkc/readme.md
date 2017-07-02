@@ -1,24 +1,25 @@
 # TodoList
-> YES - solved in the contest
+
+> Y - solved in the contest
 >
-> AC- solved after the contest
+> A- solved after the contest
 >
-> QAQ - still solving
+> W - still solving
 
  \# | A | B | C | D | E | F | G
  --|--|--|--|--|--|--|--
-contest#000|	YES|	YES|	AC|		AC|		QAQ|	X|		X
-contest#001|	YES|	YES|	YES|	AC|		AC|		X|		X
-contest#002|	AC|		YES|	YES|	YES|	AC|		X|		X
-contest#003|	AC|		YES|	AC|		AC|		YES|	X|		X
-contest#004|	YES|	YES|	YES|	AC|		QAQ|	X|		X
-contest#005|	YES|	YES|	YES|	QAQ|	QAQ|	X|		X
-contest#006|	YES|	YES|	YES|	AC|		QAQ|	AC|		X
-contest#007|	YES|	QAQ|	QAQ|	QAQ|	QAQ|	X|		X
-contest#008|	YES|	YES|	YES|	AC|		QAQ|	AC|		QAQ
-contest#009|	YES|	YES|	AC|		AC|		QAQ|	X|		X
-contest#010|	YES|	YES|	YES|	AC|		AC|		X|		X
-contest#011|	YES|	YES|	YES|	AC|		AC|		X|		X
-contest#012|	YES|	AC|		YES|	YES|	QAQ|	AC|		QAQ
-contest#013|	YES|	YES|	YES|	YES|	X|		AC|		X
-contest#014|	YES|	YES|	YES|	AC|		QAQ|	X|		X
+contest0|	Y|	Y|	A|	A|	W|	X|	X
+contest1|	Y|	Y|	Y|	A|	A|	X|	X
+contest2|	A|	Y|	Y|	Y|	A|	X|	X
+contest3|	A|	Y|	A|	A|	Y|	X|	X
+contest4|	Y|	Y|	Y|	A|	W|	X|	X
+contest5|	Y|	Y|	Y|	W|	W|	X|	X
+contest6|	Y|	Y|	Y|	A|	W|	A|	X
+contest7|	Y|	W|	W|	W|	W|	X|	X
+contest8|	Y|	Y|	Y|	A|	W|	A|	W
+contest9|	Y|	Y|	A|	A|	W|	X|	X
+contest10|	Y|	Y|	Y|	A|	A|	X|	X
+contest11|	Y|	Y|	Y|	A|	A|	X|	X
+contest12|	Y|	A|	Y|	Y|	W|	A|	W
+contest13|	Y|	Y|	Y|	Y|	A|	A|	W
+contest14|	Y|	Y|	Y|	A|	W|	X|	X
