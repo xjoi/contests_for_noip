@@ -6,8 +6,8 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-|contest8|YES|YES|YES|YES|Accepted|\ |\
-|contest9|YES|YES|YES|Accept|YES|Accept|Waiting
+|contest8|YES|YES|YES|Accept|YES|Accept|Waiting
+|contest9|YES|YES|YES|YES|Accepted|\ |\
 |contest10|YES|YES|YES|Accept|Accepted|\ |\
 |contest11|YES|YES|YES|YES|Accepted|\ |\
 |contest12|YES|Accept|YES|YES|Waiting|Accepted|Waiting
