@@ -213,3 +213,108 @@ int main()
 
 ### Tag
 > Shortest Path
+*****
+
+## E
+### Description
+> 给定一棵有n个节点的树和一个与10互质的数M，树上每条边的权值都是小于10的正整数。定义dist(u,v)为依次写下从u到v路径上每条边的权值所得到的数字。求满足M|dist(u,v)的点对个数。
+
+### Solution
+> 设当前枚举到的节点为x。令depthu表示u在x及它子树中的深度。对于在x第(i+1)棵子树中的节点u和在前i棵子树中的节点v，有：
+M|dist(u,v)⇔0^depth(v)*dist(u,x)+dist(x,v) ≡0 (mod M) (1)
+M|dist(v,u)⇔10^depth(u)*dist(v,x)+dist(x,u)≡0 (mod M) (2)
+对于(1)式，化简得dist(u,x)≡−10^(−depth(v))*dist(x,v) (mod M)；对于(2)式，化简得10^(−depth(u))*dist(x,u)≡−dist(v,x) (mod M)。用两个map分别存下前i棵子树中10^(−depth(v))*dist(x,v)和dist(v,x)的值，在处理第(i+1)棵子树时直接加上可行的方案数。
+
+### Code
+```cpp
+#include <cstdio>
+#include <map>
+#include <algorithm>
+using namespace std;
+struct edge {
+    int v, w, nxt;
+} e[200001];
+long long n, m, ans, nume, tot, root, h[100001], size[100001], f[100001];
+long long val1[100001], val2[100001], power[100001], inv[100001];
+bool vis[100001];
+map<long long, int> id1, id2;
+void extend_gcd(int a, int b, int &x, int &y) {
+    if (!b) { x = 1, y = 0; return; }
+    extend_gcd(b, a % b, y, x);
+    y -= a / b * x;
+}
+void add_edge(int u, int v, int w) {
+    e[++nume].v = v, e[nume].w = w, e[nume].nxt = h[u], h[u] = nume;
+    e[++nume].v = u, e[nume].w = w, e[nume].nxt = h[v], h[v] = nume;
+}
+void get_root(int t, int fa) {
+    size[t] = 1, f[t] = 0;
+    for (int i = h[t]; i; i = e[i].nxt) {
+        if (!vis[e[i].v] && e[i].v != fa) {
+            get_root(e[i].v, t);
+            size[t] += size[e[i].v];
+            f[t] = max(f[t], size[e[i].v]);
+        }
+    }
+    f[t] = max(f[t], tot - size[t]);
+    if (f[t] < f[root]) root = t;
+}
+void get_dist(int t, int fa, int flag, int depth) {
+    if (!flag) ++id1[val1[t]], ++id2[val2[t] * inv[depth] % m];
+    else {
+        ans += !val1[t] + !val2[t];
+        ans += id1[(val2[t] ? m - val2[t] : 0) * inv[depth] % m];
+        ans += id2[val1[t] ? m - val1[t] : 0];
+    }
+    for (int i = h[t]; i; i = e[i].nxt) {
+        if (!vis[e[i].v] && e[i].v != fa) {
+            if (flag) {
+                val1[e[i].v] = (val1[t] + e[i].w * power[depth]) % m;
+                val2[e[i].v] = (val2[t] * 10 + e[i].w) % m;
+            }
+            get_dist(e[i].v, t, flag, depth + 1);
+        }
+    }
+}
+void solve(int t) {
+    vis[t] = true, id1.clear(), id2.clear();
+    for (int i = h[t]; i; i = e[i].nxt) {
+        if (!vis[e[i].v]) {
+            val1[e[i].v] = val2[e[i].v] = e[i].w % m;
+            get_dist(e[i].v, t, 1, 1);
+            get_dist(e[i].v, t, 0, 1);
+        }
+    }
+    for (int i = h[t]; i; i = e[i].nxt) {
+        if (!vis[e[i].v]) {
+            root = n, tot = size[e[i].v];
+            get_root(e[i].v, t);
+            solve(root);
+        }
+    }
+}
+int main()
+{
+    scanf("%lld%lld", &n, &m);
+    power[0] = 1;
+    for (int i = 1; i <= n; ++i) power[i] = power[i - 1] * 10 % m;
+    for (int i = 0; i <= n; ++i) {
+        int x, y;
+        extend_gcd(power[i], m, x, y);
+        inv[i] = (x % m + m) % m;
+    }
+    for (int i = 1; i < n; ++i) {
+        int u, v, w;
+        scanf("%d%d%d", &u, &v, &w);
+        add_edge(u, v, w);
+    }
+    tot = f[n] = n, root = n;
+    get_root(0, n);
+    solve(root);
+    printf("%lld\n", ans);
+    return 0;
+}
+```
+
+### Tag
+> Divide-and-Conquer, Inverse, Tree
