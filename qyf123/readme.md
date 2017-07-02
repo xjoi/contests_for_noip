@@ -6,7 +6,7 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-|contest13|Accepted|Accepted|Accepted|Waiting|Waiting|Waiting|Waiting
-|contest14|YES|  YES     | Accepted | Accepted | Accepted | X|X
+|contest13| A | A | A | W | W | W | W 
+|contest14| Y | Y | A | A | A | X | X 
 
 
