@@ -32,7 +32,7 @@
 |最小生成树|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|X|X|X|X|X|
 |字典树   |Y|W|W|W|W|W|
 |AC自动机 |W|W|W|W|W|W|
-|线段树1.0|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|W|Y|W|W|W|
+|线段树1.0|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|W|Y|Y|Y|W|
 |线段树2.0|W|W|W|W|W|W|
 |contest5|WTM|WTM|WTM|WTM|WTM|WTM|
 |contest6|WTM|WTM|WTM|WTM|WTM|WTM|
