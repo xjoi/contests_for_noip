@@ -221,8 +221,8 @@ int main()
 
 ### Solution
 > 设当前枚举到的节点为x。令depthu表示u在x及它子树中的深度。对于在x第(i+1)棵子树中的节点u和在前i棵子树中的节点v，有：
-M|dist(u,v)⇔0^depth(v)*dist(u,x)+dist(x,v) ≡0 (mod M) (1)
-M|dist(v,u)⇔10^depth(u)*dist(v,x)+dist(x,u)≡0 (mod M) (2)
+M|dist(u,v)⇔10^depth(v)*dist(u,x)+dist(x,v) ≡0 (mod M) (1).
+M|dist(v,u)⇔10^depth(u)*dist(v,x)+dist(x,u)≡0 (mod M) (2).
 对于(1)式，化简得dist(u,x)≡−10^(−depth(v))*dist(x,v) (mod M)；对于(2)式，化简得10^(−depth(u))*dist(x,u)≡−dist(v,x) (mod M)。用两个map分别存下前i棵子树中10^(−depth(v))*dist(x,v)和dist(v,x)的值，在处理第(i+1)棵子树时直接加上可行的方案数。
 
 ### Code
