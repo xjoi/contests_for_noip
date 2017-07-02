@@ -1,26 +1,26 @@
 # 比赛征程
-> * YES : solved in the contest
-> * QAQ : solved after contest
-> * WTM : solving
+> * Y : solved in the contest
+> * A : solved after contest
+> * W : solving
 
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
 ---|---|---|---|---|---|---|---
-|contest0|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest1|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest2|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest3|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest4|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest5|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest6|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest7|QAQ|WTM|WTM|WTM|WTM|WTM|
-|contest8|YES|YES|YES|QAQ|QAQ|WTM|
-|contest9|YES|YES|QAQ|QAQ|QAQ|QAQ|
-|contest10|YES|YES|YES|QAQ|QAQ|QAQ|
-|contest11|YES|YES|YES|QAQ|QAQ|WTM|
-|contest12|YES|QAQ|QAQ|YES|WTM|QAQ|
-|contest13|YES|YES|YES|YES|QAQ|WTM|WTM|
-|contest14|YES|YES|QAQ|QAQ|WTM|NON|
+|contest0|W|W|W|W|W|W|
+|contest1|W|W|W|W|W|W|
+|contest2|W|W|W|W|W|W|
+|contest3|W|W|W|W|W|W|
+|contest4|W|W|W|W|W|W|
+|contest5|W|W|W|W|W|W|
+|contest6|W|W|W|W|W|W|
+|contest7|A|W|W|W|W|W|
+|contest8|Y|Y|Y|A|A|W|
+|contest9|Y|Y|A|A|A|A|
+|contest10|Y|Y|Y|A|A|A|
+|contest11|Y|Y|Y|A|A|W|
+|contest12|Y|A|A|Y|W|A|
+|contest13|Y|Y|Y|Y|A|W|W|
+|contest14|Y|Y|A|A|W|X|
 
 # 专题征程
 > * YES : solved in the contest
@@ -29,11 +29,11 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |  K  |  L  |  M  |  N  |  O  |  P  |  Q  |  R  |  S  |  T  |
 ---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---
-|最小生成树|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|YES|NON|NON|NON|NON|NON|
-|字典树   |YES|WTM|WTM|WTM|WTM|WTM|
-|AC自动机 |WTM|WTM|WTM|WTM|WTM|WTM|
-|线段树1.0|WTM|WTM|WTM|WTM|WTM|WTM|
-|线段树2.0|WTM|WTM|WTM|WTM|WTM|WTM|
+|最小生成树|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|X|X|X|X|X|
+|字典树   |Y|W|W|W|W|W|
+|AC自动机 |W|W|W|W|W|W|
+|线段树1.0|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|W|Y|W|W|W|
+|线段树2.0|W|W|W|W|W|W|
 |contest5|WTM|WTM|WTM|WTM|WTM|WTM|
 |contest6|WTM|WTM|WTM|WTM|WTM|WTM|
 |contest7|QAQ|WTM|WTM|WTM|WTM|WTM|
@@ -43,18 +43,6 @@
 |contest11|YES|YES|YES|QAQ|QAQ|WTM|
 |contest12|YES|QAQ|QAQ|YES|WTM|QAQ|
 |contest13|WTM|WTM|WTM|WTM|WTM|WTM|
-
-## 比赛征程
-> * YES : solved in the contest
-> * Accepted : solved after contest
-> * Waiting : solving
-
-
-  \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
----|---|---|---|---|---|---|---
-|contest0|YES|  YES     | YES | Waiting | Waiting | X|X
-| contest1 | YES   |   YES   | YES|YES|Accepted|YES|Accepted
-
 
 
 ## 赛后好题推荐
