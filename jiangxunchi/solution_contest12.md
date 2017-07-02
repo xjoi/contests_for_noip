@@ -105,3 +105,35 @@ int main(){
   printf("%lld",ans); return 0;
 }
 ```
+## C
+### Problem description
+给你一个四边形，求对称轴的数量乘2
+### Solution
+枚举对角线和两边的中点的连线，求出答案。
+```cpp
+#include<cstdio>
+#include<complex>
+using namespace std;
+typedef complex<int> vec;
+int sqrdis(const vec &a){
+  return real(a)*real(a)+imag(a)*imag(a);
+}
+bool equaldis(const vec &a,const vec &b,const vec &c,const vec &d){
+  return sqrdis(c-a)==sqrdis(d-a)&&sqrdis(c-b)==sqrdis(d-b);
+}
+int main(){
+  vec a[5];
+  for(int i=1;i<=4;++i){
+    int x,y; scanf("%d%d",&x,&y);
+    a[i]=vec(x,y); a[i]*=2;
+  }
+  int ans=0;
+  ans+=2*equaldis(a[1],a[3],a[2],a[4])+2*equaldis(a[2],a[4],a[1],a[3]);
+  vec b[5];
+  for(int i=1;i<=3;++i) b[i]=(a[i]+a[i+1])/2;
+  b[4]=(a[4]+a[1])/2;
+  ans+=2*(equaldis(b[1],b[3],a[1],a[2])&&equaldis(b[1],b[3],a[3],a[4]));
+  ans+=2*(equaldis(b[2],b[4],a[2],a[3])&&equaldis(b[2],b[4],a[1],a[4]));
+  printf("%d\n",ans); return 0;
+}
+```
