@@ -76,4 +76,96 @@ none
 	}
 ```
 
+## div 2:E
+### Problem description
+> 给你一棵树，树边有边权w，w是0~9的一个数，求有多少个本质不同的点对<u,v>使得u到v的最短路径上的数连成得数是M的倍数，本质不同当且仅当点对两个元素至少有一个不相同，M是10的倍数，点数<=10^5
+### Solution
+　　我们对这棵树进行点分治，每次分治算经过根节点的满足要求的路径数量，我们设A为从节点到根节点所形成的数，B为根节点到节点所形成的数。于是只需要把A中的每个元素存入map，再对每个B查询A\*10^].len+B%M==0的A的个数，即为查询map[-B/(10^B.len)]，这里可以用乘法逆元来做。注意从根出发形成的数字要特殊处理，因为有可能增加答案所对应的点对的路径不经过根节点，只是从根u的儿子v走到u再回到v，故要减去这种情况，具体细节看代码
+
+```cpp
+#include<cstdio>
+#include<algorithm>
+#include<map>
+#include<cstring>
+#define N 100100
+#define LL long long
+using namespace std;
+map<LL,LL>mp;
+LL a[N*2],c[N*2],fi[N],ne[N*2],la[N],vis[N],size[N],f[N],pow[N],ni[N],tt,tot,root,M,n,x,y,z,ans,mx;
+void add(LL x,LL y,LL z){
+	a[++tt]=y;c[tt]=z;
+	!fi[x]?fi[x]=tt:ne[la[x]]=tt;la[x]=tt;
+}
+void exgcd(LL a,LL b,LL &d,LL &x,LL &y){
+	if(!b){
+		d=a;x=1;y=0;return;
+	}
+	exgcd(b,a%b,d,y,x);
+	y-=x*(a/b);
+}
+void getroot(LL u,LL fa){
+	size[u]=1;f[u]=0;
+	for(LL i=fi[u];i;i=ne[i]){
+		LL v=a[i];
+		if(v==fa||vis[v])continue;
+		getroot(v,u);
+		size[u]+=size[v];
+		f[u]=max(f[u],size[v]);
+	}
+	f[u]=max(f[u],tot-size[u]);
+	if(f[u]<mx){mx=f[u],root=u;}
+}
+void getA(LL u,LL fa,LL dep,LL val){
+	mp[val]++;
+	for(LL i=fi[u];i;i=ne[i]){
+		LL v=a[i],w=c[i];
+		if(v==fa||vis[v])continue;
+		getA(v,u,dep+1,(w*pow[dep]+val)%M);
+	}
+}
+LL getB(LL u,LL fa,LL dep,LL val){
+	LL tmp=mp[(((-val)%M+M)*ni[dep])%M];
+	for(LL i=fi[u];i;i=ne[i]){
+		LL v=a[i],w=c[i];
+		if(v==fa||vis[v])continue;
+		tmp+=getB(v,u,dep+1,(val*10+w)%M);
+	}
+	return tmp;
+}
+LL calc(LL u,LL dep,LL val){
+	mp.clear();
+	getA(u,-1,dep,val);
+	return getB(u,-1,dep,val);
+}
+void solve(LL u){
+	vis[u]=1;
+	ans+=calc(u,0,0);
+	for(LL i=fi[u];i;i=ne[i]){
+	    LL v=a[i],w=c[i];
+		if(vis[v])continue;
+		ans-=calc(v,1,w);
+		mx=1e18;tot=size[v];
+		getroot(v,u);
+		solve(root);
+	}
+}
+int main(){
+	scanf("%lld%lld",&n,&M);
+	for(LL i=1;i<n;i++){
+		scanf("%lld%lld%lld",&x,&y,&z);z%=M;
+		add(x,y,z);
+		add(y,x,z);
+	}
+	pow[0]=ni[0]=1;
+	for(LL i=1;i<=100000;i++){
+        pow[i]=pow[i-1]*10%M;
+        LL d,x,y;
+        exgcd(pow[i],M,d,x,y);
+        ni[i]=(x%M+M)%M;
+	}tot=n;mx=1e18;
+	getroot(0,-1);
+	solve(root);
+	return printf("%lld",ans-n),0;
+}
+```
 
