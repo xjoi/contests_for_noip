@@ -64,4 +64,44 @@ void dfs(int x){
 ```
 ***** 
 # 赛后补题
-
+## B
+### Problem description
+数学题。用n个人坐成一圈，规定某几个人必须坐在一起，求方案数。
+### Solution
+如果有环且不止一个连通块就不行，如果和一个人连着的边的数目大于2也不行。再求出连通块的个数，求一下阶乘，但由于第1个人的位置不能动，阶乘乘到连通块的个数减一就行了。再判断每个连通块的元素个数是否大于2，是的有正反两种排列，乘以2。
+```cpp
+#include<cstdio>
+typedef long long ll;
+const ll P=1e9+7;
+int fa[101],d[101],sz[101]; bool b[101][101];
+int getf(int x){return fa[x]==x?x:fa[x]=getf(fa[x]);}
+int main(){
+  int n,m; bool cc=0; scanf("%d%d",&n,&m); int val=n;
+  if(n==2){
+    printf("1"); return 0;
+  }
+  for(int i=1;i<=n;++i) fa[i]=i,sz[i]=1;
+  for(int i=1;i<=m;++i){
+    int u,v=i; scanf("%d",&u);
+    if(b[u][v]) continue; b[u][v]=b[v][u]=1;
+    ++d[u]; ++d[v]; u=getf(u); v=getf(v);
+    if(u==v) cc=1; else{
+      sz[v]+=sz[u]; fa[u]=v; --val;
+    }
+  }
+  if(val>1&&cc){
+    printf("0"); return 0;
+  }
+  cc=0;
+  for(int i=1;i<=n;++i) if(d[i]>2){
+      cc=1; break;
+  }
+  if(cc){
+    printf("0"); return 0;
+  }
+  ll ans=1;
+  for(int i=1;i<val;++i) (ans*=i)%=P;
+  for(int i=1;i<=n;++i) if(fa[i]==i&&sz[i]>1) (ans*=2)%=P;
+  printf("%lld",ans); return 0;
+}
+```
