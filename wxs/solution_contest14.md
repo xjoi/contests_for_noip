@@ -121,3 +121,71 @@ sb的模拟就是了
 			}
 		}
  ```
+
+## D *
+ 
+ ### Problem description
+ 
+ >给出一个无向图，一些边是可修改边权的， 求一种修改方案，使s到t最短路为L。
+ 
+ ### Solution
+ 
+ 两遍spfa。
+ 
+ 第一遍求t到每个点的最短路。
+ 
+ 第二遍求s到每个点的最短路，当遇到可修改边xy就修改为L-dt[y]-ds[x]。
+ 
+ 这样保证了最短路大于等于L。
+ 
+ 最后如果最短路大于L无解。
+ 
+ ```cpp
+ void spfat(){
+	memset(dt,0x3f,sizeof dt);
+	queue<int> Q;
+	Q.push(t);
+	inq[t]=1;
+	dt[t]=0;
+	while(!Q.empty()){
+		int x=Q.front();Q.pop();inq[x]=0;
+		for(int i=0;i<G[x].size();i++){
+			Edge& e=edges[G[x][i]];
+//			cerr<<e.u<<' '<<e.len<<' '<<e.v<<' '<<dt[e.v]<<' '<<dt[x]<<endl;
+			if(dt[e.v]>dt[x]+e.len){
+				dt[e.v]=dt[x]+e.len;
+				if(!inq[e.v]){
+					inq[e.v]=1;
+					Q.push(e.v);
+				}
+			}
+		}
+	}
+}
+void spfas(){
+	memset(ds,0x3f,sizeof ds);
+	queue<int> Q;
+	memset(inq,0,sizeof inq);
+	Q.push(s);
+	inq[s]=1;
+	ds[s]=0;
+	while(!Q.empty()){
+		int x=Q.front();Q.pop();inq[x]=0;
+		for(int i=0;i<G[x].size();i++){
+			Edge& e=edges[G[x][i]];
+			if(e.k==1){
+				e.len=max(e.len,L-ds[x]-dt[e.v]);
+				edges[G[x][i]^1].len=e.len;
+			}
+			if(ds[e.v]>ds[x]+e.len){
+				ds[e.v]=ds[x]+e.len;
+				if(!inq[e.v]){
+					inq[e.v]=1;
+					Q.push(e.v);
+				}
+			}
+		}
+	}
+}
+```
+ 
