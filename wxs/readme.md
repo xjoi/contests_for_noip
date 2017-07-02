@@ -7,5 +7,5 @@
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
 |c12| Y | W | Y | Y | W | W | W
-|c13| Y | Y | A | Y | W | A | W
-|c14| Y | Y | Y | W | W | X | X
+|c13| Y | Y | A | Y | A | A | W
+|c14| Y | Y | Y | A | W | X | X
