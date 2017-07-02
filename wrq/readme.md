@@ -1,12 +1,12 @@
 ## 比赛征程
-> * OvO : solved in the contest
-> * =A= : solved after contest
-> * QAQ : solving
+> * Y : solved in the contest
+> * A : solved after contest
+> * W : solving
 
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-| contest14 | OvO | OvO | =A= | =A= | QAQ |X|X
+| contest14 | Y | Y | A | A | W |X|X
 
 
 
