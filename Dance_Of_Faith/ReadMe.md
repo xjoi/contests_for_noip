@@ -4,21 +4,23 @@
 > SO- solved after the contest
 >
 > QAQ - still solving
+>
+> X - no such problem
 
  \# | A | B | C | D | E | F | G
  --|--|--|--|--|--|--|--
-contest#000| AC|	AC|	SO|	AC|	QAQ| X|	X
-contest#001| YES|	YES|	YES|	AC|		AC|		X|		X
-contest#002| AC|		YES|	YES|	YES|	AC|		X|		X
-contest#003| AC|		YES|	AC|		AC|		YES|	X|		X
-contest#004| YES|	YES|	YES|	AC|		QAQ|	X|		X
-contest#005| YES|	YES|	YES|	QAQ|	QAQ|	X|		X
-contest#006| YES|	YES|	YES|	AC|		QAQ|	AC|		X
-contest#007| YES|	QAQ|	QAQ|	QAQ|	QAQ|	X|		X
-contest#008| YES|	YES|	YES|	AC|		QAQ|	AC|		QAQ
-contest#009| YES|	YES|	AC|		AC|		QAQ|	X|		X
-contest#010| YES|	YES|	YES|	AC|		AC|		X|		X
-contest#011| YES|	YES|	YES|	AC|		AC|		X|		X
-contest#012| YES|	AC|		YES|	YES|	QAQ|	AC|		QAQ
-contest#013| YES|	YES|	YES|	YES|	X|		AC|		X
-contest#014| YES|	YES|	YES|	AC|		QAQ|	X|		X
+contest#000| AC | AC | SO |	AC | QAQ| X  | X
+contest#001| AC | AC | AC |	SO | SO | X  | X
+contest#002| SO | AC | SO |	AC | SO | X  | X
+contest#003| SO | AC | AC | SO | AC | X  | X
+contest#004| AC | AC | AC |	SO | SO | X  | X
+contest#005| AC | AC | AC |	AC | QAQ| X  | X
+contest#006| AC | AC | AC |	AC | SO | SO | X
+contest#007| AC | SO | QAQ|	QAQ| QAQ| X  | X
+contest#008| AC | AC | AC |	SO | SO | SO | QAQ
+contest#009| AC | AC | SO |	SO | QAQ| X  | X
+contest#010| AC | AC | AC |	SO | SO | X  | X
+contest#011| AC | AC | AC |	SO | SO | X  | X
+contest#012| AC | SO | AC |	AC | QAQ| SO | QAQ
+contest#013| AC | AC | AC |	AC | X  | SO | X
+contest#014| AC | AC | AC |	SO | QAQ| X  | X
