@@ -289,8 +289,114 @@ int main(){
 }
 ```
 
-## F (Not AC Yet)
+## F 
 ### Problem Description
 给出一个有根树，每个顶点有一种颜色。有若干请求，对于每个请求，输出对应子树中某种颜色的顶点数大于k的颜色数。
 ### Solution
-先用DFS序转区间，然后对请求分块，按照块的顺序统计每个请求。（大意）
+思路：先用DFS序转区间，然后对请求分块，按照块的顺序统计每个请求。
++ DFS序
+对于每一棵子树，它所对应的区间就是[进入子树时间戳，离开子树时间戳]。
+
++ 莫队(offline)
+
+针对区间[1,n]的询问，则可以将区间以sqrt(n)为单位长度进行分块。
+将所有的询问按照左端点所在区块排序，所在区块相同的按照右端点排序。
+然后分别处理所有的请求。
+
++ 处理询问时的扫描操作
+
+第一次询问，从左到右暴力扫描，维护两个数组，cnt[x]:第x种颜色出现次数，S[x]:出现次数>=x次的颜色数。
+只需要S[++cnt[x]]++即可（因为当cnt[x]增加时，增加前的S[cnt[x]]不变，所以可以表示>=,而不是=）
+
+之后的询问，只需要将两端多出来的减去(S[cnt[x]--]--),或者将不足的加上(S[++cnt[x]]++)即可。
+
+则每次询问的答案就是S[k]。
+
+``` cpp
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+const int maxn=1e5+1;
+
+struct query{
+	int S,E,k,pos,id,ans;
+}Q[maxn];
+struct sequence{
+	int end,color;
+}A[maxn];
+int conv[maxn];
+vector <int> edges[maxn];
+int colors[maxn];
+int m,n;
+bool visit[maxn];
+int pos[maxn];
+int S[maxn],cnt[maxn];
+
+int dfs(int x,int y){
+	A[y].color=colors[x];
+	conv[x]=y;
+	visit[x]=1;
+	int k=y;
+	//printf("%d  %d\n",x,y);
+	for (int i=0;i<edges[x].size();i++){
+		int a=edges[x][i];
+		if (!visit[a]){
+			k=dfs(a,k+1);
+		}
+	}
+	A[y].end=k;
+	return k;
+}
+bool cmp(query a,query b){
+	return a.pos<b.pos||(a.pos==b.pos&&a.E<b.E);
+}
+bool cmp2(query a,query b){
+	return a.id<b.id;
+}
+int main(){
+	scanf("%d%d",&n,&m);
+	for (int i=1;i<=n;i++){
+		scanf("%d",&colors[i]);
+	}
+	for (int i=1;i<n;i++){
+		int a,b;
+		scanf("%d%d",&a,&b);
+		edges[a].push_back(b);
+		edges[b].push_back(a);
+	}
+	dfs(1,1);
+	int sq=sqrt(n);
+	for (int i=1;i<=m;i++){
+		int v;
+		scanf("%d%d",&v,&Q[i].k);
+		Q[i].S=conv[v];
+		Q[i].E=A[conv[v]].end;
+		Q[i].pos=conv[v]/sq;
+		Q[i].id=i;
+	}
+	sort(Q+1,Q+m+1,cmp);
+	for (int i=Q[1].S;i<=Q[1].E;i++) cnt[++S[A[i].color]]++;
+	Q[1].ans=cnt[Q[1].k];
+	for (int i=2;i<=m;i++){
+		if (Q[i].S>Q[i-1].S){
+			for (int j=Q[i-1].S;j<Q[i].S;j++) cnt[S[A[j].color]--]--;
+		}else{
+			for (int j=Q[i].S;j<Q[i-1].S;j++) cnt[++S[A[j].color]]++;
+		}
+		if (Q[i].E>Q[i-1].E){
+			for (int j=Q[i-1].E+1;j<=Q[i].E;j++) cnt[++S[A[j].color]]++;
+		}else{
+			for (int j=Q[i-1].E;j>Q[i].E;j--) cnt[S[A[j].color]--]--;
+		}
+		Q[i].ans=cnt[Q[i].k];
+	}
+	sort(Q+1,Q+m+1,cmp2);
+	for (int i=1;i<=m;i++){
+		printf("%d\n",Q[i].ans);
+	}
+	return 0;
+}
+```
