@@ -22,3 +22,4 @@
 |contest12|Y|Y|Y|Y|A|Y|W
 |contest13|Y|Y|Y|Y|Y|A|W
 |contest14|Y|Y|Y|A|W|X|X
+|contest15|A|W|W|W|W|X|X
