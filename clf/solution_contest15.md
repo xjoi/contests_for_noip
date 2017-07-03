@@ -2,11 +2,11 @@
 ---
 ## A - The Monster
 ### Problem Description
-> $ 求i，使得x = i\times a + b 且 x = j\times c + d$
+> 求i，使得x = i\times a + b 且 x = j\times c + d
 ### Data Limit
-> $ a, b, c, d < 100$
+> a, b, c, d < 100
 ### Solution
-> $强行模拟、exgcd均可做$
+> 强行模拟、exgcd均可做
 ### Code
 ```cpp
 #include<cstdio>
@@ -30,11 +30,11 @@ int main() {
 
 ## B - Not Afraid
 ### Problem Description
-> $给m个数列，若每个数列中均同时有一个数及其相反数，则输出YES$
+> 给m个数列，若每个数列中均同时有一个数及其相反数，则输出YES
 ### Data Limit
-> $\sum _{i = 1}^m k_i ≤ 10^4 $
+> \sum _{i = 1}^m k_i ≤ 10^4 
 ### Solution
-> $模拟$
+> 模拟
 ### Code
 ```cpp
 #include <cstdio>
@@ -69,14 +69,14 @@ int main() {
 
 ## C - Berzerk
 ### Problem Description
-> $两个人博弈，棋盘是一个n个点的环，每人有序列s，可以使棋子顺时针移动s[i][j]个单位，使棋子移$
-> $动到第一格的人获胜，求对于棋子的每一个起始位置，两个人分别作为先手，是否必胜$
+> 两个人博弈，棋盘是一个n个点的环，每人有序列s，可以使棋子顺时针移动s[i][j]个单位，使棋子移
+> 动到第一格的人获胜，求对于棋子的每一个起始位置，两个人分别作为先手，是否必胜
 ### Data Limit
-> $n <= 7000$
+> n <= 7000
 ### Solution
-> $考虑每个状态f[i][j]表示走到第i个位置，先手是j时先手的是否必胜，f[i][j]可以转移到$
-> $f[(i + s[k][j])][!\ j]，若它可以转移到的每一个状态都是对手必胜，则该状态为必败，若$
-> $该状态可以转移到任何一个对手必败的局面，则该局面必胜，否则可以导致循环$
+> 考虑每个状态f[i][j]表示走到第i个位置，先手是j时先手的是否必胜，f[i][j]可以转移到
+> f[(i + s[k][j])][!\ j]，若它可以转移到的每一个状态都是对手必胜，则该状态为必败，若
+> 该状态可以转移到任何一个对手必败的局面，则该局面必胜，否则可以导致循环
 ### Code
 ```cpp
 #include <cstdio>
@@ -138,13 +138,13 @@ int main() {
 
 ## D - Legacy
 ### Problem Description
-> $单源最短路，允许u->v 或u->[l,r]或[l,r]->u$
+> 单源最短路，允许u->v 或u->[l,r]或[l,r]->u
 ### Data Limit
-> $ 1 ≤ n, q ≤ 10^5, \ 1 ≤ s ≤ n$
+>  1 ≤ n, q ≤ 10^5, \ 1 ≤ s ≤ n$
 ### Solution
-> $我们试图用一些点代表一些区间，于是我们得到了线段树$
->![Alt text](./0N[DAXH]OM0BKB6@[IRET9.png)
-> $于是我们顺利地把边数变成了O(log(q))的级别$
+> 我们试图用一些点代表一些区间，于是我们得到了线段树
+>![Alt text](http://images2015.cnblogs.com/blog/1099411/201707/1099411-20170703181254628-1790707444.png)
+> 于是我们顺利地把边数变成了O(log(q))的级别
 ### Code
 ```cpp
 #include <cstdio>
@@ -241,13 +241,13 @@ int main() {
 
 ## E - Till I Collapse
 ### Problem Description
-> $对于一个序列，求k∈[1,n]，至少将序列分成几块，使每块内不同的数总数不超过k$
+> 对于一个序列，求k∈[1,n]，至少将序列分成几块，使每块内不同的数总数不超过k
 ### Data Limit
-> $n ≤ 10^5$
+> n ≤ 10^5
 ### Solution
-> $经过观察发现答案数组是非严格递减的，那么可以知道如果对于一个区间 [l,r] 中，如果$
-> $ans[l]==ans[r] 那么整个区间 ans 应该是一样的。所以把这种情况剪枝一下，然后就过了$
-> $标算是可持久化数据结构$
+> 经过观察发现答案数组是非严格递减的，那么可以知道如果对于一个区间 [l,r] 中，如果
+> ans[l]==ans[r] 那么整个区间 ans 应该是一样的。所以把这种情况剪枝一下，然后就过了
+> 标算是可持久化数据结构
 ### Code
 ```cpp
 #include <cstdio>
