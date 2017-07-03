@@ -33,7 +33,7 @@ printf("%d\n",ans);
 ***
 ## #B Complete the Word
 ```
-    VJudge链接：  https://cn.vjudge.net/contest/168561#problem/A
+    VJudge链接：  https://cn.vjudge.net/contest/168561#problem/B
 CodeForces链接：  http://codeforces.com/contest/716/problem/B
 
       时间限制：  2000ms
