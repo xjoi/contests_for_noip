@@ -2,7 +2,7 @@
 ---
 ## A - The Monster
 ### Problem Description
-> 求i，使得x = i\times a + b 且 x = j\times c + d
+> $求i，使得x = i\times a + b 且 x = j\times c + d$
 ### Data Limit
 > a, b, c, d < 100
 ### Solution
@@ -32,7 +32,7 @@ int main() {
 ### Problem Description
 > 给m个数列，若每个数列中均同时有一个数及其相反数，则输出YES
 ### Data Limit
-> \sum _{i = 1}^m k_i ≤ 10^4 
+> $\sum _{i = 1}^m k_i ≤ 10^4 $
 ### Solution
 > 模拟
 ### Code
@@ -140,7 +140,7 @@ int main() {
 ### Problem Description
 > 单源最短路，允许u->v 或u->[l,r]或[l,r]->u
 ### Data Limit
->  1 ≤ n, q ≤ 10^5, \ 1 ≤ s ≤ n$
+>  1 ≤ n, q ≤ 10^5, \ 1 ≤ s ≤ n
 ### Solution
 > 我们试图用一些点代表一些区间，于是我们得到了线段树
 >![Alt text](http://images2015.cnblogs.com/blog/1099411/201707/1099411-20170703181254628-1790707444.png)
