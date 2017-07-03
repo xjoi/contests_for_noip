@@ -137,3 +137,88 @@ int main(){
   printf("%d\n",ans); return 0;
 }
 ```
+## D
+### Problem description
+将一个序列拆成两个非空的单调序列。
+### Solution
+如果这两个序列都是上升或都是下降，可以直接贪心，上升的话就接到大的后面，下降的话就接到小的后面。一升一降的情况可以dp，设f[i]，g[i]分别为第i个数在上升序列下降序列末尾数的最大值和第i个数在下降序列上升序列末尾数的最小值，可以很容易写出dp方程。dp时需要记录路径。贪心的时候如果发现一个序列为空，就把另一个序列的末尾元素接到这个序列上。
+```cpp
+#include<cstdio>
+#include<algorithm>
+#include<cstdlib>
+#include<cstring>
+const int N=100000,inf=0x3f3f3f3f;
+int n,a[N+1];
+void solve1(){
+  int f[N+1]={0},g[N+1]={0},cntf=0,cntg=0;
+  for(int i=1;i<=n;++i){
+	int Max=-1; bool b=0;
+	if(a[i]>f[cntf]) Max=f[cntf];
+	if(a[i]>g[cntg]&&g[cntg]>Max){
+	  Max=g[cntg]; b=1;
+	}
+	if(Max==-1) return;
+	if(b) g[++cntg]=a[i]; else f[++cntf]=a[i];
+  }
+  if(cntg==0){
+	g[++cntg]=f[cntf--];
+  }
+  printf("%d %d\n",cntf,cntg);
+  for(int i=1;i<=cntf;++i) printf("%d ",f[i]);
+  printf("\n");
+  for(int i=1;i<=cntg;++i) printf("%d ",g[i]);
+  exit(0);
+}
+void solve2(){
+  int f[N+1]={inf},g[N+1]={inf},cntf=0,cntg=0;
+  for(int i=1;i<=n;++i){
+	int Min=inf+1; bool b=0;
+	if(a[i]<f[cntf]) Min=f[cntf];
+	if(a[i]<g[cntg]&&g[cntg]<Min){
+	  Min=g[cntg]; b=1;
+	}
+	if(Min==inf+1) return;
+	if(b) g[++cntg]=a[i]; else f[++cntf]=a[i];
+  }
+  if(cntg==0) g[++cntg]=f[cntf--];
+  printf("%d %d\n",cntf,cntg);
+  for(int i=1;i<=cntf;++i) printf("%d ",f[i]);
+  printf("\n");
+  for(int i=1;i<=cntg;++i) printf("%d ",g[i]);
+  exit(0);
+}
+void solve3(){
+  int f[N+1],g[N+1],pref[N+1]={0},preg[N+1]={0}; bool vis[N+1];
+  memset(f,0,sizeof f); memset(g,0x3f,sizeof g);
+  memset(pref,0,sizeof pref); memset(preg,0,sizeof preg);
+  f[1]=inf; g[1]=0;
+  for(int i=2;i<=n;++i){
+	if(a[i]>a[i-1]){
+	  f[i]=f[i-1]; pref[a[i]]=a[i-1];
+	}else{
+	  g[i]=g[i-1]; preg[a[i]]=a[i-1];
+	}
+	if(a[i]>g[i-1]&&a[i-1]>f[i]){
+	  f[i]=a[i-1]; pref[a[i]]=g[i-1];
+	}
+	if(a[i]<f[i-1]&&a[i-1]<g[i]){
+	  g[i]=a[i-1]; preg[a[i]]=f[i-1];
+	}
+  }
+  if(f[n]==0&&g[n]==inf) return; int ansf[N+1],cntf=0;
+  int p; for(p=n;!f[p];--p); memset(vis,0,sizeof vis);
+  for(p=a[p];p;p=pref[p]){
+	vis[p]=1; ansf[++cntf]=p;
+  }
+  printf("%d %d\n",cntf,n-cntf);
+  for(int i=cntf;i>=1;--i) printf("%d ",ansf[i]); printf("\n");
+  for(int i=n;i>=1;--i) if(!vis[i]) printf("%d ",i);
+  exit(0);
+}
+int main(){
+  scanf("%d",&n);
+  for(int i=1;i<=n;++i) scanf("%d",&a[i]);
+  solve1(); solve2(); solve3();
+  printf("Fail"); return 0;
+}
+```

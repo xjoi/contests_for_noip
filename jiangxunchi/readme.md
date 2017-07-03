@@ -1,12 +1,12 @@
 # 比赛征程
-> * YES : solved in the contest
-> * Accepted : solved after contest
-> * Waiting : solving
+> * Y : solved in the contest
+> * A : solved after contest
+> * W : solving
 
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-|contest11|YES|YES|YES|YES|Accepted|X|X
-|contest12|YES|  Waiting     | Waiting | YES | Waiting | Waiting|YES
-|contest13|YES|YES|YES|YES|Accepted|Accepted|Waiting
-|contest14|YES|YES|YES|Accepted|Waiting|X|X
+|contest11|Y|Y|Y|Y|A|/|/
+|contest12|Y|A|A|Y|A|W|Y
+|contest13|Y|Y|Y|Y|A|A|W
+|contest14|Y|Y|Y|A|W|/|/
