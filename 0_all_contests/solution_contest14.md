@@ -80,3 +80,203 @@ for (long long i=2;i<=n;++i){
 当所有可变边更新完毕后若d[s,t]=L则出解,否则无解。(MlogM)
 ***
 ## #E Digit Tree
+### Description
+给你一颗树，求有序点对(x,y)的个数，使得x->y的路径上的数字连起来的数是m的倍数, gcd(10, m) = 1
+### Data Limit: n <= 1e5 m <= 1e9
+
+### Solution
+树分治知识介绍参考[分治算法在树的路径中的应用](https://wenku.baidu.com/view/1bc2e4ea172ded630b1cb602.html)。
+树分治基础题，考虑计算经过当前重心的路径，算从前面子树的点到当前子树的点构成的路径，假设当前根到当前子树的某个点的数字连起来对m取模为val,那么假设前面的点到根的数字为x那么(x * 10 ^ L + val ) % m = 0, x = -val * inv(10^L), L为当前子树某个点的深度, 预处理逆元，可以算出这个x只有唯一一个正整数解，那么就统计一下前面出现了几个x就行了，但是这样做会漏掉后面子树到当前子树的路径，所以还要反着做一遍，从最后一个子树到第一个子树。
+```cpp
+#include <bits/stdc++.h>
+const int N = 100010;
+
+//#define wuyiqi
+int mx[N], n, solved[N], queue[N], parent[N], size[N];
+
+int MOD;
+std::vector <std::pair<int, int> > edge[N];
+int val[N];
+std::vector <int> num, all_num;
+int inv[N];
+long long ret;
+int ten[N];
+
+struct HashTable {
+    static const int P = 1111117;
+    int head[P], nxt[P], pnt[P], E, cnt[P];
+    void Init () {
+        E = 0;
+        memset(head, -1, sizeof(head));
+    }
+    int Insert(int num) {
+        int p = num % P;
+        for (int i = head[p];~i ; i = nxt[i]) {
+            if(pnt[i] == num) {
+                cnt[i]++;
+                return p;
+            }
+        }
+        cnt[E] = 1;
+        pnt[E] = num;
+        nxt[E] = head[p];
+        head[p] = E++;
+        return p;
+    }
+    int Find(int num) {
+        int p = num % P;
+        for (int i = head[p]; ~i; i = nxt[i]) {
+            if(pnt[i] == num) {
+                return cnt[i];
+            }
+        }
+        return 0;
+    }
+}hash_table;
+
+int Bfs(int root, int fa) {
+    int head = 0, tail = 0;
+    queue[tail++] = root;
+    parent[root] = fa;
+    while(head < tail) {
+        int u = queue[head++];
+        for(auto to : edge[u]) {
+            int v = to.first;
+            if(v != parent[u] && !solved[v]) {
+                queue[tail++] = v;
+                parent[v] = u;
+            }
+        }
+    }
+    return tail;
+}
+
+int GetRoot(int root, int &sz) {
+    int tail = Bfs(root, -1);
+    for(int i = 0; i < tail; i++) {
+        int u = queue[i];
+        size[u] = mx[u] = 1;
+    }
+    for(int i = tail - 1; i >= 1; i--) {
+        int u = queue[i];
+        size[parent[u]] += size[u];
+        mx[parent[u]] = std::max(mx[parent[u]], size[u]);
+    }
+    for(int i = 0; i < tail; i++) {
+        int u = queue[i];
+        mx[u] = std::max(mx[u], tail - size[u]);
+        if(mx[u] < mx[root]) {
+            root = u;
+        }
+    }
+    sz = tail;
+    return root;
+}
+
+void Go (bool first, int u, int fa, int val, int val_up, std::vector<int> &num, int depth) {
+    int x = (1LL * (MOD - val) * inv[depth] % MOD);
+#ifdef wuyiqi 
+    printf ("u=%d val=%d mp[%d] = %d\n", u, val, x, mp[x]);
+#endif
+    ret += hash_table.Find(x);
+    if(val == 0 && first) {
+        ret++;
+    }
+    num.emplace_back(val_up);
+    for (auto to : edge[u]) {
+        int v = to.first;
+        int w = to.second;
+        if (solved[v] || v == fa) {
+            continue;
+        }
+        Go (first, v, u, (1LL * val * 10 % MOD + w) % MOD, (val_up + 1LL * ten[depth] * w % MOD) % MOD ,num, depth + 1);
+    }
+}
+
+void Solve(int u) {
+    int sz = -1;
+    int root = GetRoot(u, sz);
+    solved[root] = 1;
+    for (auto to: edge[root]) {
+        int v = to.first;
+        int w = to.second;
+        if (solved[v]) {
+            continue;
+        }
+        num.clear();
+        Go (1, v, root, w%MOD, w%MOD, num, 1);
+        for (int value : num) {
+            int t = hash_table.Insert(value);
+            
+            all_num.emplace_back(t);
+        }
+    }
+    for (int value : all_num) {
+        hash_table.head[value] = -1;
+    }
+    hash_table.E = 0;
+    all_num.clear();
+    for (int i = edge[root].size() - 1; i >= 0; i--) {
+        int v = edge[root][i].first;
+        int w = edge[root][i].second;
+        if(solved[v]) {
+            continue;
+        }
+        num.clear();
+        Go (0, v, root, w%MOD, w%MOD, num, 1);
+        for (int value : num) {
+            int t = hash_table.Insert(value);
+            all_num.emplace_back(t);
+            if (value == 0) {
+                ret++;
+            }
+        }
+    }
+    for (int value : all_num) {
+        hash_table.head[value] = -1;
+    }
+    hash_table.E = 0;
+    all_num.clear();
+#ifdef wuyiqi 
+    printf("root=%d ret=%d\n", root, ret);
+#endif
+    for (auto to : edge[root]) if(!solved[to.first]){
+        Solve(to.first);
+    }
+}
+
+void ExtendGcd(int a, int b, int &x, int &y) {
+    if (b) {
+        ExtendGcd(b, a % b, x, y);
+        x -= (a / b) * y;
+        std::swap(x, y);
+    } else {
+        x = 1; y = 0;
+    }
+}
+
+int main () {
+    hash_table.Init();
+    int x, y;
+    int u, v, w;
+    scanf("%d%d", &n, &MOD);
+    ExtendGcd(10, MOD, inv[1], y);
+    inv[1] = (inv[1] % MOD + MOD) % MOD;
+    for (int L = 2; L <= n; L++) {
+        inv[L] = 1LL * inv[L - 1] * inv[1] % MOD;
+    }
+    ten[0] = 1;
+    for (int i = 1; i <= n; i++) {
+        ten[i] = 1LL * ten[i - 1] * 10 % MOD;
+    }
+    for (int i = 1; i < n; i++) {
+        scanf("%d%d%d", &u, &v, &w);
+        edge[u].emplace_back(v, w);
+        edge[v].emplace_back(u, w);
+    }
+    Solve(0);
+    printf("%lld\n", ret);
+    return 0;
+}
+
+```
