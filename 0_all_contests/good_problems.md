@@ -21,4 +21,4 @@
 ### 树分治
 - [ ] [D Tree](http://acm.hdu.edu.cn/showproblem.php?pid=4812)
 - [ ] [Tree](http://poj.org/problem?id=1741) 树分治入门题
-- [ ] [Query on the subtree](http://acm.hdu.edu.cn/showproblem.php?pid=4918)
+- [ ] [Query on the subtree](http://acm.hdu.edu.cn/showproblem.php?pid=4918) [题解](http://regmsif.cf/oi/query-on-the-subtree/)
