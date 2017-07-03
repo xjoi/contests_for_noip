@@ -226,7 +226,7 @@ int main(){
 
 > 求出从s点到所有点(包括自己)的最短路。
 
-### Data Limit：n,q <= 1e5  Time Limit: 1s
+### Data Limit：n,q <= 1e5  Time Limit: 2s
 ### Solution
 > 维护两棵线段树（共用叶结点），其中一棵从父结点向子结点连权为0的边，记为T1。
 > 另一棵从子结点向父结点连权为0的边，记为T2。
@@ -241,6 +241,140 @@ int main(){
 
 ### Code
 ```cpp
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <utility>
+#include <vector>
+#define mp(a,b) make_pair(a,b)
+#define ll long long
+using namespace std;
+const long long inf=4611686018427387903;
+typedef pair<ll,int> pir;
+
+struct edge{
+	int v,next;
+	ll w;
+}map[3000000];
+int head[500000],m_tail=0;
+void add(int u,int v,ll w){
+	map[++m_tail].v=v;map[m_tail].w=w;map[m_tail].next=head[u];head[u]=m_tail;
+}
+struct node{
+	int l,r,Lson,Rson;
+	node(int l=0,int r=0,int ls=0,int rs=0){
+		this->l=l;this->r=r;this->Lson=ls;this->Rson=rs;
+	}
+}point[500000];
+int rootA,rootB,p_tail=0;
+int pos[100001];
+void make(int l,int r,int father){
+	if (l==r) {
+		pos[l]=father;
+		return;
+	}
+	int mid=(l+r)/2;
+	point[++p_tail]=node(l,mid);point[father].Lson=p_tail;
+	add(father,p_tail,0);
+	make(l,mid,p_tail);
+	point[++p_tail]=node(mid+1,r);point[father].Rson=p_tail;
+	add(father,p_tail,0);
+	make(mid+1,r,p_tail);
+}
+void make_rev(int l,int r,int father){
+	int mid=(l+r)/2;
+	if (l!=mid){
+		point[++p_tail]=node(l,mid);point[father].Lson=p_tail;
+		add(p_tail,father,0);
+		make_rev(l,mid,p_tail);
+	}else{
+		add(pos[l],father,0);
+		point[father].Lson=pos[l];
+	}
+	if (mid+1!=r){
+		point[++p_tail]=node(mid+1,r);point[father].Rson=p_tail;
+		add(p_tail,father,0);
+		make_rev(mid+1,r,p_tail);
+	}else{
+		add(pos[r],father,0);
+		point[father].Rson=pos[r];
+	}
+
+}
+void insert(int l,int r,int idx,int v,ll w,int t){
+	if (idx==0) return;
+	int L=point[idx].l,R=point[idx].r;
+	if (l==L&&r==R){
+		if (t==2) add(pos[v],idx,w);
+		if (t==3) add(idx,pos[v],w);
+	}else{
+		int mid=(L+R)/2;
+		if (l<=mid){
+			insert(l,min(mid,r),point[idx].Lson,v,w,t);
+		}
+		if (r>=mid+1){
+			insert(max(mid+1,l),r,point[idx].Rson,v,w,t);
+		}
+	}
+}
+int m,n,q,s;
+priority_queue <pir,vector<pir>,greater<pir> > Q;
+ll dist[500000];
+void print_tree(){
+	for (int i=1;i<=p_tail;i++){
+		printf("tree[%d]:l=%d,r=%d,Lson=%d,Rson=%d\n",i,point[i].l,point[i].r,point[i].Lson,point[i].Rson);
+	}
+} 
+void print_map(){
+	for (int i=1;i<=m_tail;i++){
+		printf("map[%d]:v=%d,w=%d,next=%d\n",i,map[i].v,map[i].w,map[i].next);
+	}
+}
+int main(){
+	cin>>n>>q>>s;
+	point[rootA=++p_tail]=node(1,n);
+	make(1,n,p_tail);
+	if (n!=1){
+		point[rootB=++p_tail]=node(1,n);
+		make_rev(1,n,p_tail);		
+	}
+	for (int i=1;i<=q;i++){
+		int t;
+		//scanf("%d",&t);
+		cin>>t;
+		if (t==1){
+			int u,v,w;
+			cin>>v>>u>>w;
+			add(pos[v],pos[u],w);
+		}else{
+			int v,l,r,w;
+			cin>>v>>l>>r>>w;
+			if (t==2) insert(l,r,rootA,v,w,t);
+			if (t==3) insert(l,r,rootB,v,w,t);
+		}
+	}
+	for (int i=1;i<500000;i++) dist[i]=inf;
+	dist[pos[s]]=0;
+	Q.push(mp(0,pos[s]));
+	while(!Q.empty()){
+		pir x=Q.top();Q.pop();
+		if (x.first!=dist[x.second]) continue;
+		for (int i=head[x.second];i;i=map[i].next){
+			int to=map[i].v,w=map[i].w;
+			if (x.first+w<dist[to]){
+				dist[to]=x.first+w;
+				Q.push(mp(dist[to],to));
+			}
+		}
+	}
+	for (int i=1;i<=n;i++){
+		cout<<((dist[pos[i]]>=inf)?-1:dist[pos[i]])<<" ";
+	}
+	return 0;
+}
 ```
 *****
 
