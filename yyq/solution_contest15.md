@@ -152,15 +152,170 @@ void bfs()
 
 ## #D Legacy
 ### Problem description
-> 暂无
+> 有n个点，q个询问，每次询问有一种操作。操作1：u到v的距离为w；操作2：u→[l,r]（即u到l，l+1，l+2，...，r距离均为w）的距离为w；操作3：[l,r]→u的距离为w；求起点到其他点的最短距离，到达不了输出-1。
 
 ### Data Limit: n, q<=1e5  Time Limit: 2s
 
 ### Solution
-> 暂无
+> 线段树+Dijkstra最短路。具体见代码。
 
 ### Code
-> 暂无
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int MAXN=5000005;
+const ll INF=1e17+10;
+struct node
+{
+	int to,next;
+	ll w;
+}edge[MAXN];
+int tot,head[MAXN],ma;
+bool vis[MAXN];
+ll ans[MAXN];
+void init()
+{
+	tot=0;
+	ma=0;
+	memset(vis,0,sizeof(vis));
+	memset(head,-1,sizeof(head));
+}
+void add(int u,int v,ll w)
+{
+	tot++;
+	edge[tot].to=v;
+	edge[tot].w=w;
+	edge[tot].next=head[u];
+	head[u]=tot;
+}
+void build(int l,int r,int pos,int flag,int t)
+{
+	if(t==2)
+		ma=max(ma,pos+flag);
+	if(l==r)
+	{
+		if(t==2)
+			add(pos+flag,l,0LL);
+		else
+			add(l,pos+flag,0LL);
+		return;
+	}
+	if(t==2)
+	{
+		add(pos+flag,(pos<<1)+flag,0LL);
+		add(pos+flag,(pos<<1|1)+flag,0LL);
+	}
+	else
+	{
+		add((pos<<1)+flag,pos+flag,0LL);
+		add((pos<<1|1)+flag,pos+flag,0LL);
+	}
+	int mid=(l+r)>>1;
+	build(l,mid,pos<<1,flag,t);
+	build(mid+1,r,pos<<1|1,flag,t);
+}
+void update(int L,int R,ll w,int l,int r,int pos,int flag,int u,int t)
+{
+	if(L<=l&&r<=R)
+	{
+		if(t==2)
+			add(u,pos+flag,w);
+		else
+			add(pos+flag,u,w);
+		return;
+	}
+	int mid=(l+r)>>1;
+	if(L<=mid)
+		update(L,R,w,l,mid,pos<<1,flag,u,t);
+	if(R>mid)
+		update(L,R,w,mid+1,r,pos<<1|1,flag,u,t);
+}
+struct dijk
+{
+	int s;
+	ll dis;
+	dijk() {}
+	dijk(ll ss,ll d)
+	{
+		s=ss,dis=d;
+	}
+	bool operator <(const dijk &x)const
+	{
+		return dis>x.dis;
+	}
+};
+priority_queue<dijk>q;
+void dij(int s)
+{
+	ans[s]=0LL;
+	q.push(dijk(s,0LL));
+	while(!q.empty())
+	{
+		dijk now=q.top();
+		q.pop();
+		int u=now.s;
+		if(vis[u])
+			continue;
+		vis[u]=1;
+		for(int i=head[u];i!=-1;i=edge[i].next)
+		{
+			int v=edge[i].to;
+			ll w=edge[i].w;
+			if(ans[v]>now.dis+w)
+			{
+				q.push(dijk(v,now.dis+w));
+				ans[v]=now.dis+w;
+//				cout<<u<<"->"<<v<<":"<<ans[v];
+			}
+		}
+	}
+}
+int main()
+{
+	int n,q,s;
+	cin>>n>>q>>s;
+	init();
+	build(1,n,1,n+1,2);
+	build(1,n,1,ma+1,3);
+	for(int i=1;i<=q;i++)
+	{
+		int t;
+		cin>>t;
+		if(t==1)
+		{
+			int u,v;
+			ll w;
+			cin>>u>>v>>w;
+			add(u,v,w);
+		}
+		else
+		{
+			int u,l,r;
+			ll w;
+			cin>>u>>l>>r>>w;
+			if(t==2)
+				update(l,r,w,1,n,1,n+1,u,t);
+			else
+				update(l,r,w,1,n,1,ma+1,u,t);
+		}
+	}
+	for(int i=0;i<MAXN;i++)
+		ans[i]=INF;
+	dij(s);
+	for(int i=1;i<=n;i++)
+	{
+		if(ans[i]>=INF)
+			cout<<"-1";
+		else
+			cout<<ans[i];
+		if(i!=n)
+			cout<<" ";
+	}
+	cout<<endl;
+	return 0;
+}
+```
 *****
 
 ## #E Till I Collapse
@@ -170,7 +325,7 @@ void bfs()
 ### Data Limit: n<=1e5  Time Limit: 2s
 
 ### Solution
-> 暂无
+> 一种高级数据结构：主席树，暂时不会，就先放着吧。
 
 ### Code
 > 暂无
