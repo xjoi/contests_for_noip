@@ -1,4 +1,6 @@
 ## Result
+- My Blog: http://regmsif.cf
+
 > * Yes : solved in the contest
 > * Accepted : solved after contest
 > * Waiting : solving
