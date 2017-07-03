@@ -13,7 +13,7 @@
 |contest3|A|Y|Y|W|Y|X|X
 |contest4|Y|Y|A|A|W|X|X
 |contest5|W|W|W|W|W|X|X
-|contest6|W|W|W|W|W|X|X
+|contest6|W|W|W|W|W|W|X
 |contest7|A|W|W|W|W|X|X
 |contest8|Y|Y|Y|A|W|W|W
 |contest9|Y|Y|A|A|W|X|X
