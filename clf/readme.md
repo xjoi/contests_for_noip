@@ -7,8 +7,3 @@
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
 | contest15 |Y|  A     | A | A | A | X|X
-
-  \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
----|---|---|---|---|---|---|---
-|contest0|Y|  Y     | Y | W | W | X|X
-| contest1 | Y   |   Y   | Y|Y|A|Y|A
