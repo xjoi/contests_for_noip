@@ -8,4 +8,4 @@
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
 | contest14 | YES | YES | YES | AC | Waiting | × | ×
-| contest15 | YES | YES | AC |Waiting|Waiting|×|×
+| contest15 | YES | YES | AC |Waiting|AC|×|×
