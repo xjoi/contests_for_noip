@@ -88,14 +88,14 @@ int main()
 ```cpp
 int solve(int n)
 {
-    map<int,int> maple;
-    for(int i=0;i<n;i++)
-    {
-        if(maple.find(-a[i])!=maple.end())
-            return 0;
+	map<int,int> maple;
+	for(int i=0;i<n;i++)
+	{
+		if(maple.find(-a[i])!=maple.end())
+			return 0;
         maple[a[i]]=1;
-    }
-    return 1;
+	}
+	return 1;
 }
 ```
 *****
@@ -114,38 +114,38 @@ int solve(int n)
 ```cpp
 void bfs()
 {
-    while(!que.empty())
+	while(!que.empty())
 	{
-        point cnt=que.front();
+		point cnt=que.front();
 		que.pop();
-        vis[cnt.p][cnt.turn]=1;
-        int turn=!cnt.turn;
-        if(cnt.ans==2)
+		vis[cnt.p][cnt.turn]=1;
+		int turn=!cnt.turn;
+		if(cnt.ans==2)
 		{
-            for(int i=0;i<k[turn];i++)
+			for(int i=0;i<k[turn];i++)
 			{
-                int nex=(cnt.p+n-sta[turn][i])%n;
-                if(!vis[nex][turn])
+				int nex=(cnt.p+n-sta[turn][i])%n;
+				if(!vis[nex][turn])
 				{
 					dp[nex][turn]=1;
 					que.push((point){nex,turn,1});
 				}
-            }
-        }
-        else
+			}
+		}
+		else
 		{
-            for(int i=0;i<k[turn];i++)
+			for(int i=0;i<k[turn];i++)
 			{
-                int nex=(cnt.p+n-sta[turn][i])%n;
-                deg[nex][turn]--;
-                if (deg[nex][turn]==0&&!vis[nex][turn])
+				int nex=(cnt.p+n-sta[turn][i])%n;
+				deg[nex][turn]--;
+				if(deg[nex][turn]==0&&!vis[nex][turn])
 				{
-                    dp[nex][turn]=2;
-                    que.push((point){nex,turn,2});
-                }
-            }
-        }
-    }
+					dp[nex][turn]=2;
+					que.push((point){nex,turn,2});
+				}
+			}
+		}
+	}
 }
 ```
 *****
