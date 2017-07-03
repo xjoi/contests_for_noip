@@ -7,6 +7,8 @@
 ### Problem description
 > 给出a,b,c,d,求满足k1*a+b=k2*c+d的最小k1。
 
+### Data Limit：a,b,c,d<=100 Time Limit: 1s
+
 ### Solution
 > 方法一：extgcd。方法二：由于本题数据较小，暴力判断即可。
 
@@ -19,7 +21,7 @@ using namespace std;
 int a,b,c,d,bo[5000000];
 int main(){
     scanf("%d%d%d%d",&a,&b,&c,&d);
-	for (int i=b;i<5000000;i+=a) bo[i]=1;
+    for (int i=b;i<5000000;i+=a) bo[i]=1;
 	for (int i=d;i<5000000;i+=c) if (bo[i]) return printf("%d",i),0;
 	puts("-1");
 	return 0;
@@ -34,6 +36,8 @@ int main(){
 
 ### Solution
 > 由于题意较模糊，注意这串数字中可能包含相同的数，所以不可以用绝对值判断。其实开一个bool判断即可。
+
+### Data Limit：n<=10000 Time Limit: 2s
 
 ### Code
 ```cpp
@@ -64,6 +68,8 @@ int main(){
 
 ### Solution
 > 考虑三维dp,f[i][j][2]表示走i步，在j号点是否必胜。容易得出dp方程。然而经过大量减枝仍然tle在最后一个点。容易发现当某个点被判定为必胜或必败后不会改变，于是考虑用bfs优化dp把复杂度加为N^2。
+
+### Data Limit：n<=7000 Time Limit: 4s
 
 ### Code
 ```cpp
@@ -109,6 +115,8 @@ int main(){
 > 显然需要建虚拟点，这里可以想到用线段树思想，把每个区间转换为不超过log个节点。
 
 > 于是我们可以构建两棵线段树，每棵线段树上每对父子连边，这样就可以在最多3*N个节点，30*N条边以内建完图，spfa即可。
+
+### Data Limit：n<=100000 Time Limit: 2s
 
 ### Code
 ```cpp
@@ -170,10 +178,49 @@ main(){
 > 方法1：主席树记录区间不同数的个数，可以通过数学（<del>程序暴力计算</del>）方法得出，（1/1+1/2+1/3...1/n）≈log n
 > 所以可知总共不超过log个区间。于是直接主席树处理即可在nlog n^2时间内岀解。
 
-> 方法2：设对于K=i时的答案组数为ans[i]可知当ans[l]=ans[r]时，ans[l,r]答案都一样。故直接分制即可。
+> 方法2：设对于K=i时的答案组数为ans[i]可知当ans[l]=ans[r]时，ans[l,r]答案都一样。故直接分治即可。
+
+### Data Limit：n<=100000 Time Limit: 2s
 
 ### Code
 ```cpp
+//方法一
+#include<iostream>
+#include<cstdio>
+using namespace std;
+const int N=1e5+10,M=40*N;
+int n,m,x,y,rt[N],size,a[N],su[M],c[M][2],la[N];
+inline void add(int pos,int val,int &v,int v2,int l=1,int r=n){
+	su[v=++size]=su[v2];
+	su[v]+=val;
+	if (l==r) return;
+	int mid=(l+r)>>1;
+	if (pos<=mid) add(pos,val,c[v][0],c[v2][0],l,mid),c[v][1]=c[v2][1];
+		else add(pos,val,c[v][1],c[v2][1],mid+1,r),c[v][0]=c[v2][0];
+}
+inline int ask(int y,int v,int l=1,int r=n){
+	if (l==r) return l;
+	int mid=(l+r)>>1,t=su[c[v][0]];
+	return y<=t?ask(y,c[v][0],l,mid):ask(y-t,c[v][1],mid+1,r);
+}
+int main(){
+	scanf("%d",&n);
+	for (int i=1;i<=n;++i) scanf("%d",&a[i]);
+	for (int i=n;i;--i){
+		add(i,1,rt[i],rt[i+1]);
+		if (la[a[i]]) add(la[a[i]],-1,rt[i],rt[i]);
+		la[a[i]]=i;
+	}
+	for (int i=1;i<=n;++i){
+		int tot=1;
+		for (int pos=1;su[rt[pos]]>i;pos=ask(i+1,rt[pos]),++tot);
+		printf("%d ",tot);
+	}
+	return 0;
+}
+```
+```cpp
+//方法2
 #include<iostream>
 #include<cstdio>
 using namespace std;
