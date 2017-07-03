@@ -1,0 +1,93 @@
+[contest link](https://vjudge.net/contest/168561)
+
+# Accepted during Contest
+
+## A
+
+### Problem Desc
+
+给定一个上升的整数序列a进行入队操作, 当即将入队元素与队尾元素差值>c, 清空队列后再进行入队. 求最后队列长度
+
+### Solution
+
+纯模拟
+
+```
+Vector<Int> q
+For Int x In a:
+    If x - Back q > c:
+        Clear q
+    Push_back q x
+Write Size q
+```
+
+## B
+
+### Problem Desc
+
+补全带零或多个未知字符的字符串s, 使其包含一个长度为26的字串等于字母表的集合
+
+### Solution
+
+先扫一遍确定是否有解
+
+然后暴力补全
+
+```
+Walk In s:
+    Get Next 26 Chars As String subs:
+        For Char ch In subs:
+            If ch Appear In subs Before:
+                subs Is Invalid
+If All Is Invalid:
+    Write -1
+Else:
+    Walk In s:
+        Get Next 26 Chars As String subs:
+            If subs Is Valid:
+                For Char ch In subs:
+                    If ch Is Unknown:
+                        ch = Get Char Not Appear In subs Before
+    Write s
+```
+
+## C
+
+### Problem Desc
+
+维护整数level, value.
+
+初始level = 1, value = 2
+
+有两种操作
+
+1. value += level
+
+2. value = Sqrt value, level += 1
+
+每次操作后需保证value % level = 0
+
+令F x = 从level x升到level x + 1所需的操作次数, 求F 1 ... F n
+
+### Solution
+
+对于每次操作2
+
+1. value1 = Sqrt value0
+
+2. level1 = level0 + 1
+
+则value0 % level0 = 0, value1 % level1 = 0
+
+所以value0 % Sqr level1 = 0
+
+因为level1与level0互质, 且value0为完全平方数, 所以value0 = Sqr level0 * Sqr level1合法
+
+```
+Seq<Int> F
+Int value = 2
+For Int level In 1...n:
+    F level = (Sqr level * Sqr (level + 1) - value) / level
+    value = level * (level + 1)
+Write F
+```
