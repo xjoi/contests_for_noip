@@ -6,20 +6,20 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-|contest0|YES|  YES     | YES | Accepted | Accepted| X|X
-| contest1 | YES   |   YES   | Accepted|Accepted|Accepted|X|X
-| contest2 | Accepted   |  Yes   | Yes |Accepted|Accepted|X|X
-| contest3 | Accepted  |   YES | YES|Accepted|YES|X|X
-| contest4 | YES   |   YES   | YES|YES|Accepted|X|X
-| contest5 | YES   |   YES   | YES|Accepted|Accepted|X|X
-| contest6 | YES   |   YES   | YES|YES|Accepted|wating|X
-| contest7 | YES   |   Accepted   | Accepted|wating|wating|X|X
-| contest8 | YES   |   YES   | YES|YES|Accepted|Accepted|Accepted
-| contest9 | YES   |   YES   | Accepted|wating|Accepted|X|X
-| contest10 | YES   |   YES   | YES|Accepted|Accepted|X|X
-| contest11 | YES   |   YES   | Yes|Yes|Accepted|X|X
-| contest12 | YES   |   YES   | Accepted|YES|wating|Accepted|Accepted
-| contest13| YES   |   YES   | YES|YES|Accepted|Acceptecd|wating
-| contest14 | YES   |   YES   | YES|Accepted|wating|X|X
-| contest15 | YES   |   YES   | YES|YES|Accepted|X|X
+|contest0|Y|  Y     | Y | A | A| X|X
+| contest1 | Y   |   Y   | A|A|A|X|X
+| contest2 | A   |  Y   | Y |A|A|X|X
+| contest3 | A  |   Y | Y|A|Y|X|X
+| contest4 | Y   |   Y   | Y|Y|A|X|X
+| contest5 | Y   |   Y   | Y|A|A|X|X
+| contest6 | Y   |   Y   | Y|Y|A|W|X
+| contest7 | Y   |   A   | A|W|W|X|X
+| contest8 | Y   |   Y   | Y|Y|A|A|A
+| contest9 | Y   |   Y   | A|W|A|X|X
+| contest10 | Y   |   Y   | Y|A|A|X|X
+| contest11 | Y   |   Y   | Y|Y|A|X|X
+| contest12 | Y   |   Y   | A|Y|W|A|A
+| contest13| Y   |   Y   | Y|Y|A|A|W
+| contest14 | Y   |   Y   | Y|A|W|X|X
+| contest15 | Y   |   Y   | Y|Y|A|X|X
 
