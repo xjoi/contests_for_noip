@@ -33,7 +33,7 @@ printf("%d\n",ans);
 ***
 ## #B Complete the Word
 ```
-    VJudge链接：  https://cn.vjudge.net/contest/168561#problem/A
+    VJudge链接：  https://cn.vjudge.net/contest/168561#problem/B
 CodeForces链接：  http://codeforces.com/contest/716/problem/B
 
       时间限制：  2000ms
@@ -105,6 +105,7 @@ CodeForces链接：  http://codeforces.com/contest/716/problem/D
 给出一个无向图，其中一些边的权值被擦除了（初始值为0）。再给出起点S和终点T，要求给所有的被擦除的边赋上大于0的权值，使得S到T的最短路总权值恰好为L。
 ### Solution
 这里给出其中一种解法。
+
 首先对所有权值不为0（即未被擦除）的边跑一遍最短路，如果结果小于L，那么怎么做都不能达到要求，可以直接输出NO；之后对所有被擦除的边一个接一个将权值赋为1，并加入到图中，每次跑一遍最短路，当某一条边加入之后最短路小于等于L，那么将这条边权值赋值为(L-最短路长)，再把剩余的没加入的边权值全部赋为INF(1e18)，这样就可以达到要求。如果全部的边都加入后最短路还是大于L，那么无解。
 ### Code
 ```Cpp
