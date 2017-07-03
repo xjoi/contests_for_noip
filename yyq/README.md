@@ -7,7 +7,7 @@
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
 |contest0|Y|Y|W|Y|W|X|X
-|contest1|A|A|A|A|X|X|X
+|contest1|A|A|A|A|W|X|X
 |contest2|A|Y|Y|Y|Y|X|X
 |contest3|A|Y|Y|W|Y|X|X
 |contest4|Y|Y|A|A|W|X|X
