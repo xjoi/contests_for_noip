@@ -4,7 +4,7 @@
 ## A
 ### Problem description
 解b+k1a=d+k2c(k1>=0,k2>=0)
-1<=a,b,c,d<=100
+### Data Limit:1<=a,b,c,d<=100  Time Limit:1s
 ### Solution
 暴力求解，每次选b和d之中较小的那个加上a或c。
 ```cpp
@@ -25,9 +25,10 @@ int main(){
 ## B
 ### Problem description
 给你几个集合，如果存在一个集合中没有互为相反数的数，输出YES，否则输出NO。
+### Data Limit:所有数的数量<=10000 Time Limit:2s
 ### Solution
 都丢掉set里面暴力判断就行了。
-所有数的数量<=10000
+
 ```cpp
 #include<cstdio>
 #include<set>
@@ -55,7 +56,7 @@ int main(){
 ## C
 ### Problem description
 有两个人玩游戏。1到n这些点按顺时针围成一个圈，每个人有几个数，每次行动可以选一个数，将一个东西顺时针走一个数步。两个人轮流行动，求这个东西一开始放在i的位置，第j个人先行动的胜负性。
-n<=7000
+### Data Limit:n<=7000 Time Limit:4s
 ### Solution
 如果一个状态能走到必败状态，就是必胜状态。如果一个状态只能走到必胜状态，就是必败状态，其他都是平局。这样从每个确定的状态开始bfs一下就行了。
 ```cpp
@@ -101,7 +102,7 @@ int main(){
 ## D
 ### Problem description
 给你一个有向图，可以给两个点连边，也可以给一个点的区间和一个点连边，求单源最短路。
-点数,连边数<=100000
+### Data Limit:点数,连边数<=100000 Time Limit:2s
 ### Solution
 建2棵线段树，第一棵从下往上连边，如果从区间到点连边，就把线段树中对应的节点向点连边。另一棵线段树从上往下连边，如果从点到区间连边，就把点和线段树中对应的区间连边。最后跑最短路就好了。
 ```cpp
@@ -192,7 +193,7 @@ int main(){
 ## E
 ### Problem description
 给你一个长为n的数列。f(k)表示把数列划分成一些区间，每个区间的不同数字个数不能超过k的情况下，区间数量的最大值。求f(1)到f(n)所有数。
-n,k<=100000
+### Data Limit:n,k<=100000 Time Limit:2s
 ### Solution
 显然答案是一个递减数列。我们可以用一个玄学的方法，先二分，对于每一个区间[l,r],若f[l]=f[r]，则l到r所有数都相等，可以直接退出。否则二分求解。
 ```cpp
