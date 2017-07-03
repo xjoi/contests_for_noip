@@ -6,7 +6,7 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-| contest13 | YES   |   YES   | YES|YES|YES|Accepted|NO
+| contest13 | YES   |   YES   | YES|YES|YES|Accepted|Accepted
 
 
 [比赛链接](https://cn.vjudge.net/contest/168406#overview)
@@ -94,9 +94,12 @@ int main()
 
 ## C
 ### Problem description
-> 给一个大数，其位数>=4，其中必含1,6,8,9四个数字。。求重新排列成一个7的倍数。。
+> 给一个大数，其位数>=4，其中必含1,6,8,9四个数字。。
+> 求重新排列成一个7的倍数。。
+
 ### Solution
 仔细yy，先处理除了1,6,8,9以外的数，剩下打表。。
+
 ```cpp
 #include<cstdio>
 #include<cstring>
@@ -152,7 +155,9 @@ int main()
 ### Problem description
 > 求随意打乱行的顺序后的最大子矩阵的最大值。。
 ### Solution
-枚举每一列。。统计出每一行从该列开始向右最远连续的'1'。。基数排序一下就好。。（自行yy！。。）
+枚举每一列。。统计出每一行从该列开始向右最远连续的'1'。。
+
+基数排序一下就好。。（自行yy！。。）
 ```cpp
 #include<cstdio>
 #include<iostream>
@@ -201,10 +206,14 @@ int main()
 ## E
 ### Problem description
 > 从给定点出发，回到出发点。。
-  限制：只能上下左右走。。不能出界或撞墙（撞宝藏也不行啊）。。不能围炸弹。。
-  最大化：所有围住的宝藏的权值和 - 走的步数
+> 限制：只能上下左右走。。不能出界或撞墙（撞宝藏也不行啊）。。不能围炸弹。。
+> 最大化：所有围住的宝藏的权值和 - 走的步数
+  
 ### Solution
-撞鸭dp（好吧。。或者说叫记忆化广搜。。）记录到达每种状态的最少步数。。最后再统计就好了
+撞鸭dp（好吧。。或者说叫记忆化广搜。。）
+
+记录到达每种状态的最少步数。。最后再统计就好了
+
 ```cpp
 #include<cstdio>
 #include<iostream>
@@ -343,9 +352,12 @@ int main()
 ## F
 ### Problem description
 > 给出一个每个节点都有颜色的有根树。。
-  询问：以v为根的子树中（含根），有多少种颜色，满足颜色为该颜色的节点数>=k。。
+> 询问：以v为根的子树中（含根），有多少种颜色，满足颜色为该颜色的节点数>=k。。
+  
 ### Solution
+
 树转区间+莫队。。
+
 ```cpp
 #include<cstdio>
 #include<iostream>
@@ -490,9 +502,134 @@ int main()
 
 ## G
 ### Problem description
-> 略
-### Solution
-略
-```cpp
+> 给出一棵有边权的树。。树上每个节点均为红色或黑色。。
+> 目标：每个红点在距离x内有黑点。。
+> 可用操作：交换两点颜色。。
+> 最小化：达到目标的操作次数。。
 
+### Solution
+tree dp。。
+
+定义“u控制v”意为最终状态下红点v到黑点u的距离<=x。。
+
+f[i,j,k]表示以i为根的子树中，
+
+使得所有非根节点都被控制（可以被k）且根节点被k节点控制的方案中，
+
+恰用了j个黑点（不含k）的最少操作次数（即红变黑）。。
+
+```cpp
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<cstring>
+#define xxx 501
+#define debug 0
+using namespace std;
+short f[xxx][xxx][xxx],be[xxx][xxx]; 
+int ww[xxx],cnt=0,n,siz[xxx];
+long long dd,d[xxx][xxx];
+struct R{
+	int to,was;
+};
+vector<R>r[xxx];
+vector<int>ch[xxx];
+
+void dis(int root,int x,int fa,long long t)
+{
+	d[root][x]=t;
+	for (int i=0;i<r[x].size();i++)
+		if (r[x][i].to!=fa)
+			dis(root,r[x][i].to,x,t+(long long)r[x][i].was);
+	return;
+}
+
+short tem[xxx];
+void dfs(int x,int fa)
+{
+	siz[x]=1;
+	for (int i=0;i<r[x].size();i++)
+	{
+		if (r[x][i].to!=fa)
+		{
+			dfs(r[x][i].to,x);
+			siz[x]+=siz[r[x][i].to];
+			ch[x].push_back(r[x][i].to); 
+		}
+	}
+	if (debug) printf("%d %d %d\n",x,fa,siz[x]);
+	int s,y,chsiz=ch[x].size();
+	for (int i=1;i<=n;i++)
+	{
+		if (d[x][i]>dd) continue;
+		for (int a=0;a<=siz[x];a++)
+			tem[a]=520;
+		tem[0]=tem[1]=0;
+		s=1;
+		for (int t=0;t<chsiz;t++)
+		{
+			y=ch[x][t];
+			//背包貌似一维的更好写？。。 
+			for (int a=min(s+siz[y],cnt);a>=0;a--)
+			{
+				short realtem=520;
+				for (int b=max(0,a-s);b<=min(siz[y],a);b++)
+				{
+					realtem=min(realtem,(short)(tem[a-b]+f[y][b][i]));
+					realtem=min(realtem,(short)(tem[a-b]+be[y][b]));
+				}
+				tem[a]=realtem;
+			}
+			s+=siz[y];
+		}
+		for (int a=0;a<=s;a++)
+			f[x][a][i]=tem[a];
+	}
+	for (int a=0;a<siz[x];a++)
+	{
+		be[x][a+1]=520;
+		for (int i=1;i<=n;i++)
+			if (d[x][i]<=dd)
+				be[x][a+1]=min(be[x][a+1],(short)(f[x][a][i]+ww[i]));
+	}
+	if (debug)
+	{
+		printf("%d:\n",x);
+		for (int a=0;a<=s;a++)
+		{
+			printf("%d:",a);
+	 		for (int i=1;i<=n;i++)cout<<" ("<<i<<")"<<f[x][a][i];
+			cout<<"  best:"<<be[x][a]<<endl;
+		}
+	}
+}
+
+int main()
+{
+	memset(f,5,sizeof(f));
+	memset(be,5,sizeof(be));
+	scanf("%d%d",&n,&dd);
+	for (int i=1;i<=n;i++)
+	{
+		scanf("%d",&ww[i]);
+		cnt+=ww[i];
+		ww[i]^=1;
+	}
+	int u,v,w;
+	for (int i=1;i<n;i++)
+	{
+		scanf("%d%d%d",&u,&v,&w);
+		r[u].push_back((R){v,w});
+		r[v].push_back((R){u,w});
+	}
+	for (int i=1;i<=n;i++)
+		dis(i,i,0,(long long)0);
+	if (debug){
+		for (int i=1;i<=n;i++){for (int j=1;j<=n;j++) printf("%d ",d[i][j]);printf("\n");}
+	}
+	dfs(1,0);
+	be[1][cnt] = be[1][cnt]>=520?-1:be[1][cnt];
+	cout<<be[1][cnt]<<endl;
+	return 0;
+}
 ```
