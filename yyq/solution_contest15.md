@@ -4,7 +4,7 @@
 
 ### 无。
 
-> 由于被逐出了Group.惨啊。
+> 由于太久没补题被逐出了Group，无法进去比赛...惨啊。
 
 *****
 
@@ -16,162 +16,160 @@
 ### Data Limit: a,b,c,d<=100  Time Limit: 1s
 
 ### Solution
-> 第一种方法，直接暴力，因为a,b,c,d均小于等于100，所以可以用一个book数组开到大约1e7左右存第一个人尖叫的时间，然后从小到大枚举第二个人尖叫的时间，找到第一个被标记的时间直接输出然后```return 0;``
+> 第一种方法，直接暴力，因为a,b,c,d均小于等于100，所以可以用一个book数组开到大约1e7左右存第一个人尖叫的时间，然后从小到大枚举第二个人尖叫的时间，找到第一个被标记的时间直接输出然后```return 0;```。
 
-> 第二种方法，用扩展欧几里得，其实这题跟xjoi上的[青蛙的约会]()差不多。
-
-### Code
-```cpp
-cin>>n>>c;
-cin>>num;
-x=num;
-tot++;
-n--;
-while(n--)
-{
-	cin>>num;
-	if(num-x<=c)
-		tot++;
-	else
-		tot=1;
-	x=num;
-}
-cout<<tot<<endl;
-```
-*****
-
-
-## #B Complete the Word
-### Problem description
-> 给你一串字符串，其中包括小写字母与问号，问号可以代替任何字母，问你有没有一个长度为26的字串，其中'a'~'z'26个小写字母全部出现了一遍，若不存在，则输出-1，若存在，则将问号代替后输出整个原字符串。
-
-### Data Limit: len<=5e4  Time Limit: 2s
-
-### Solution
-> 首先我们知道，当字符串长度小于26时是显然不行的，直接输出-1。然后暴力遍历整个字符串，取长度为26的字串，用两个变量cnt1和cnt2分别记录不同小写字母出现个数和问号个数。遍历时，将每个小写字母有无出现过记录下来，若是第一次出现，则cnt1++，若是问号，则cnt2++。在遍历了26个字符后，若cnt1+cnt2==26，则有解，将该字串内的问号填充后，其他无关紧要的问号随意填就行了。
+> 第二种方法，用扩展欧几里得，其实这题跟xjoi上的[青蛙的约会](http://www.hzxjhs.com:83/problem/2407)差不多。具体我就不细讲了，看代码吧。
 
 ### Code
+> 暴力
 ```cpp
-for(int i=0;i<=len-26&&flag==true;i++)
-{
-	memset(b,0,sizeof(b));
-	int cnt1=0,cnt2=0;
-	for(int j=i;j<i+26;j++)
+cin>>a>>b>>c>>d;
+memset(book,0,sizeof book);
+for(int i=0;i<=1000;i++)
+	book[b+i*a]=true;
+for(int i=0;i<=1000;i++)
+	if(book[d+i*c])
 	{
-		if(s[j]>='A'&&s[j]<='Z')
-		{
-		   b[s[j]-'A']++;
-		}
-		else
-			cnt2++;
+		cout<<d+i*c<<endl;
+		return 0;
 	}
-	for(int j=0;j<26;j++)
-		if(b[j]==1)
-			cnt1++;
-	if(cnt2+cnt1==26)
-	{
-		int t=0;
-		for(int j=i;j<i+26;j++)
-		{
-			if(s[j]=='?')
-			{
-				for(;t<26;t++)
-				{
-					if(b[t]==0)
-					{
-						s[j]='A'+t;
-						t++;
-						break;
-					}
-				}
-			}
-		}
-		flag=false;
-	}
-}
+cout<<"-1"<<endl;
 ```
-*****
 
-
-## #C Plus and Square Root
-### Problem description
-> 一个等级制的小游戏，初始等级为1，有一个初始值为2的数字K。现在有两种操作，一是给数字K加上当前等级数；二是给数字K开方，并使等级上升一级。但操作二有两个要求，一个是当前的K是一个完全平方数，另一个是平方之后得到的数必须是下一等级数的倍数。现在给出一个等级数N，求使其达到N+1级的操作方法。只需输出每个等级中在对K开方之前做加法的次数。
-
-### Data Limit: n<=1e5  Time Limit: 2s
-
-### Solution
-> 一道典型的数论题（结论题），理清楚题意后可以得到两个关系 ```①a[i]+ans[i]*i = a[i+1]^2 ②a[i] mod i = 0```
-因为第```i```个答案为```ans[i]```,因此将第一个式子变形为 ```ans[i] = (a[i+1]^2 - a[i]) / i```
-这个式子说明只要能满足```a[i] mod i = 0```和```a[i+1]^2 mod i = 0```的数列a[i]都能用来构造答案数列，我们可以令```a[i] = i * (i-1)```
-因此答案```ans[i] = (i+1)^2*i-i+1```, 同时要注意按照这种方式构造的数列```ans[1]```并不满足，因此特判后进行计算即可
-
-### Code
+> 扩欧（exgcd）
 ```cpp
+int exgcd(int a,int b,int &x,int &y)
+{
+	int r,temp;
+	if (b==0)
+	{
+		x=1;
+		y=0;
+		return a;
+	}
+	r=exgcd(b,a%b,x,y);
+	temp=x;
+	x=y;
+	y=temp-a/b*y;
+	return r;
+}
 int main()
 {
-    scanf("%d",&n);
-    for(int i=1;i<=n;i++)
+	scanf("%d%d%d%d",&a,&b,&c,&d);
+	q=d-b;
+	min=exgcd(a,c,x,y);
+	if (q%min!=0)
+		cout<<"-1"<<endl;
+	else
 	{
-        if(i==1)
-            printf("2\n");
-        else
-            cout<<(ll)(i+1)*(i+1)*i-(i-1)<<endl;
-    }
-    return 0;
-}
-```
-*****
-
-# 赛后补题
-
-## #D Complete The Graph
-### Problem description
-> 给定一个有n个点，m条边，起点为s，终点为t的一个无向图。图中边权为0的边表示表示边权可以进行修改，现在要求改变所有这些边的边权（必须为正值），使得s到t最短路为L。
-
-### Data Limit: n<=1000, m<=10000  Time Limit: 4s
-
-### Solution
-> 首先把边权为0的边用vector存起来，其他按原来方法，然后跑一遍dijkstra，如果最短路小于L，那么其他的0边无论怎么变化，最短路都不会变化，这时可以直接输出NO，如果等于L，则直接输出这个图，vector里面的0边搞成INF（1e9）输出就行了。最短路大于L的情况，这时就需要添加0边来看是否能找到最短路等于L的方案。具体的实现方法是把vector存的边一条一条的添加进原图中，添加的时候边权设为1。添加一条跑一次dij，如果添加到某条边使得最短路小于等于L，把最后添加进的这条边的权值加上```L-dis[t]```，然后记录下这条边在vector的位置，输出这个图，剩余的0边权值改为INF（1e9）输出即可。如果添加了所有边进去还是找不到最短路小于等于L的方案，那么就不存在方案，输出NO。
-
-### Code
-```cpp
-dij();
-if(dis[t]<L)
-{
-	puts("NO");
-	return 0;
-}
-else if(dis[t]==L)
-{
-	puts("YES");
-	for(int i=0;i<top;i+=2)
-		printf("%d %d %I64d\n",E[i].u,E[i].v,E[i].w);
-	for(int i=0;i<V.size();i++)
-		printf("%d %d %I64d\n",V[i].u,V[i].v,INF);
-	return 0;
-}
-int pos=-1;
-for(int i=0;i<V.size();i++)
-{
-	add(V[i].u,V[i].v,1);
-	add(V[i].v,V[i].u,1);
-	dij();
-	if(dis[t]<=L)
-	{
-		E[top-2].w+=L-dis[t];
-		E[top-1].w+=L-dis[t];
-		pos=i;
-		break;
+		x=x*(q/min);
+		x=(x%(c/min)+(c/min))%(c/min);
+		y=(b-d+x*a)/c;
+		while (y<0)
+		{
+			x=x+c/min;
+			y=(b-d+x*a)/c;
+		}
+		printf("%d\n",b+a*x);
 	}
 }
 ```
 *****
 
-## #E Digit Tree
+
+## #B Not Afraid
+### Problem description
+> 输入n,m,接下来m行先输入一个k,后面跟着k个数，若每行中都有一对相反数，就输出"NO"，否则输出"YES"。
+
+### Data Limit: n<=1e4  Time Limit: 2s
+
+### Solution
+> 直接在每行数字输入前用一个map，在数字读完后遍历一遍，若该数字的相反数已经记录在map中，则他们是一对相反数。若遍历完还没有出现一对相反数，则该行不存在一对相反数，可以直接输出"YES"。
+
+### Code
+```cpp
+int solve(int n)
+{
+    map<int,int> maple;
+    for(int i=0;i<n;i++)
+    {
+        if(maple.find(-a[i])!=maple.end())
+            return 0;
+        maple[a[i]]=1;
+    }
+    return 1;
+}
+```
+*****
+
+
+## #C Berzerk
+### Problem description
+> 一个环形路径编号为1-n，1号点为黑洞，玩家轮流让怪物前进若干步（从自己的操作集合里随便选），若该轮怪物走到黑洞，则该轮的玩家胜利。要求求出所有怪物初始位置（即2~n-1）和玩家a，b各自先手的游戏结果。
+
+### Data Limit: n<=7000  Time Limit: 4s
+
+### Solution
+> 这题可以用DP+BFS。设状态```dp[x][y]```表示当前怪物在x点，轮到玩家y操作的游戏结果。所以```dp[1][0]```和```dp[1][1]```的结果都是失败，若在```dp[x][y]```的情况下，玩家的任意操作到达的```dp[x’][y’]```的状态是y’玩家失败，则```dp[x][y]```为胜利（玩家选择该操作即可胜利），反之，若玩家的所有选择到达的下一个状态```dp[x’][y’]```都是另一个玩家y’胜利,则```dp[x][y]```为失败的，搜索就行。不过因为会有陷入循环的结果，所以可以使用逆向bfs的方法，有点像拓扑排序（先初始化所有点的度数为可操作数），先让点```[0][0]```和```[0][1]```入队，对于任意当前队列头的点，如果这个点的状态是失败，则逆推出能从哪些点到这一点，那些点的状态都是胜利并且入队；如果这个点的状态是失败，则让所有逆推出来的上一步的点的度数减一，如果该点的度数为0，则该点的状态是失败并且入队。最后那些始终没有入队过的就是陷入循环的点了。
+
+### Code
+```cpp
+void bfs()
+{
+    while(!que.empty())
+	{
+        point cnt=que.front();
+		que.pop();
+        vis[cnt.p][cnt.turn]=1;
+        int turn=!cnt.turn;
+        if(cnt.ans==2)
+		{
+            for(int i=0;i<k[turn];i++)
+			{
+                int nex=(cnt.p+n-sta[turn][i])%n;
+                if(!vis[nex][turn])
+				{
+					dp[nex][turn]=1;
+					que.push((point){nex,turn,1});
+				}
+            }
+        }
+        else
+		{
+            for(int i=0;i<k[turn];i++)
+			{
+                int nex=(cnt.p+n-sta[turn][i])%n;
+                deg[nex][turn]--;
+                if (deg[nex][turn]==0&&!vis[nex][turn])
+				{
+                    dp[nex][turn]=2;
+                    que.push((point){nex,turn,2});
+                }
+            }
+        }
+    }
+}
+```
+*****
+
+## #D Legacy
 ### Problem description
 > 暂无
 
-### Data Limit: n<=1e5  Time Limit: 3s
+### Data Limit: n, q<=1e5  Time Limit: 2s
+
+### Solution
+> 暂无
+
+### Code
+> 暂无
+*****
+
+## #E Till I Collapse
+### Problem description
+> 暂无
+
+### Data Limit: n<=1e5  Time Limit: 2s
 
 ### Solution
 > 暂无
