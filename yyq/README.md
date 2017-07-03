@@ -19,5 +19,5 @@
 |contest10|A|A|A|A|W|X|X
 |contest11|Y|Y|A|W|W|X|X
 |contest12|Y|Y|Y|Y|W|Y|W
-|contest13|Y|Y|Y|Y|Y|W|W
+|contest13|Y|Y|Y|Y|Y|A|W
 |contest14|Y|Y|Y|A|W|X|X
