@@ -24,3 +24,4 @@ contest#011| Y | Y | Y | A | A | X | X
 contest#012| Y | A | Y | Y | W | A | W
 contest#013| Y | Y | Y | Y | A | A | W
 contest#014| Y | Y | Y | A | W | X | X
+contest#013| Y | Y | A | A | A | X | X
