@@ -4,13 +4,13 @@
 
 ## Problem Desc
 
-¶ÔÓÚ
+å¯¹äºŽ
 
 F k = b + ka
 
 G t = d + tc
 
-ÇóÂú×ãF k = G tÊ±, F kµÄ×îÐ¡Öµ
+æ±‚æ»¡è¶³F k = G tæ—¶, F kçš„æœ€å°å€¼
 
 1 <= a, b, c, d <= 100
 
@@ -18,7 +18,7 @@ G t = d + tc
 
 ### Accepted Solution
 
-±©Ã¶, ¸ù¾ÝÄ³Ö¤Ã÷²»»áTLE
+æš´æžš, æ ¹æ®æŸè¯æ˜Žä¸ä¼šTLE
 
 ```
 For Int i In (b If a > c Else d)..(a If a > c Else c)..MagicNumber:
@@ -31,13 +31,13 @@ For Int i In (b If a > c Else d)..(a If a > c Else c)..MagicNumber:
 
 exgcd
 
-µ±F k = G tÊ±
+å½“F k = G tæ—¶
 
 b + ka = d + tc
 
 ka - tc = d - b
 
-ÕâÊÇÒ»¸öÃîÃîµÄ·½³Ì, ¿ÉÒÔÓÃexgcdÇó½â
+è¿™æ˜¯ä¸€ä¸ªå¦™å¦™çš„æ–¹ç¨‹, å¯ä»¥ç”¨exgcdæ±‚è§£
 
 ```
 Int g = Gcd a -c
@@ -55,13 +55,13 @@ Write x * a + b
 
 ## Problem Desc
 
-¸øÄãm¸ö×é, ÇóÊÇ·ñÃ¿¸ö×é¶¼°üº¬ÖÁÉÙÒ»¶ÔÏà·´Êý
+ç»™ä½ mä¸ªç»„, æ±‚æ˜¯å¦æ¯ä¸ªç»„éƒ½åŒ…å«è‡³å°‘ä¸€å¯¹ç›¸åæ•°
 
 1 <= m <= 10^4
 
 ## Solution
 
-±©Á¦É¨Ò»±é
+æš´åŠ›æ‰«ä¸€é
 
 ```
 Vector<Vector<Int> > groups = Read
@@ -79,11 +79,11 @@ Else:
 
 ## Problem Desc
 
-¶ÔÓÚ»·1..n, 1ÎªÖÕµã, ½«ÈÎÒâ·Ç1×÷ÎªÆðµã, Á½ÈËÖÐÈÎÒâÒ»ÈËÏÈÊÖ
+å¯¹äºŽçŽ¯1..n, 1ä¸ºç»ˆç‚¹, å°†ä»»æ„éž1ä½œä¸ºèµ·ç‚¹, ä¸¤äººä¸­ä»»æ„ä¸€äººå…ˆæ‰‹
 
-¸ø¶¨ÈË1µÄ¿ÉÒÆ¶¯²½Êý¼¯ºÏs1, ÈË2µÄ¿ÉÒÆ¶¯²½Êý¼¯ºÏs2 (Ë³Ê±ÕëÒÆ¶¯)
+ç»™å®šäºº1çš„å¯ç§»åŠ¨æ­¥æ•°é›†åˆs1, äºº2çš„å¯ç§»åŠ¨æ­¥æ•°é›†åˆs2 (é¡ºæ—¶é’ˆç§»åŠ¨)
 
-Çó¶ÔÓÚÉÏÊöÃ¿ÖÖÇé¿öµÄÊ¤¸º
+æ±‚å¯¹äºŽä¸Šè¿°æ¯ç§æƒ…å†µçš„èƒœè´Ÿ
 
 2 <= n <= 7000
 
@@ -123,21 +123,21 @@ Write All Status
 
 ## Problem Desc
 
-ÓÐÈýÖÖÂ·¾¶
+æœ‰ä¸‰ç§è·¯å¾„
 
 1. u -> v
 2. u -> [l, r]
 3. [l, r] -> v
 
-Çó´Ós¿ªÊ¼µÄµ¥Ô´×î¶ÌÂ·
+æ±‚ä»Žså¼€å§‹çš„å•æºæœ€çŸ­è·¯
 
-½áµãÊýn <= 10^5
+ç»“ç‚¹æ•°n <= 10^5
 
 ## Solution
 
-½áµãÌ«¶à, Ö±½ÓÁ¬±ßÒªGG, ÄÇÃ´¿ÉÒÔ½¨Ïß¶ÎÊ÷, ÓÃÊ÷ÉÏµÄ½áµã´úÌæÇø¼ä, È»ºóÖ±½ÓÅÜ×î¶ÌÂ·
+ç»“ç‚¹å¤ªå¤š, ç›´æŽ¥è¿žè¾¹è¦GG, é‚£ä¹ˆå¯ä»¥å»ºçº¿æ®µæ ‘, ç”¨æ ‘ä¸Šçš„ç»“ç‚¹ä»£æ›¿åŒºé—´, ç„¶åŽç›´æŽ¥è·‘æœ€çŸ­è·¯
 
-ÐèÒª½¨Á½¿Ã, Ò»¿ÃÏòÉÏÁ¬±ß, ÁíÒ»¿ÃÏòÏÂ, ±ßÈ¨ÖµÎª0
+éœ€è¦å»ºä¸¤æ£µ, ä¸€æ£µå‘ä¸Šè¿žè¾¹, å¦ä¸€æ£µå‘ä¸‹, è¾¹æƒå€¼ä¸º0
 
 ```
 SegmentTree t1 t2
@@ -157,19 +157,19 @@ Write ShortestPath From s
 
 ## Problem Desc
 
-¶ÔÓÚ³¤¶ÈÎªnµÄÐòÁÐa»®·Ö, Ã¿¶Î²»Í¬ÔªËØ²»ÄÜ³¬¹ý1..n, Çó×îÐ¡»®·Ö¶ÎÊý
+å¯¹äºŽé•¿åº¦ä¸ºnçš„åºåˆ—aåˆ’åˆ†, æ¯æ®µä¸åŒå…ƒç´ ä¸èƒ½è¶…è¿‡1..n, æ±‚æœ€å°åˆ’åˆ†æ®µæ•°
 
 n <= 10^5
 
 ## Solution
 
-´ó±©Á¦¶ÔÓÚ1..n¼ÆËã, ÕâÑù¿Ï¶¨GG
+å¤§æš´åŠ›å¯¹äºŽ1..nè®¡ç®—, è¿™æ ·è‚¯å®šGG
 
-ÎÒÃÇ·¢ÏÖ, ¶ÔÓÚ´ð°¸ÐòÁÐ, ÊÇµ¥µ÷µÄ
+æˆ‘ä»¬å‘çŽ°, å¯¹äºŽç­”æ¡ˆåºåˆ—, æ˜¯å•è°ƒçš„
 
-ËùÒÔ¿ÉÒÔ¶þ·Ö, ¶ÔÓÚÒ»¸öÇø¼ä, ÈôÊ×Î²ÖµÏàÍ¬, ÔòÇø¼äÖµ¾ùÏàÍ¬
+æ‰€ä»¥å¯ä»¥äºŒåˆ†, å¯¹äºŽä¸€ä¸ªåŒºé—´, è‹¥é¦–å°¾å€¼ç›¸åŒ, åˆ™åŒºé—´å€¼å‡ç›¸åŒ
 
-ÐþÑ§AC
+çŽ„å­¦AC
 
 ```
 Def get_ans Int k:
