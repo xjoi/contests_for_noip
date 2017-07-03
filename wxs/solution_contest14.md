@@ -8,6 +8,8 @@
  
  > 判断杠杆平衡
  
+ ### data limit 1 ≤ n ≤ 100 000, 1 ≤ c ≤ 109 +2s
+ 
  ### Solution
  
 ~~仔细分析一下，这个题可以用一个printf语句解决~~
@@ -37,6 +39,8 @@ sb的模拟就是了
  
  > 简化借钱的帐
  
+ ### data limit 1 ≤ |s| ≤ 50 000 +2s
+ 
  ### Solution
  
  直接算每个人的进出
@@ -54,6 +58,8 @@ sb的模拟就是了
  ### Problem description
  
  > 一个包含数位1698的数，判断如何重组成7的倍数
+ 
+ ### data limit 1 ≤ n ≤ 100 000 +2s
  
  ### Solution
  
@@ -127,6 +133,8 @@ sb的模拟就是了
  ### Problem description
  
  >给出一个无向图，一些边是可修改边权的， 求一种修改方案，使s到t最短路为L。
+ 
+ ### data limit 2 ≤ n ≤ 1000,  1 ≤ m ≤ 10 000,  1 ≤ L ≤ 109,  0 ≤ s, t ≤ n - 1,  s ≠ t,0 ≤ ui, vi ≤ n - 1,  ui ≠ vi,  0 ≤ wi ≤ 109 +4s
  
  ### Solution
  
