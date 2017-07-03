@@ -13,10 +13,8 @@
 ### Code
 ```cpp
 for(int i=0;i<strlen(a);i++)
-{
 	if('9'-a[i]<a[i]-'0')
 		a[i]='9'-a[i]+'0';
-}
 ```
 *****
 
