@@ -21,6 +21,7 @@
 |contest12|Y|A|A|Y|W|A|
 |contest13|Y|Y|Y|Y|A|W|W|
 |contest14|Y|Y|A|A|W|X|
+|contest14|Y|Y|A|A|A|X|
 
 # 专题征程
 > * YES : solved in the contest
