@@ -261,62 +261,15 @@ int main(){
 }
 ```
 *****
-
-
-
-# 赛后补题
-
-
-## E
+## E TODO:
 ### Problem description
-> 给你n个数，问最少能把这n个数分成连续的几段，且每段中不同的个数小于等于k个，输出k从1到n的答案。</P>
 
 ### Data Limit：n <= 1e5  Time Limit: 2s
 
 ### Solution
-> 考虑K=L和K=R的情况（r>=l），如果ans（L）==ans（R），那么显然ans[L..R]答案都是一样的，没了。。。。</P>
-  要相信CF的机子快！这是信仰的分数！</P>
+
 
 ### Code
-```cpp
-#include<bits/stdc++.h>
-using namespace std;
-int c[100007],vis[100007],ans[100007];
-int n;
-int get_cnt(int k)
-{
-	int res = 0, cnt = 0;
-	memset(vis,-1,sizeof(vis));
-	for (int i=1; i<=n; i++)
-	{
-		if (vis[c[i]]==res) continue;
-		vis[c[i]] = res;
-		cnt ++ ;
-		if (cnt>k) { res++; cnt = 1; vis[c[i]]= res;}
-	}
-	return res+1;
-}
-void solve(int l,int r)
-{
-	if (l>r) return ;
-	int cntl=get_cnt(l); int cntr=get_cnt(r);
-	if (cntl==cntr)
-	{
-		for (int i=l; i<=r; i++) ans[i]=cntl;
-		return;
-	}
-	ans[l] = cntl; ans[r] = cntr;
-	int mid=(l+r) >> 1;
-	solve(l+1,mid);
-	solve(mid+1,r-1);
-}
-int main()
-{
-	scanf("%d",&n);
-	for (int i=1; i<=n; i++) scanf("%d",&c[i]);
-	solve(1,n);
-	for (int i=1; i<=n; i++) printf("%d ",ans[i]);
-	return 0;
-}
+```c++
 
 ```
