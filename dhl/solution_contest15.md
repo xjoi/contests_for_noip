@@ -158,8 +158,22 @@ void dij()
 ### Solution
 > 我的是暴力做法，我们通过实践可以发现，如果存在一个l,r，他们的答案是相同的，那么他们之间的答案也是相同的，我们就可以进行二分区间然后暴力求解啦
 >正解貌似是主席树（？？？）
-
+-----------------------------
+## update
+>这里再说一种线段树的方法，我们用线段树的叶节点维护一段1~n的区间，表示这里的颜色的数目，然后我们在树上二分
+>初始化：我们用一个vector数组记录这个节点可以用的k的值
+>二分每一次贪心，如果可以走右边尽量走右边
+>建树：存最小值，至于为什么下面会证明
+------------
+>反证法，如果存最大值得话，当一个值等于左子树的时候我们是不能区分到底是向左还是向右的，因为有可能右边的最左边也有可能和他相等，
+ 但是我们用贪心的思想的话这样值不满足的。
+>证毕
+### 在Code的下面会有第二个代码的完整实现
+------
+## update 
+>好像还有一种树状数组的方法？？
 ### Code
+#### 暴力出奇迹
 ```cpp
 inline int get(int x)
 {
@@ -190,4 +204,76 @@ void solve(int l,int r)
 	return ;
 }
 
+```
+#### 线段树
+```cpp
+#include<bits/stdc++.h>
+#define next NxTe
+#define ls (rt<<1)
+#define rs (rt<<1|1)
+#define mid (l+(r-l)/2)
+#define maxn 200000
+using namespace std;
+
+int tag[maxn<<4],tr[maxn<<4],a[maxn],head[maxn],next[maxn],ans[maxn];
+int n,m;
+vector<int> v[maxn];
+
+void pushdown(int rt)
+{
+	tag[ls]+=tag[rt],tag[rs]+=tag[rt];
+	tr[ls]+=tag[rt],tr[rs]+=tag[rt];
+	tag[rt]=0;
+	return ;
+}
+
+void update(int l,int r,int rt,int L,int R,int C)
+{
+	if(L<=l&&r<=R)
+		{tr[rt]+=C,tag[rt]+=C;return ;}
+	if(tag[rt]) pushdown(rt);
+	if(L<=mid) update(l,mid,ls,L,R,C);
+	if(R>mid) update(mid+1,r,rs,L,R,C);
+	tr[rt]=min(tr[ls],tr[rs]);
+	return ;
+}
+
+int find(int l,int r,int rt,int x)
+{
+	if(l==r) return l;//返回的是地址 
+	if(tag[rt]) pushdown(rt);
+	if(tr[rs]<=x) return find(mid+1,r,rs,x);//右子树满足先选右子树咯 
+	else return find(l,mid,ls,x);
+}
+
+int main()
+{
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++)
+		scanf("%d",&a[i]),head[i]=next[i]=n+1,v[1].push_back(i);
+	for(int i=n;i>=1;i--)
+		next[i]=head[a[i]],head[a[i]]=i;
+	for(int i=1;i<=n;i++)
+		if(head[i]<=n)
+			update(1,n,1,head[i],n,1);
+	int x,y;
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=0;j<v[i].size();j++)
+		{
+			x=v[i][j];
+			y=find(1,n,1,x)+1;
+			v[y].push_back(x);
+			ans[x]++;
+		}
+		update(1,n,1,i,next[i]-1,-1);
+	}
+	for(int i=1;i<=n;i++)
+		printf("%d ",ans[i]);
+	
+	return 0;
+}
+```
+#### 树状数组 待会儿写上
+```cpp
 ```
