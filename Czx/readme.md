@@ -1,12 +1,11 @@
 ## 比赛征程
-> * YES : solved in the contest
-> * Accepted : solved after contest
-> * Waiting : solving
+> * Y : solved in the contest
+> * A : solved after contest
+> * W : solving
+> * X : tan90
 
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
-| contest14 | YES   |   YES   | YES|Waiting|Waiting|X|X
-
-
-
+|contest14|Y|Y|Y|A|W|X|X
+|contest15|Y|Y|Y|W|A|X|X
