@@ -6,6 +6,7 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
+|contest15|Y|  Y   | A| A | A | X|X
 |contest14|Y|  A     | Y | A | W | X|X
 | contest13| Y   |   Y   | Y|A|A|A|W
 
