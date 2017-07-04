@@ -17,7 +17,7 @@
 |contest7|A|W|W|W|W|X|X
 |contest8|Y|Y|Y|A|W|W|W
 |contest9|Y|Y|A|A|W|X|X
-|contest10|A|A|A|A|W|X|X
+|contest10|A|A|A|A|A|X|X
 |contest11|Y|Y|A|W|W|X|X
 |contest12|Y|Y|Y|Y|A|Y|W
 |contest13|Y|Y|Y|Y|Y|A|W
