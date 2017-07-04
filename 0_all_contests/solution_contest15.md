@@ -1,5 +1,7 @@
 [比赛链接](http://codeforces.com/contest/787/)
 
+TODO:E
+
 # 比赛中解决的问题
 ## A
 ### Problem description
@@ -197,73 +199,64 @@ int main()
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-const int maxn=2e6+7;
-int tme,n,q,ss;
-vector<pair<int,int> >v[maxn];
-long long dist[maxn],ver[2][maxn];
-int build(int y,int l,int r,int x)//X=0表示这是正着的线段树，X=1表示这是下面的倒着的线段树 
-{
-	if (l==r) return ver[x][y] = l;
-	ver[x][y] = ++tme; //ver[x][y]表示id为x的线段树的第y个节点代表的虚拟节点的编号 
-	int mid = (l+r)/2;
-	int cl = build(y*2,l,mid,x);
-	int cr = build(y*2+1,mid+1,r,x);
-	if  (x==0) //分树的正反来操作 
-	{
-		v[ver[x][y]].push_back(make_pair(cl,0));//向当前的这个节点加权值为0的出边 
-		v[ver[x][y]].push_back(make_pair(cr,0)); 		
-	} 
-	 else
-	 {
-	 	v[cl].push_back(make_pair(ver[x][y],0));
-	 	v[cr].push_back(make_pair(ver[x][y],0));	//加权值为0的入边 	
-	 }
-	return ver[x][y];	
+typedef long long ll;
+typedef pair<ll,ll> pii;
+#define FILE "read"
+#define MAXN (ll)2e6+10
+struct node{ll y,next,v;}e[MAXN];
+ll n,m,S,cnt,len,root[5],Link[MAXN],dis[MAXN],vis[MAXN],tr[MAXN][2];
+priority_queue<pii,vector<pii >,greater<pii> > q;
+inline ll read(){
+	ll x=0,f=1;  char ch=getchar();
+	while(!isdigit(ch))  {if(ch=='-')  f=-1;  ch=getchar();}
+	while(isdigit(ch))  {x=x*10+ch-'0';  ch=getchar();}
+	return x*f;
 }
-void update(int x,int l,int r,int ll,int rr,int xx,int w,int z)
-{
-	if (ll>r||rr<l) return;
-	if (l>=ll&r<=rr)
-	{
-		if (z==0) v[xx].push_back(make_pair(ver[z][x],w));
-		else v[ver[z][x]].push_back(make_pair(xx,w));
+void insert(ll x,ll y,ll v){e[++len].next=Link[x];Link[x]=len;e[len].y=y;e[len].v=v;}
+void build(ll &p,ll l,ll r,ll opt){
+	if(l==r) {p=l; return;}
+	p=++cnt;  ll mid=(l+r)>>1;
+	build(tr[p][0],l,mid,opt);  build(tr[p][1],mid+1,r,opt);
+	if(!opt) insert(p,tr[p][0],0),insert(p,tr[p][1],0);
+	else insert(tr[p][0],p,0),insert(tr[p][1],p,0);
+}
+void updata(ll p,ll l,ll r,ll x,ll y,ll pos,ll v,ll opt){
+	if(x>r||y<l)  return;
+	if(x<=l&&y>=r){
+		if(opt==2)  insert(pos,p,v);
+		else insert(p,pos,v);
 		return;
-	 } 
-	 int mid =(l+r) /2;
-	 update(x*2,l,mid,ll,rr,xx,w,z);
-	 update(x*2+1,mid+1,r,ll,rr,xx,w,z);
-}
-int main()
-{ 
-	scanf("%d%d%d",&n,&q,&ss);
-	tme = n;
-	build(1,1,n,0);
-	build(1,1,n,1);
-	for (int i=0; i<q; i++)
-	{
-		int id,a,b,c,d;
-		scanf("%d%d%d%d",&id,&a,&b,&c);
-		if (id==1) v[a].push_back(make_pair(b,c));
-		else  {scanf("%d",&d);	update(1,1,n,b,c,a,d,id-2);	}
-	 } 
-	memset(dist,-1,sizeof(dist));
-	priority_queue<pair<long long,int> >Q;
-	dist[ss] = 0; Q.push(make_pair(0,ss));
-	while (!Q.empty())
-	{
-		int now=Q.top().second; Q.pop();
-		for (int i=0; i<v[now].size(); i++) 
-		{
-			int ve = v[now][i].first;
-			int le = v[now][i].second;
-			if (dist[ve]==-1||dist[now]+le<dist[ve]) 
-		    {
-		    	dist[ve] = dist[now] + le;
-		    	Q.push(make_pair(-dist[ve],ve));
-			 } 
-		} 
 	}
-	for (int i=1; i<=n; i++) printf("%lld ",dist[i]);
+	ll mid=(l+r)>>1;
+	updata(tr[p][0],l,mid,x,y,pos,v,opt); 
+	updata(tr[p][1],mid+1,r,x,y,pos,v,opt);
+}
+void dijkstra(){
+	memset(dis,10,sizeof(dis));
+	ll oo=dis[0];  dis[S]=0;
+	q.push(make_pair(dis[S],S));
+	while(!q.empty()){
+		ll v=q.top().first,x=q.top().second; q.pop();
+		if(v>dis[x])  continue;
+		for(ll i=Link[x];i;i=e[i].next)if(dis[x]+e[i].v<dis[e[i].y]){
+			dis[e[i].y]=dis[x]+e[i].v;
+			q.push(make_pair(dis[e[i].y],e[i].y));
+		}
+	}
+	for(ll i=1;i<=n;++i){
+		if(dis[i]==oo)  printf("-1 ");
+		else printf("%I64d ",dis[i]);
+	}
+}
+int main(){
+	n=cnt=read();  m=read();  S=read();
+	build(root[1],1,n,0);  build(root[2],1,n,1);
+	for(ll i=1;i<=m;++i){
+		ll opt=read();
+		if(opt==1)  {ll x=read(),y=read(),v=read();insert(x,y,v);}
+		else  {ll x=read(),l=read(),r=read(),v=read();updata(root[opt-1],1,n,l,r,x,v,opt);}
+	}
+	dijkstra();
 	return 0;
 }
 ```
