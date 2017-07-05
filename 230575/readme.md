@@ -23,5 +23,5 @@
 | contest13 |  Y   |  Y   |  Y  |  Y  |  A  |  A  |  X  
 | contest14 |  Y   |  Y   |  Y  |  A  |  A  |  X  |  X  
 | contest15 |  Y   |  Y   |  Y  |  A  |  A  |  X  |  X  
-
+| xjoi1 |  Y   |  Y   |  A  |  Y  |  X  |  X  |  X 
 
