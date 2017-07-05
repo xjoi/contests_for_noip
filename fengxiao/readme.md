@@ -2,8 +2,9 @@
 > * Y : solved in the contest
 > * A : solved after contest
 > * W : solving
+> * X : 查无此题
 
-
+## Vjudge
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
 ---|---|---|---|---|---|---|---
 |contest0|W|W|W|W|W|W|
@@ -18,15 +19,31 @@
 |contest9|Y|Y|A|A|A|A|
 |contest10|Y|Y|Y|A|A|A|
 |contest11|Y|Y|Y|A|A|W|
-|contest12|Y|A|A|Y|W|A|
+|contest12|Y|A|A|Y|A|A|A|
 |contest13|Y|Y|Y|Y|A|W|W|
 |contest14|Y|Y|A|A|W|X|
 |contest14|Y|Y|A|A|A|X|
 
+## XJOI
+  \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
+---|---|---|---|---|---|---|---
+|contest12|Y|Y|A|Y|X|X|
+|contest13|W|W|W|W|W|W|
+|contest14|W|W|W|W|W|W|
+|contest15|W|W|W|W|W|W|
+|contest16|W|W|W|W|W|W|
+|contest17|W|W|W|W|W|W|
+|contest18|W|W|W|W|W|W|
+|contest19|A|W|W|W|W|W|
+|contest20|Y|Y|Y|A|A|W|
+|contest21|Y|Y|A|A|A|A|
+|contest10|Y|Y|Y|A|A|A|
+|contest11|Y|Y|Y|A|A|W|
+|contest12|Y|A|A|Y|W|A|
+|contest13|Y|Y|Y|Y|A|W|W|
+|contest14|Y|Y|A|A|W|X|
+|contest14|Y|Y|A|A|A|X|
 # 专题征程
-> * YES : solved in the contest
-> * WTM : solving
-> * NON : 查无此题...
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |  K  |  L  |  M  |  N  |  O  |  P  |  Q  |  R  |  S  |  T  |
 ---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---
