@@ -266,9 +266,48 @@ int main(){
 给你n个数，问在不破坏序列的情况下,最少能把这n个数分成几段，且每段中不同的个数小于等于k个，输出k从1到n的答案。
 ### Data Limit： 1<=n<=1e5  Time Limit: 2s
 ### Solution
+#### 解法一:
+首先考虑暴力的方法，每次询问k，暴力扫一遍区间，一直到一段连续的区间充满了k个不同的数后，又要加入一个新的数的时候，再划分出一个新的区间。
 
+这样是O(n^2)的。
 
+但是呢，答案相对于k来讲是有单调性的，而且在很多情况下，一段连续的k对应着同一个答案。
+
+所以就可以二分了，对于l,r，如果k=l以及k=r时的答案相等，l<=k<=r的答案就都相等。
+#### 解法二:
 ### Code
+#### 解法一:
+```c++
+inline int get(int x)
+{
+	memset(col,0,sizeof(col));
+	int cnt=0,ans=1;
+	for(int i=1;i<=n;i++)
+	{
+		if(col[a[i]]==ans) continue;
+		cnt++;
+		col[a[i]]=ans;
+		if(cnt>x) {ans++;cnt=1;col[a[i]]=ans;}
+	}
+	return ans;
+}
+
+void solve(int l,int r)
+{
+	if(l>r) return ;
+	ans[l]=get(l),ans[r]=get(r);
+	if(ans[l]==ans[r])
+	{
+		for(int i=l+1;i<=r-1;i++)
+			ans[i]=ans[l];
+		return ; 
+	}
+	int mid=l+(r-l)/2;
+	solve(l+1,mid),solve(mid,r-1);
+	return ;
+}
+```
+#### 解法二:
 ```c++
 
 ```
