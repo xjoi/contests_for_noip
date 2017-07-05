@@ -51,7 +51,7 @@ int main(){
 直接搜索（事实上，这个数据连记忆化都不需要）。预处理好每秒鱼的位置即可。
 
 ### Code
-	
+```cpp	
 	#include <iostream>
 	#include <cstdio>
 	#include <cstring>
@@ -108,7 +108,7 @@ int main(){
 		dfs(Ax,0,0);
 		printf("%d",ans);
 	}
-
+```
 ## 雪
 ### Problem Description
 > 有n个首尾相连，对称轴在y轴上的等腰三角形组成的树。与x轴的夹角为a的平行光线能照亮多少长度的树。
@@ -120,11 +120,13 @@ int main(){
 
 首先预处理：若a>90°（π/2),说明光线从左侧打来，可以将a变成π-a，使它从右边打来。同时，求出各等腰三角形的高(h)和腰长(L)。
 
-先考虑右半侧:设前面被挡住的光线在x轴上形成的“投影"长度为tx，则由正弦定理求得腰上无法照到的长度l(如图1）。
+先考虑右半侧:设前面被挡住的光线在x轴上形成的“投影"长度为tx，则由正弦定理求得腰上无法照到的长度l=tx\*sin*a*/sin(90°+b-a)(如图1）。
 若l>L说明整个三角形都处在阴影当中，则更新tx=tx-h/tan*a*.(如图2）
 反之，则只有部分三角形处于阴影中，则被照到的部分为L-l。则更新tx=底边长/2.（如图3）
 
 考虑左半侧，方法类似（如图4）（注意tx变化时的加减），但唯一和右侧不同的是，有可能l求出来为负的（也就是a+b<90°）的情况，这时，tx需要加上h/tan*a*.（如图5）
+
+![Figure](https://raw.githubusercontent.com/jhdjames37/contests_for_noip/master/jhd/Figure_ProblemC.JPG)
 
 另外，注意精度问题。【%f输出竟然是四舍五入的！】
 
