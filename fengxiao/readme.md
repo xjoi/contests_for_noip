@@ -18,11 +18,11 @@
 |contest8|Y|Y|Y|A|A|W|
 |contest9|Y|Y|A|A|A|A|
 |contest10|Y|Y|Y|A|A|A|
-|contest11|Y|Y|Y|A|A|W|
+|contest11|Y|Y|Y|A|A|A|
 |contest12|Y|A|A|Y|A|A|A|
 |contest13|Y|Y|Y|Y|A|A|W|
 |contest14|Y|Y|A|A|W|X|
-|contest14|Y|Y|A|A|A|X|
+|contest15|Y|Y|A|A|A|X|
 
 ## XJOI
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
