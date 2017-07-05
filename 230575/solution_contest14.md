@@ -123,7 +123,7 @@ int main()
 ### Data Limit：n<=1e5  Time Limit:2s
 
 ### Solution
-> 我们可以设每一次开根号出来的数为(n+1)×n，则相对上一次开出来的数n×(n-1)，需要加上数的总和为(n+1)^2×n^2-n×(n-1)，则次数为总和除以n，化简得n^3+2×n^2+1,所以第一个数输出2，接下来的数输出i^3+2×i^2+1即可。
+>数学法求解。我们可以设每一次开根号出来的数为(n+1)×n，则相对上一次开出来的数n×(n-1)，需要加上数的总和为(n+1)^2×n^2-n×(n-1)，则次数为总和除以n，化简得n^3+2×n^2+1,所以第一个数输出2，接下来的数输出i^3+2×i^2+1即可。
 
 ### Code
 ```cpp
@@ -247,13 +247,120 @@ int main()
 
 ## E
 ### Problem description
-> 
+> 给出一棵有n个节点的树，每条边都有权值，若点对(u,v)之间的边按顺序组成的十进制码能整除m，则该点对被我们选中。问有多少点对被我们选中。
 
 ### Data Limit：n<=1e5，m<=1e9  Time Limit:3s
 
 ### Solution
-> 
+> 点分治，树的重心，邻接表存边。
 
 ### Code
 ```cpp
+#include<iostream>
+#include<cstdlib>
+#include<cstring>
+#include<cstdio>
+#include<cmath>
+#include<algorithm>
+#include<map>
+#define int long long
+using namespace std;
+const int N=100010;
+int n,m,p,x,y,z,tot=1,ans,root,rmn;
+int fi[N],ne[N<<1],va[N<<1],ar[N<<1],inv[N],si[N];
+map<int,int> mp;
+inline void extgcd(int x,int y,int &a,int &b)
+{
+	if (!y)
+	{
+	    a=1;
+		b=0;
+		return;
+	}
+	extgcd(y,x%y,b,a);
+	b-=x/y*a;
+}
+inline int adde(int x,int y,int z)
+{
+	ar[++tot]=y;
+	va[tot]=z;
+	ne[tot]=fi[x];
+	fi[x]=tot;
+}
+inline void get_size(int x,int fa)
+{
+	si[x]=1;
+	for (int i=fi[x];i;i=ne[i])
+	if (ar[i]&&ar[i]!=fa)
+	{
+		get_size(ar[i],x);
+		si[x]+=si[ar[i]];
+	}
+}
+inline void get_root(int x,int fa,int susi)
+{
+	int mx=susi-si[x];
+	for (int i=fi[x];i;i=ne[i])
+	if (ar[i]&&ar[i]!=fa)
+	{
+		get_root(ar[i],x,susi);
+		mx=max(mx,si[ar[i]]);
+	}
+	if (mx<rmn)
+	{
+		rmn=mx;
+		root=x;
+	}
+}
+inline void get_d1(int x,int fa,int no,int qu)
+{
+	++mp[no];
+	for (int i=fi[x];i;i=ne[i])
+	if (ar[i]&&ar[i]!=fa) get_d1(ar[i],x,(no+va[i]*qu)%p,qu*10%p);
+}
+inline int get_d2(int x,int fa,int no,int de)
+{
+	int sum=mp[(-no*inv[de]%p+p)%p];
+	for (int i=fi[x];i;i=ne[i])
+	if (ar[i]&&ar[i]!=fa) sum+=get_d2(ar[i],x,(no*10+va[i])%p,de+1);
+	return sum;
+}
+inline int cal(int x,int v)
+{
+	mp.clear();
+	get_d1(x,0,v%p,v?10:1);
+	return get_d2(x,0,v%p,v?2:1)-(v==0);
+}
+inline void solve(int x)
+{
+	get_size(x,0);
+	rmn=1e9;
+	get_root(x,0,si[x]);
+	ans+=cal(root,0);
+	for (int i=fi[root];i;i=ne[i])
+	if (ar[i])
+	{
+		ar[i^1]=0;
+		ans-=cal(ar[i],va[i]);
+		solve(ar[i]);
+	}
+}
+main()
+{
+	scanf("%lld%lld",&n,&p);
+	int _temp,inv10;
+	extgcd(10,p,inv10,_temp);
+	inv[1]=1;
+	for (int i=2;i<=n;++i)
+	inv[i]=(inv[i-1]*inv10)%p;
+	for (int i=1;i<n;++i)
+	{
+		scanf("%lld%lld%lld",&x,&y,&z);
+		adde(x+1,y+1,z);
+		adde(y+1,x+1,z);
+	}
+	solve(1);
+	printf("%lld",ans);
+	return 0;
+}
 ```
