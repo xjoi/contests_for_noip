@@ -263,9 +263,8 @@ int main(){
 *****
 ## E TODO:
 ### Problem description
-
-### Data Limit：n <= 1e5  Time Limit: 2s
-
+给你n个数，问在不破坏序列的情况下,最少能把这n个数分成几段，且每段中不同的个数小于等于k个，输出k从1到n的答案。
+### Data Limit： 1<=n<=1e5  Time Limit: 2s
 ### Solution
 
 
