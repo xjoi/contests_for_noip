@@ -20,7 +20,7 @@
 |contest10|Y|Y|Y|A|A|A|
 |contest11|Y|Y|Y|A|A|W|
 |contest12|Y|A|A|Y|A|A|A|
-|contest13|Y|Y|Y|Y|A|W|W|
+|contest13|Y|Y|Y|Y|A|A|W|
 |contest14|Y|Y|A|A|W|X|
 |contest14|Y|Y|A|A|A|X|
 
