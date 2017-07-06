@@ -152,3 +152,41 @@ for(int i=0;i<4;i++)
 ******************/
 ```
 ***
+***
+# #F Tree and Queries
+```
+/******************
+      主要算法：莫队
+******************/
+```
+### 题意
+给你一棵树，问你某棵子树中有多少种颜色的重复数大于等于k。
+### 题解
+先DFS将树拆成区间，  
+然后运用莫队维护。
+### 核心代码
+```
+/******************
+void dfs(int u,int from)
+{
+	l[u]=++cnt;
+	are[cnt]=c[u];
+	for(int i=head[u]; i ;i=nxt[i]) if(to[i]!=from) dfs(to[i],u);
+	r[u]=cnt;
+}
+void solve()
+{
+	int s=0,e=0;
+	for(int i=1;i<=q;i++)
+	{
+		while(s<l[qu[i].x]) {_key[key[are[s]]]--; key[are[s]]--; s++;}
+		while(s>l[qu[i].x]) {s--; key[are[s]]++; _key[key[are[s]]]++; }
+		while(e<r[qu[i].x]) {e++; key[are[e]]++; _key[key[are[e]]]++; }
+		while(e>r[qu[i].x]) { _key[key[are[e]]]--; key[are[e]]--; e--;}
+		ans[qu[i].pos]=_key[qu[i].k];
+	}
+}
+******************/
+```
+***
+

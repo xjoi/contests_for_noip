@@ -151,23 +151,73 @@ void spfa(int s,int type)
 然后开始暴力做法，改了N次莫名WA在13个点，至今不明，然后高级做法倒是对了  
 
 ***
-# #E 
+# #E Digit Tree
 ```
 /******************
-      主要算法：
+      主要算法：树分治（点分治）
 ******************/
 ```
 ### 题意
-
-
+变量意义：n个点，P为模数，边权小于10  
+给你一颗有边权的树，问有多少个点对满足i->j之间的路径之间的由边权组成的数字（每个边权占一位）能被P整除  
 ### 题解
-
+正解为树分治（点分治）。先找到重心u，处理出属于u的不同子树的所有点对并计算，然后递归处理。  
+同时注意细节： 记i->u的距离为d1,u->j距离为d2，则要求满足(d1*10^dep+d2)%P=0 -> d1=d2/10^dep  用逆元处理  
 ### 核心代码
 ```
 /******************
 
+inline void exgcd(int a,int b,int &x,int &y){if(b==0) x=1,y=0 ; else exgcd(b,a%b,y,x),y-=a/b*x; return;}
+void get_sz(int u,int from)
+{
+	sz[u]=1;
+	for(int i=head[u];i;i=nxt[i]) if(to[i]&&to[i]!=from) {get_sz(to[i],u); sz[u]+=sz[to[i]];}
+}
+void get_root(int u,int from,int siz)
+{
+	int maxn=siz-sz[u];
+	for(int i=head[u];i;i=nxt[i]) if(to[i]&&to[i]!=from) {get_root(to[i],u,siz); maxn=max(maxn,sz[to[i]]);}
+	if(maxn<Maxn) {Maxn=maxn;root=u;}
+}
+void get_d1(int u,int from,int num,int tim)
+{
+	key[num]++;
+	for(int i=head[u];i;i=nxt[i])
+		if(to[i]&&to[i]!=from)
+			get_d1(to[i],u,(v[i]*tim+num)%P,tim*10%P);
+}
+int get_d2(int u,int from,int num,int dep)
+{
+	int sum=key[(-num*inv[dep]%P+P)%P];//逆元
+	for(int i=head[u];i;i=nxt[i]) 
+		if(to[i]&&to[i]!=from) 
+			sum+=get_d2(to[i],u,(num*10+v[i])%P,dep+1);
+	return sum;
+}
+int calc(int x,int v)
+{
+	key.clear();
+	get_d1(x,0,v%P,v?10:1);
+	return get_d2(x,0,v%P,v?2:1)-(v==0);
+}
+void dfs(int u)
+{
+	get_sz(u,0); Maxn=1e9;
+	get_root(u,0,sz[u]);
+	ans+=calc(root,0);
+	for(int i=head[root];i;i=nxt[i]) 
+		if(to[i]) 
+		{
+			to[i^1]=0;
+			ans-=calc(to[i],v[i]);
+			dfs(to[i]);
+		}
+}
+	exgcd(10,P,iv,tmp);
+	inv[1]=1;
+	for(i=2;i<=n;i++) inv[i]=(inv[i-1]*iv)%P;
 ******************/
 ```
 ### 错题记录
-
+如果这玩意错了我就不想调了。。
 ***

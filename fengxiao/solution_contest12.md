@@ -198,7 +198,108 @@ bool judge(int t1,int t2)
 ******************/
 ```
 ###错题记录
-
+木有错过
 ***
-F还没查出错误。。。
-G还没做。。。
+# #F 
+```
+/******************
+      主要算法：并查集+几何计算
+******************/
+```
+### 题意
+给你若干点和一些以这些点为端点的边，并且如果边相交了那么四个点都可以连在一起。  
+求最后是否所有点都连在一起
+
+### 题解
+首先考虑边不相交该怎么做：直接用并查集。。  
+然后再加上交点的判断，此处可以用叉积法  
+**注意如果边经过了点那么那个点也将被联通**
+
+### 核心代码
+```
+/******************
+自己的不知道为什么错 暂时不贴
+******************/
+```
+###错题记录
+莫名其妙就错了，估计卡在了精度或者一些神奇的东西上
+***
+# #G 皇后像廣場
+```
+/******************
+      主要算法：DFS
+******************/
+```
+### 题意
+给你9个4*4的正方形，让你拼成一个10*10的正方形，其中每两个有边相邻的小正方形相邻的边要删掉一条  
+要注意的是顺序可以随便取并且正方形可以旋转  
+若有多组合法的输出一组即可
+
+### 题解
+rotate函数预处理出每个正方形旋转后的所有样子
+judge判断邻边是否完全一样
+dfs就是暴力搜索，不需要任何剪枝  
+这道题最锻炼人的就是对mod的操作熟练度
+### 核心代码
+```
+/******************
+inline void rotate(int x)
+{
+	for(int i=0;i<4;i++)
+		for(int j=0;j<4;j++)
+		{
+			map[x+1][j][3-i]=map[x][i][j];
+			map[x+2][3-i][3-j]=map[x][i][j];
+			map[x+3][3-j][i]=map[x][i][j];
+		}
+}
+inline bool cmp1(int x,int y) //  |
+{
+	for(int i=0;i<4;i++) if(map[x][i][3]!=map[y][i][0]) return false;
+	return true;
+}
+inline bool cmp2(int x,int y)// --
+{
+	for(int i=0;i<4;i++) if(map[x][3][i]!=map[y][0][i]) return false;
+	return true;
+}
+bool judge(int p,int x)
+{
+	if(p%3!=0 && !cmp1(ord[p-1],x)) return false;
+	if(p>=3 && !cmp2(ord[p-3],x)) return false;
+	return true;
+}
+void print()
+{
+	int i,j;
+	for(i=0;i<12;i++)
+		for(j=0;j<12;j++)
+			G[i][j]=map[ord[i/4*3+j/4]][i-i/4*4][j-j/4*4];
+	for(i=0;i<12;i++)
+	{
+		for(j=0;j<12;j++)
+			if(i!=4 && i!=8 && j!=4 && j!=8)
+				printf("%d ",G[i][j]);
+		if(i!=4 && i!=8) printf("\n");
+	}
+}
+void dfs(int step)
+{
+	if(step==9) {print(); flag=1; return;}
+	for(int i=0;i<9;i++)
+		if(!used[i])
+		{
+			for(int j=0;j<4;j++)
+				if(judge(step,i*4+j))
+				{
+					used[i]=1; ord[step]=i*4+j;
+					dfs(step+1); if(flag) return;
+					used[i]=0; ord[step]=0;
+				}
+		}
+}
+******************/
+```
+###错题记录
+各种mod错误。。
+***
