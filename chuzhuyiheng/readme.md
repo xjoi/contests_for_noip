@@ -8,3 +8,4 @@
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  
 ---|---|---|---|---|---|---|---
 |contest15|Y|Y|A|W|W|X|X
+|xjoi1|Y|A|A|Y|X|X|X
