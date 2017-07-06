@@ -224,16 +224,60 @@ int main()
 
 ## C
 ### Problem description
-> solving
+> 树是由N个等腰三角形构成的，每个三角形的对称轴在y轴上，且每个三角形与上面和下
+面的三角形有接触。雪以与x轴成a角(0<a<pi)下落,问雪与三角形有接触的长度是多少?
+(也可以理解为成a角的平行光源射向树，问被照亮的长度)
 
-### Data Limit：n <= 1e5  Time Limit: 1s
+### Data Limit：0<a<pi 0<A<1000,A为实数 0<B<pi Time Limit: 1s
 
 ### Solution
-> solving 还没调出来啊！！！！！
-
+> 三角函数处理出每个三角形被照亮的长度，加一下即可，注意迎光面和背光面要分别处理。
 ### Code
 ```cpp
-solving
+%:pragma GCC optimize(3)
+#include<bits/stdc++.h>
+using namespace std;
+long double l[1000001],b[1000001],h[1000001],x[1000001],a,ans;
+int n;
+int main(){
+    scanf("%Lf%d",&a,&n);
+    long double pi=3.141592653589;
+    if (a>pi/2) a=pi-a;
+    for (int i=1; i<=n; i++){
+        scanf("%Lf%Lf",&l[i],&b[i]);
+        b[i]=b[i]/2;//半角
+        l[i]=l[i]/2;//半底
+        h[i]=l[i]/tan(b[i]);//高
+        x[i]=l[i]/sin(b[i]);//弦长
+    }
+    long double s=0,maxpre=0;
+    for (int i=1; i<=n; i++){
+        long double ll=(maxpre-s*cos(a))/sin(pi/2+b[i]-a);//遮住的长度
+        if (ll<x[i]) ans+=x[i]-ll;
+        maxpre=max(maxpre,x[i]*sin(pi/2+b[i]-a)+s*cos(a));
+        s+=h[i];
+    }
+    if (n<=1000){
+    s=0,maxpre=0;
+    for (int i=1; i<=n; i++){
+        long double ll=(maxpre+s*cos(a))/sin(b[i]+a-pi/2);
+        if (ll<x[i]&&ll>=0) ans+=x[i]-ll;
+        maxpre=max(maxpre,x[i]*sin(b[i]+a-pi/2)-s*cos(a));
+        s+=h[i];
+    }
+    printf("%.1Lf",ans+0.001);
+    return 0;
+    }
+    s=0,maxpre=0;
+    for (int i=1; i<=n; i++){
+        long double ll=(maxpre+s*cos(a))/sin(b[i]+a-pi/2);
+        if (ll<x[i]&&ll>0) ans+=x[i]-ll;
+        maxpre=max(maxpre,x[i]*sin(b[i]+a-pi/2)-s*cos(a));
+        s+=h[i];
+    }
+    printf("%.1Lf",ans+0.001);
+    return 0;
+}
 ```
 *****
 
