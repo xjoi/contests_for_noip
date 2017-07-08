@@ -1,7 +1,7 @@
 [比赛链接](http://www.hzxjhs.com:83/contest/753)
 
 # 比赛中解决的问题
-## A
+## A 四面楚歌
 ### Problem description
 > 给出n条直线，n条直线共有m个交点，且保证不存在三条及三条以上的直线交于同一点。问平面被直线分成了几个部分。
 
@@ -54,7 +54,7 @@ int main()
 *****
 
 
-## B
+## B 蒲公英的约定
 ### Problem description
 > 输入n，m，计算n^m分别对19941023和19950814取模的值。
 
@@ -101,7 +101,7 @@ int main()
 
 # 赛后补题
 
-## C
+## C 跨时代
 ### Problem description
 > 给出n根围栏及其长度l[i]，问是否能选出一些围栏，围成一个面积最大的矩形。能输出面积，否则输出“No Solution”。
 
