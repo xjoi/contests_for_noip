@@ -25,3 +25,4 @@
 | contest15 |  Y   |  Y   |  Y  |  A  |  A  |  X  |  X  
 | xjoi1 |  Y   |  Y   |  A  |  Y  |  X  |  X  |  X 
 | xjoi2 |  Y   |  Y   |  A  |  X  |  X  |  X  |  X 
+| xjoi3 |  A   |  A   |  A  |  X  |  X  |  X  |  X 
