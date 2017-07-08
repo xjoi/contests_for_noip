@@ -37,12 +37,6 @@
 |contest19|A|W|W|W|W|W|
 |contest20|Y|Y|Y|A|A|W|
 |contest21|Y|Y|A|A|A|A|
-|contest10|Y|Y|Y|A|A|A|
-|contest11|Y|Y|Y|A|A|W|
-|contest12|Y|A|A|Y|W|A|
-|contest13|Y|Y|Y|Y|A|W|W|
-|contest14|Y|Y|A|A|W|X|
-|contest14|Y|Y|A|A|A|X|
 # 专题征程
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |  K  |  L  |  M  |  N  |  O  |  P  |  Q  |  R  |  S  |  T  |
@@ -50,18 +44,8 @@
 |最小生成树|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|X|X|X|X|X|
 |字典树   |Y|W|W|W|W|W|
 |AC自动机 |W|W|W|W|W|W|
-|线段树1.0|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|W|Y|Y|Y|W|
+|线段树1.0|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|
 |线段树2.0|W|W|W|W|W|W|
-|contest5|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest6|WTM|WTM|WTM|WTM|WTM|WTM|
-|contest7|QAQ|WTM|WTM|WTM|WTM|WTM|
-|contest8|YES|YES|YES|QAQ|QAQ|WTM|
-|contest9|YES|YES|QAQ|QAQ|QAQ|QAQ|
-|contest10|YES|YES|YES|QAQ|QAQ|QAQ|
-|contest11|YES|YES|YES|QAQ|QAQ|WTM|
-|contest12|YES|QAQ|QAQ|YES|WTM|QAQ|
-|contest13|WTM|WTM|WTM|WTM|WTM|WTM|
-
 
 ## 赛后好题推荐
 > * 作比赛的时候碰到了新的知识，假如增加专题，优先做下方的题目再去刷专题
