@@ -28,8 +28,8 @@
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
 ---|---|---|---|---|---|---|---
 |contest12|Y|Y|A|Y|X|X|
-|contest13|W|W|W|W|W|W|
-|contest14|W|W|W|W|W|W|
+|contest13|Y|Y|A|X|X|X|
+|contest14|A|Y|A|X|X|X|
 |contest15|W|W|W|W|W|W|
 |contest16|W|W|W|W|W|W|
 |contest17|W|W|W|W|W|W|
@@ -37,6 +37,19 @@
 |contest19|A|W|W|W|W|W|
 |contest20|Y|Y|Y|A|A|W|
 |contest21|Y|Y|A|A|A|A|
+## Others
+  \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |
+---|---|---|---|---|---|---|---
+|CC_2017_July|Y|Y|Y|W|W|W|W|W|
+|contest13|W|W|W|W|W|W|W|W|
+|contest14|W|W|W|W|W|W|W|W|
+|contest15|W|W|W|W|W|W|W|W|
+|contest16|W|W|W|W|W|W|W|W|
+|contest17|W|W|W|W|W|W|W|W|
+|contest18|W|W|W|W|W|W|W|W|
+|contest19|W|W|W|W|W|W|W|W|
+|contest20|W|W|W|W|W|W|W|W|
+|contest21|W|W|W|W|W|W|W|W|
 # 专题征程
 
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |  K  |  L  |  M  |  N  |  O  |  P  |  Q  |  R  |  S  |  T  |
