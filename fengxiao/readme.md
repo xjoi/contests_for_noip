@@ -39,7 +39,7 @@
 |contest21|Y|Y|A|A|A|A|
 ## Others
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |
----|---|---|---|---|---|---|---
+---|---|---|---|---|---|---|---|---
 |CC_2017_July|Y|Y|Y|W|W|W|W|W|
 |contest13|W|W|W|W|W|W|W|W|
 |contest14|W|W|W|W|W|W|W|W|
