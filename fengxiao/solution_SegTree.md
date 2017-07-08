@@ -332,22 +332,120 @@ void update(int u)//l，r都是全局变量，因为设为函数变量会引发�
 # #M 约会安排
 ```
 /******************
-      主要算法：
+      主要算法：区间合并线段树（恶心）
 ******************/
 ```
 ### 题意
-
-
+给你区间总长度，操作数，有如下操作  
+1：DS x -> 从区间按从前往后的顺序选择一段至少长为x的空区间，标记并输出开始位置  
+2：NS x -> 跟上一个一样，但如果没有空区间的话可以占掉DS的区间  
+3：study l r -> 吧[l,r]变为空区间并输出一句话  
+对于每个操作输出其要求的句子  
 ### 题解
-
+本来区间合并线段树已经够恶心的了，这还搞两个区间。。。  
+维护DS区间和NS区间，NS在DS区间中找位置，如果没找到就在NS区间中找位置，并映射下去（说说容易写起来TMD）  
+记录区间中最大的可用区间，然后比较，如果有更新就push up上去。
 ### 核心代码
 ```
 /******************
+void pu(int u)
+{
+    if(tre[u].s==tre[u].e)return;
+    tre[u].Lmax=tre[lc].Lmax;
+    if(tre[lc].Lmax==tre[lc].e-tre[lc].s+1)tre[u].Lmax+=tre[rc].Lmax;
+    tre[u].Rmax=tre[rc].Rmax;
+    if(tre[rc].Rmax==tre[rc].e-tre[rc].s+1)tre[u].Rmax+=tre[lc].Rmax;
+    tre[u].Max=max(tre[lc].Max,tre[rc].Max);
+    tre[u].Max=max(tre[u].Max,max(tre[u].Lmax,tre[u].Rmax));
+    tre[u].Max=max(tre[u].Max,tre[lc].Rmax+tre[rc].Lmax);
 
+    tre[u].Lmax1=tre[lc].Lmax1;
+    if(tre[lc].Lmax1==tre[lc].e-tre[lc].s+1)tre[u].Lmax1+=tre[rc].Lmax1;
+    tre[u].Rmax1=tre[rc].Rmax1;
+    if(tre[rc].Rmax1==tre[rc].e-tre[rc].s+1)tre[u].Rmax1+=tre[lc].Rmax1;
+    tre[u].Max1=max(tre[lc].Max1,tre[rc].Max1);
+    tre[u].Max1=max(tre[u].Max1,max(tre[u].Lmax1,tre[u].Rmax1));
+    tre[u].Max1=max(tre[u].Max1,tre[lc].Rmax1+tre[rc].Lmax1);
+}
+void pd(int u)
+{
+    if(tre[u].s==tre[u].e)return;
+	if(tre[u].Max==0)
+        tre[lc].Max=tre[lc].Lmax=tre[lc].Rmax=0,
+        tre[rc].Max=tre[rc].Lmax=tre[rc].Rmax=0;
+    if(tre[u].Max==tre[u].e-tre[u].s+1)
+        tre[lc].Max=tre[lc].Lmax=tre[lc].Rmax=tre[lc].e-tre[lc].s+1,
+        tre[rc].Max=tre[rc].Lmax=tre[rc].Rmax=tre[rc].e-tre[rc].s+1;
+    if(tre[u].Max1==0)
+        tre[lc].Max1=tre[lc].Lmax1=tre[lc].Rmax1=0,
+        tre[rc].Max1=tre[rc].Lmax1=tre[rc].Rmax1=0;
+    if(tre[u].Max1==tre[u].e-tre[u].s+1)
+        tre[lc].Max1=tre[lc].Lmax1=tre[lc].Rmax1=tre[lc].e-tre[lc].s+1,
+        tre[rc].Max1=tre[rc].Lmax1=tre[rc].Rmax1=tre[rc].e-tre[rc].s+1;
+}
+void build_tre(int u,int l,int r)
+{
+    tre[u].s=l; tre[u].e=r;
+    tre[u].Max=tre[u].Lmax=tre[u].Rmax=r-l+1;
+    tre[u].Max1=tre[u].Lmax1=tre[u].Rmax1=r-l+1;
+    if(l==r)return;
+    int mi=(l+r)/2;
+    build_tre(lc,l,mi); build_tre(rc,mi+1,r);
+}
+int query(int u,int x)
+{
+    if(tre[u].Max<x)return 0;
+    if(tre[u].Lmax>=x)return tre[u].s;
+    if(tre[lc].Max>=x)return query(lc,x);
+    if(tre[lc].Rmax+tre[rc].Lmax>=x)return tre[lc].e-tre[lc].Rmax+1;
+    return query(rc,x);
+}
+int query1(int u,int x)
+{
+    if(tre[u].Max1<x)return 0;
+    if(tre[u].Lmax1>=x)return tre[u].s;
+    if(tre[lc].Max1>=x)return query1(lc,x);
+    if(tre[lc].Rmax1+tre[rc].Lmax1>=x)return tre[lc].e-tre[lc].Rmax1+1;
+    return query1(rc,x);
+}
+void update(int u,int l,int r)
+{
+    if(l<=tre[u].s && tre[u].e<=r)
+    {
+        tre[u].Max=tre[u].Lmax=tre[u].Rmax=tre[u].e-tre[u].s+1;
+        tre[u].Max1=tre[u].Lmax1=tre[u].Rmax1=tre[u].e-tre[u].s+1;
+        return;
+    }
+    pd(u);
+    if(l<=mid)update(lc,l,r);
+    if(r> mid) update(rc,l,r);
+    pu(u);
+}
+void change_DS(int u,int l,int r)
+{
+    if(l<=tre[u].s && tre[u].e<=r) {tre[u].Max=tre[u].Lmax=tre[u].Rmax=0; return;}
+    pd(u);
+    if(l<=mid) change_DS(lc,l,r);
+    if(r> mid) change_DS(rc,l,r);
+    pu(u);
+}
+void change_NS(int u,int l,int r)
+{
+    if(l<=tre[u].s && tre[u].e<=r)
+    {
+        tre[u].Max=tre[u].Lmax=tre[u].Rmax=0;
+        tre[u].Max1=tre[u].Lmax1=tre[u].Rmax1=0;
+        return;
+    }
+    pd(u);
+    if(l<=mid) change_NS(lc,l,r);
+    if(r> mid) change_NS(rc,l,r);
+    pu(u);
+}
 ******************/
 ```
 ###错题记录
-
+WA了一次，然后到处乱调乱改突然就A了。。。
 ***
 # #N Picture
 ```
