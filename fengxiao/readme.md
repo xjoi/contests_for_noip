@@ -7,22 +7,22 @@
 ## Vjudge
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
 ---|---|---|---|---|---|---|---
-|contest0|W|W|W|W|W|W|
-|contest1|W|W|W|W|W|W|
-|contest2|W|W|W|W|W|W|
-|contest3|W|W|W|W|W|W|
-|contest4|W|W|W|W|W|W|
-|contest5|W|W|W|W|W|W|
-|contest6|W|W|W|W|W|W|
-|contest7|A|W|W|W|W|W|
-|contest8|Y|Y|Y|A|A|W|
-|contest9|Y|Y|A|A|A|A|
-|contest10|Y|Y|Y|A|A|A|
-|contest11|Y|Y|Y|A|A|A|
+|contest0|W|W|W|W|W|W|X|
+|contest1|W|W|W|W|W|W|X|
+|contest2|W|W|W|W|W|W|X|
+|contest3|W|W|W|W|W|W|X|
+|contest4|W|W|W|W|W|W|X|
+|contest5|W|W|W|W|W|W|X|
+|contest6|W|W|W|W|W|W|X|
+|contest7|A|W|W|W|W|W|X|
+|contest8|Y|Y|Y|A|A|W|X|
+|contest9|Y|Y|A|A|A|A|X|
+|contest10|Y|Y|Y|A|A|A|X|
+|contest11|Y|Y|Y|A|A|A|X|
 |contest12|Y|A|A|Y|A|A|A|
 |contest13|Y|Y|Y|Y|A|A|W|
-|contest14|Y|Y|A|A|A|X|
-|contest15|Y|Y|A|A|A|X|
+|contest14|Y|Y|A|A|A|X|X|
+|contest15|Y|Y|A|A|A|X|X|
 
 ## XJOI
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
@@ -44,7 +44,7 @@
 |最小生成树|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|X|X|X|X|X|
 |字典树   |Y|W|W|W|W|W|
 |AC自动机 |W|W|W|W|W|W|
-|线段树1.0|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|
+|线段树1.0|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|X|X|X|
 |线段树2.0|W|W|W|W|W|W|
 
 ## 赛后好题推荐
