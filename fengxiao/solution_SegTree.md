@@ -1,7 +1,7 @@
 # Solution of zhuanti of SegTree
 普通线段树： 一般包含区间修改，区间查询，单点修改，单点查询，实现较为简单  
 区间合并线段树：记录所需区间的左右端点，在适当时进行update，注意区间与区间之间的联系  
-线段树求矩形交（or各种交）：扫描线法：见http://blog.csdn.net/lwt36/article/details/48908031  
+线段树求矩形交（or各种交）：扫描线法：见http://blog.csdn.net/lwt36/article/details/48908031     
 动态开点线段树：多两个数组lc和rc，在需要调用这个区间时申请空间（cnt++）并建立父子关系，极(tou)其(lan)节(bu)省(li)空(san)间(hua)。
 ```
 /******************
