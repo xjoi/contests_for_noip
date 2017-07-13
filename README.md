@@ -1,5 +1,5 @@
 # 使用指南
-每场赛后更新两个文件
+每场赛后更新两个文件 格式请参考solution_template.md readme_template.md
 ## solution_contestid.md(比如solution_contest15.md)
 > * 比赛AC记录
 > * 赛后AC记录
