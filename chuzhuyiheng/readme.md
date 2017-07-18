@@ -12,3 +12,4 @@
 |xjoi2|Y|Y|A|X|X|X|X
 |xjoi3|A|Y|A|X|X|X|X
 |contest16|Y|Y|A|W|W|X|X
+|contest17|Y|Y|Y|A|W|X|X
