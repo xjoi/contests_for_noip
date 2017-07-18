@@ -27,3 +27,4 @@
 | xjoi2 |  Y   |  Y   |  A  |  X  |  X  |  X  |  X  
 | xjoi3 |  A   |  A   |  A  |  X  |  X  |  X  |  X  
 | contest16 |  Y   |  Y   |  Y  |  Y  |  A  |  X  |  X  
+| contest17 |  Y   |  Y   |  Y  |  A  |  A  |  X  |  X  
