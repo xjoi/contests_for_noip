@@ -1,27 +1,45 @@
 #include<bits/stdc++.h>
-#define use_fastio ios::sync_with_stdio(false);cin.tie(0);
+#define use_fastio; ios::sync_with_stdio(false);cin.tie(0);
 using namespace std;
+typedef long long ll;
 string s;
-int k;
-int ma=0;
-int num[30];
-int ans=0;
+string ans="";
+int sum=0;
+int n;
+bool f=0;
 int main() {
-	use_fastio
-	cin>>s;
-	cin>>k;
-	for(int i=1;i<=26;i++) {
-		cin>>num[i];
-		ma=max(ma,num[i]);
+	use_fastio;
+	cin>>n;
+	while(n--) {
+		cin>>s;
+		if(s[0]=='0') {
+			puts("0");
+			return 0;
+		}
+		else if(s[0]!='1') {
+			ans=ans+s;
+			f=1;
+			continue;
+		}
+		else if(s[0]=='1') {
+			for(int i=1;i<s.length();i++) {
+				if(s[i]!='0') {
+					ans+=s;
+					f=1;
+					sum-=(i-1);
+					break;
+				}
+				if(s[i]=='0')
+					sum++;
+			}
+		}
 	}
-	for(int i=0;i<s.length();i++) {
-		ans=ans+num[s[i]-'a'+1]*(i+1);
-//		cout<<ans<<endl;
-	}
-	for(int i=s.length()+1;i<=s.length()+k;i++) {
-		ans=ans+i*ma;
-//		cout<<ans<<endl;
-	}
-	cout<<ans<<endl;
+	if(!f)
+		cout<<"1";
+	else
+		cout<<ans;
+	for(int i=1;i<=sum;i++)
+		cout<<"0";
+	cout<<endl;
 	return 0;
 }
