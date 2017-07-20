@@ -1,7 +1,7 @@
 ### 比赛征程
-\#   |  A  |  B  |  C  |  D  |  E  |  F
---- | --- | --- | --- | --- | --- | --- | ---
-| contest18 | Y | Y | Y | A | Y | A
+  \# |  A  |  B  |  C  |  D  |  E  |  F  
+---|---|---|---|---|---|---|---
+| contest18 |Y|  Y     | Y | A | Y | A
 
 [比赛链接](codeforces.com/contest/197/problems)
 
