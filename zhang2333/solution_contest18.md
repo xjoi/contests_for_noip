@@ -98,7 +98,7 @@ int main(){
 ### Problem description
 > 略。。</br>
 
-### Time Limit: 1s
+### Time Limit: 2s
 ### Solution
 > 略。。</br>
 
