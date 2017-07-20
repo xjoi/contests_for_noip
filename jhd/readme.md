@@ -11,5 +11,6 @@
 |contest 13|Y|Y|Y|Y|A|A|W
 |contest 14|Y|Y|A|A|A|X|X|
 |contest 15|Y|Y|A|A|A|X|X|
-|contest 16|Y|Y|Y|A|W|X|X|
+|contest 16|Y|Y|Y|A|A|X|X|
+|contest 17|Y|Y|Y|A|A|X|X|
 
