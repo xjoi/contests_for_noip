@@ -1,4 +1,5 @@
 [比赛链接](https://vjudge.net/contest/168929)
+
 [Origin](http://codeforces.com/contest/787)
 
 # 比赛中解决的问题
