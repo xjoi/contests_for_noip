@@ -1,6 +1,5 @@
-[比赛链接](http://codeforces.com/contest/787/)
-
-TODO:E
+[比赛链接](https://vjudge.net/contest/168929)
+[Origin](http://codeforces.com/contest/787)
 
 # 比赛中解决的问题
 ## A
