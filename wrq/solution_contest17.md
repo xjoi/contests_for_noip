@@ -30,7 +30,7 @@
 ## B
 ### Problem description
 > 给出一个由小写字母组成的字符串s，并给出每个小写字母的权值w[i]。 
-定义f(s)=Σ(w[s[i]]*i)，求往字符串s中加入k个字母后f(s)最大值
+定义f(s)=Σ(w[s[i]]*i),求往字符串s中加入k个字母后f(s)最大值
 
 ### Data Limit：0 <= |s|,k <= 10^3 , w[i] <= 10^3 Time Limit: 1s
 
@@ -143,7 +143,42 @@ int main(){
 可以根据该特性维护一颗线段树
 
 ### Code
-//to be continue
-
 ```cpp
+ll calcf(ll fx,ll fy,int x){
+	if (x==1) return fx;
+	if (x==2) return fy;
+	return (fx*f[x-2]+fy*f[x-1])%mod;
+}
+ll calcs(ll fx,ll fy,int x){
+	return (calcf(fx,fy,x+2)-fy+mod)%mod;
+}
+void pushdown(int x){
+	if (tree[x].f1){
+		int i=x*2,j=x*2+1,mid=(tree[x].l+tree[x].r)/2;
+		int fx=calcf(tree[x].f1,tree[x].f2,mid-tree[x].l+2);
+		int fy=calcf(tree[x].f1,tree[x].f2,mid-tree[x].l+3);
+		tree[i].f1=(tree[i].f1+tree[x].f1)%mod;
+		tree[i].f2=(tree[i].f2+tree[x].f2)%mod;
+		tree[j].f1=(tree[j].f1+fx)%mod;
+		tree[j].f2=(tree[j].f2+fy)%mod;
+		tree[i].sum=(tree[i].sum+calcs(tree[x].f1,tree[x].f2,mid-tree[x].l+1))%mod;
+		tree[j].sum=(tree[j].sum+calcs(fx,fy,tree[x].r-mid))%mod;
+		tree[x].f1=tree[x].f2=0;
+	}
+	//printf("%d %lld\n",x,tree[x].sum);
+}
+void update(int k,int l,int r){
+	//printf("%d %d %d\n",tree[k].l,tree[k].r,k);
+	if (l<=tree[k].l&&tree[k].r<=r){
+		tree[k].f1=(tree[k].f1+f[tree[k].l-l+1])%mod;
+		tree[k].f2=(tree[k].f2+f[tree[k].l-l+2])%mod;
+		tree[k].sum=(tree[k].sum+calcs(f[tree[k].l-l+1],f[tree[k].l-l+2],tree[k].r-tree[k].l+1))%mod;
+		return;
+	}
+	pushdown(k);
+	int mid=(tree[k].l+tree[k].r)/2;
+	if (l<=mid) update(k*2,l,r);
+	if (r>mid) update(k*2+1,l,r);
+	tree[k].sum=(tree[k*2].sum+tree[k*2+1].sum)%mod;
+}
 ```
