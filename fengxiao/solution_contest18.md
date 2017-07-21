@@ -219,3 +219,62 @@ main()
 ###错题记录
 刚开始爆int了。。
 ***
+# #F Opening Portals 
+```
+/******************
+      主要算法：SPFA+MST
+     Data limit:n and m (1 ≤ n ≤ 1e5, 0 ≤ m ≤ 1e5) xi, yi, wi (1 ≤ xi, yi ≤ n, xi ≠ yi, 1 ≤ wi ≤ 1e9)
+******************/
+```
+### 题意
+给你一幅n个顶点m条边的无向图,图中有k个关键点,当你走到关键点时关键点就会解锁,所有已解锁的关键点可以互相传送,代价为0   
+你的任务是解锁(经过)所有关键点,输出最小代价
+### 题解
+刚开始跑偏了,直接写了个MST,结果自己搞了个数据卡死自己了..  
+然而如果n个点都是关键点的话答案还真是MST,所以就想到用SPFA来缩图(??反正就这意思)  
+记录dis[i]表示i点离最近的关键点的距离,并用pa记录是哪个关键点,那么两个关键点的距离就是dis[i]+cost(i->j)+dis[j](pa[i]!=pa[j])  
+于是这样就相当于把图缩小了,保证了该图所有点都是关键点  
+于是就可以愉快地Kruskal了  
+### 核心代码
+```
+/******************
+	memset(dis,63,sizeof(dis));
+	int i,k=0,x,y,c;
+	scanf("%I64d %I64d",&n,&m);
+	for(i=1;i<=n;i++) fat[i]=i;
+	for(i=1;i<=m;i++) {scanf("%I64d %I64d %I64d",&x,&y,&c); adde(x,y,c); adde(y,x,c);}
+	scanf("%I64d",&K);
+	for(i=1;i<=K;i++) {scanf("%I64d",&x); que.push(x); used[x]=1; dis[x]=0; pa[x]=x;}
+	while(!que.empty())
+	{
+		int p=que.front(); que.pop();
+		for(i=head[p];i;i=nxt[i])
+			if(dis[to[i]]>dis[p]+v[i])
+			{
+				dis[to[i]]=dis[p]+v[i];
+				pa[to[i]]=pa[p];
+				if(!used[to[i]]) {used[to[i]]=1; que.push(to[i]);}
+			}
+		used[p]=0;
+	}
+	for(i=1;i<=lst;i+=2) e[(i+1)/2]=(E){pa[to[i]],pa[to[i+1]],dis[to[i]]+dis[to[i+1]]+v[i]};
+	sort(e+1,e+m+1,cmp);
+	for(i=1;i<=m;i++)
+	{
+		int fx=father(e[i].x),fy=father(e[i].y);
+		//printf("%d %d %d %d\n",e[i].x,e[i].y,fx,fy);
+		if(fx!=fy)
+		{
+			fat[fx]=fy;
+			ans+=e[i].c;
+			k++; if(k==K-1) break;
+		}
+	}
+	ans+=dis[1];
+	printf("%I64d",ans);
+******************/
+```
+###错题记录
+1A
+***
+
