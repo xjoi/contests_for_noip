@@ -25,6 +25,9 @@
 |contest15|Y|Y|A|A|A|X|X|
 |contest16|Y|Y|Y|A|A|X|X|
 |contest17|Y|Y|Y|A|A|X|X|
+|contest18|Y|Y|Y|A|A|A|X|
+|contest19|Y|Y|Y|A|A|X|X|
+|contest20|Y|Y|Y|A|A|X|X|
 
 ## XJOI
   \# |  A  |  B  |  C  |  D  |  E  |  F  |  G  |
