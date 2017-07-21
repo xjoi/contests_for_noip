@@ -198,8 +198,80 @@ int main()
 ### Data Limit：1 ≤ n ≤ 1500  Time Limit: 1s
 
 ### Solution
->不会
+>由于没有3点共线的情况，所以解总是存在的。
+ 我们考虑以当前平面左下角的点p作为树根，对平面上的点以p做基准进行极角排序，则所有点与p点的连线都不会有除了p以外的交点。
+ 现在我们已经会填树根处的点了，对于树根的每个子节点，我们都可以递归的处理以其为根的子树，
+ 假设该子树包含x个节点，我们考虑以一根从p出发，长度不限的射线，从p的正下方开始按逆时针扫过去，
+ 直到扫过的平面包含x个节点即可停止。此时扫过的平面即为该子树应当处理的平面。
+ 每次处理需要先找到左下角的点，然后对当前平面的所有点进行排序，共需要处理n次，所以复杂度O(n^2*logn)。
 
 ### Code
 ```cpp
+#include <cstdio>
+#include <algorithm>
+#include <vector>
+#define inf 0x3f3f3f3f
+#define met(a,b) memset(a,b,sizeof a)
+#define pb push_back
+typedef long long ll;
+using namespace std;
+const int N = 2005;
+const int M = 24005;
+pair<ll,ll>ori;
+vector<ll>edg[N];
+ll n,m,k;
+ll sz[N],ans[N];
+struct man{
+    ll x,y,id;
+    bool operator < (const man & b) const {
+        return (x-ori.first)*(b.y-ori.second) - (y-ori.second)*(b.x-ori.first) > 0;
+    }
+}p[N];
+void dfs1(ll u,ll fa){
+    sz[u]=1;
+    for(int i=0;i<edg[u].size();i++){
+        ll v=edg[u][i];
+        if(v==fa)continue;
+        dfs1(v,u);
+        sz[u]+=sz[v];
+    }
+}
+void dfs2(ll u,ll fa,ll s,ll e){
+    int pos;
+    ll x,y;
+    x=y=1e10;
+    for(int i=s;i<=e;i++){
+        if(p[i].x<x||((p[i].x==x)&&p[i].y<y)){
+            x=p[i].x;y=p[i].y;pos=i;
+        }
+    }
+    ori.first=x;ori.second=y;
+    swap(p[s],p[pos]);
+    sort(p+s+1,p+e+1);
+    ans[p[s].id]=u;
+    int cnt=0;
+    for(int i=0;i<edg[u].size();i++){
+        ll v=edg[u][i];
+        if(v==fa)continue;
+        dfs2(v,u,s+1+cnt,s+1+cnt+sz[v]-1);
+        cnt+=sz[v];
+    }
+}
+int main()
+{
+    ll T,u,v;
+    scanf("%lld",&n);
+    for(int i=1;i<n;i++){
+        scanf("%lld%lld",&u,&v);
+        edg[u].pb(v);edg[v].pb(u);
+    }
+    for(int i=0;i<n;i++){
+        scanf("%lld%lld",&p[i].x,&p[i].y);
+        p[i].id=i;
+    }
+    dfs1(1,0);
+    dfs2(1,0,0,n-1);
+    for(int i=0;i<n;i++)printf("%lld ",ans[i]);printf("\n");
+    return 0;
+}
 ```
