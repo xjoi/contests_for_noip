@@ -210,13 +210,80 @@ int main(){
 
 ## E
 ### Problem description
-> 
+> 给出n个字母,每个字母有A[i]个.将它们排成一圈,求从任意一处断开,所能得到的回文串数量和的最大值.
 
-### Data Limit：n <= 1e5  Time Limit: 1s
+### Data Limit：1 ≤ n ≤ 26, 2 ≤ A[i] ≤100000  Time Limit: 2s
 
 ### Solution
+> 分类讨论.
 > 
+> 1. 若A[i]有两个(或以上)值为奇数,则显然不存在.
+> 2. 若A[i]只有1个奇数,则回文串数量ans=gcd(A[1],..,A[n])(显然为奇数).因为可以将每一个字母分成ans份.每一份都可以构成一个回文串.将它们并起来自然就可以构成ans个回文串
+> 3. 若A[i]全为偶数,答案为ans=gcd(A[1],..,A[n])(显然为偶数).分成ans/2份,将每一份构成回文串,并起来就可以构成ans个回文串
 
 ### Code
 ```cpp
+int A[30];
+int gcd(int a,int b){
+	return b==0?a:gcd(b,a%b);
+}
+int main(){
+	int n;
+	scanf("%d",&n);
+	int sig=0;
+	for (int i=1;i<=n;i++) scanf("%d",&A[i]),sig+=A[i]&1;
+	if (n==1) {
+		printf("%d\n",A[1]);
+		for (int i=1;i<=A[1];i++) printf("a");
+		return 0;
+	}
+	if (sig>1){
+		printf("0\n");
+		for (int i=1;i<=n;i++){
+			for (int j=1;j<=A[i];j++){
+				printf("%c",i-1+'a');
+			}
+		}
+	}else if (sig==1){
+		int x=0;
+		for (int i=1;i<=n;i++){
+			x=gcd(x,A[i]);
+		}
+		printf("%d\n",x);
+		for (int ii=1;ii<=x;ii++){	
+			int pc=0;
+			for (int i=1;i<=n;i++){
+				if (A[i]&1) pc=i;
+				for (int j=1;j<=A[i]/x/2;j++){
+					printf("%c",i-1+'a');
+				}
+			}
+			printf("%c",pc-1+'a');
+			for (int i=n;i>=1;i--){
+				for (int j=1;j<=A[i]/x/2;j++){
+					printf("%c",i-1+'a');
+				}
+			}
+		}
+	}else{
+		int x=0;
+		for (int i=1;i<=n;i++){
+			x=gcd(x,A[i]);
+		}
+		printf("%d\n",x);
+		int t=x/2;
+		for (int ii=1;ii<=t;ii++){
+			for (int i=1;i<=n;i++){
+				for (int j=1;j<=A[i]/x;j++){
+					printf("%c",i-1+'a');
+				}
+			}
+			for (int i=n;i>=1;i--){
+				for (int j=1;j<=A[i]/x;j++){
+					printf("%c",i-1+'a');
+				}
+			}
+		}
+	}		
+}
 ```
