@@ -254,70 +254,82 @@ int main() {
 ### Data Limit:1≤n≤26  Time Limit:2s
 
 ### Solution
-> 求最大公因数。若数列中奇数的个数超过2个，可以判断不存在对称，直接输出0和所有珠子即可。若数列中只有1个奇数，那么答案就是所有数字的gcd，然后构造答案就是输出gcd个回文串，个数为奇数的颜色放在回文串的中间。如果数列中没有奇数，那么答案就是所有数字的gcd，然后构造答案就是输出gcd/2个回文串。
+> 想象在一个环上有两个位置切开后都满足对称性，那么根据对称的传递，环被分割成一段段相等而且回文的序列，每种字符在每一份里面的数量是一样的，每种字符都被分成了相同的份数，这个是他们的公约数，所以最大公约数就是答案，第i种字符在每一份里面的数量是a[i]/gcd,如果有两个或以上奇数（无法构成回文），强行乘以2(这个时候gcd肯定是个偶数，份数变成了gcd/2)，然后每次就首尾各放一个字符来构造这一份字符串，最后输出gcd份或者gcd/2(看有没有乘2来定) 份同样的字符串就好了
 
 ### Code
 ```cpp
-int n,c=0,x,a[30];
-int gcd(int x,int y)
-{
-    if (y==0) return x;
-    return gcd(y,x%y);
+#include <bits/stdc++.h>
+using namespace std;
+
+int gcd(int a, int b) {
+    while(a && b) {
+        if (a < b)  {
+            swap(a, b);
+        }
+        a -= b;
+    }
+    return b;
 }
-int main()
-{
-    scanf("%d",&n);
-    for (int i=1;i<=n;++i)
-    scanf("%d",&a[i]);
-    for (int i=1;i<=n;++i)
-    if (a[i]&1)
-    {
-        ++c;
-        x=i;
-    }
-    if (c>1)
-    {
-        printf("0\n");
-        for (int i=1;i<=n;++i)
-        while (a[i]--)
-        printf("%c",'a'-1+i);
-    }
-    else if (c==1)
-    {
-        c=a[1];
-        for (int i=2;i<=n;++i)
-        c=gcd(c,a[i]);
-        printf("%d\n",c);
-        for (int i=1;i<=c;++i)
-        {
-            for (int j=1;j<=n;++j)
-            if (j!=x)
-            for (int k=1;k<=a[j]/c/2;++k)
-            printf("%c",'a'-1+j);
-            for (int j=1;j<=a[x]/c;++j)
-            printf("%c",'a'-1+x);
-            for (int j=n;j>=1;--j)
-            if (j!=x)
-            for (int k=1;k<=a[j]/c/2;++k)
-            printf("%c",'a'-1+j);
+
+int s[100010];
+int main () {
+    int n, a[26];
+    scanf("%d", &n);
+    int odd = 0; 
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+        if (a[i] & 1) {
+            odd++;
         }
     }
-    else if (c==0)
-    {
-        c=a[1];
-        for (int i=2;i<=n;++i)
-        c=gcd(c,a[i]);
-        printf("%d\n",c);
-        for (int i=1;i<=c/2;++i)
-        {
-            for (int j=1;j<=n;++j)
-            for (int k=1;k<=a[j]/c;++k)
-            printf("%c",'a'-1+j);
-            for (int j=n;j>=1;--j)
-            for (int k=1;k<=a[j]/c;++k)
-            printf("%c",'a'-1+j);
+    if (odd > 1) {
+        puts("0");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < a[i]; j++) {
+                printf("%c", 'a' + i);
+            }
+        }
+        puts("");
+        return 0;
+    }
+    int _gcd = a[0];
+    for (int i = 1; i < n; i++) {
+        _gcd = gcd(_gcd, a[i]);
+    }
+
+    int cnt = 0;
+    int id = -1;
+    for (int i = 0; i < n; i++) {
+        a[i] /= _gcd;
+        if (a[i] & 1) {
+            id = i;
+            cnt++;
+        }
+    }
+    int parts = _gcd;
+    if (cnt > 1) {
+        for (int i = 0; i < n; i++) {
+            a[i] *= 2;
+        }
+        parts /= 2;
+    }
+    memset(s, 0, sizeof(s));
+    int l = 0, r = accumulate(a, a + n, 0) - 1;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < a[i] / 2; j++) {
+            s[l++] = s[r--] = 'a' + i;
+        }
+    }
+    if (cnt == 1) {
+        s[l] = 'a' + id;
+    }
+    printf ("%d\n", _gcd);
+    for (int i = 0; i < parts; i++) {
+        for (int j = 0; s[j]; j++) {
+            printf("%c", s[j]);
         }
     }
     return 0;
 }
+
 ```
