@@ -8,7 +8,7 @@
 
   \# |  A  |  B  |  C  |  D  |  E  |
 ---|---|---|---|---|---|
-|contest0|Y|  Y  |Y| A | A |
+|contest0|Y|  A  |A| A | A |
 
 
 
