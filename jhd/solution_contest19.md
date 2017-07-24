@@ -189,7 +189,7 @@ int main(){
 
 > 复杂度O(9!log*n*^2)
 
-> P.S. 使用主席树维护区间前缀和可以优化到O(9!log*n*)  (实际
+> P.S. 使用主席树维护区间前缀和可以优化到O(9!log*n*) 
 
 ### Code
 (线段树+vector)
@@ -321,10 +321,10 @@ int main(){
 		if (P[A1+1].x==P[A1].x||P[A2+A1].x==P[A2+A1+1].x||P2[B1].y==P2[B1+1].y||P2[B1+B2].y==P2[B1+B2+1].y) continue;
 		if (query(root[A1],1,n,a[1])>y1                  ||query(root[A1],1,n,a[1]+1)<y3||
 		    query(root[A1+A2],1,n,a[1]+a[4])>y1          ||query(root[A1+A2],1,n,a[1]+a[4]+1)<y3||
-			query(root[n],1,n,B1)>y1                     ||query(root[n],1,n,B1+1)<y3||
+		    query(root[n],1,n,B1)>y1                     ||query(root[n],1,n,B1+1)<y3||
 		    query(root[A1],1,n,a[1]+a[2])>y2             ||query(root[A1],1,n,a[1]+a[2]+1)<y4||
-			query(root[A1+A2],1,n,a[1]+a[2]+a[4]+a[5])>y2||query(root[A1+A2],1,n,a[1]+a[2]+a[4]+a[5]+1)<y4||
-			query(root[n],1,n,B1+B2)>y2                  ||query(root[n],1,n,B1+B2+1)<y4) continue;
+		    query(root[A1+A2],1,n,a[1]+a[2]+a[4]+a[5])>y2||query(root[A1+A2],1,n,a[1]+a[2]+a[4]+a[5]+1)<y4||
+		    query(root[n],1,n,B1+B2)>y2                  ||query(root[n],1,n,B1+B2+1)<y4) continue;
 		printf("%.8lf %.8lf\n%.8lf %.8lf",(P[A1].x+P[A1+1].x)/2.0,(P[A1+A2].x+P[A1+A2+1].x)/2.0,(P2[B1].y+P2[B1+1].y)/2.0,(P2[B1+B2].y+P2[B1+B2+1].y)/2.0);
 		return 0;	
 	}while(next_permutation(a+1,a+9+1));
