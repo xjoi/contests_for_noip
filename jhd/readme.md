@@ -14,4 +14,5 @@
 |contest 16|Y|Y|Y|A|A|X|X|
 |contest 17|Y|Y|Y|A|A|X|X|
 |contest 18|Y|Y|Y|A|A|A|X|
+|contest 19|Y|Y|Y|Y|A|X|X|
 
