@@ -218,9 +218,106 @@ int main()
 ### Data Limit:9≤n≤1e5  Time Limit:2s
 
 ### Solution
-> 
+> 全排列+log级别的搜索。
 
 ### Code
 ```cpp
-
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#define maxn 100005
+using namespace std;
+int x[maxn],y[maxn],symx[maxn],symy[maxn],tmp[maxn],a[10];
+int n,cnt=0,h[maxn],xx[maxn],yx[maxn],t[maxn],tx[205][maxn];
+bool cmpx(int u,int v)
+{
+    return x[u]<x[v];
+}
+bool cmpy(int u,int v)
+{
+    return y[u]<y[v];
+}
+int check(int u,int v,int goal)
+{
+    if (xx[u]==-1||yx[v]==-1) return 0;
+    int r=h[u],s=yx[v];
+    for (int i=s;i;i-=i&(-i))
+	goal-=tx[r][i];
+    return goal==0;
+}
+int main()
+{
+    scanf("%d",&n);
+    for (int i=1;i<=n;i++)
+	scanf("%d%d",&x[i],&y[i]);
+    for (int i=1;i<=9;i++)
+	scanf("%d",&a[i]);
+    sort(a+1,a+10);
+    for (int i=1;i<=9;i++)
+    for (int j=i+1;j<=9;j++)
+    for (int k=j+1;k<=9;k++)
+	{
+        int p=a[i]+a[j]+a[k];
+        if (!h[p]) h[p]=++cnt;
+        if (!h[n-p]) h[n-p]=++cnt;
+    }
+    for (int i=1;i<=n;i++)
+	tmp[i]=i;
+    sort(tmp+1,tmp+n+1,cmpy);
+    for (int i=1,opt=1;i<=n;i++)
+	{
+        symy[opt]=y[tmp[i]];
+        if (y[tmp[i]]==y[tmp[i+1]])
+		{
+			yx[i]=-1;
+			y[tmp[i]]=opt;
+		}
+        else
+		{
+			yx[i]=opt;
+			y[tmp[i]]=opt++;
+		}
+    }
+    for (int i=1;i<=n;i++)
+	tmp[i]=i;
+    sort(tmp+1,tmp+n+1,cmpx);
+    for (int i=1,opt=1;i<=n;i++)
+    {
+        symx[opt]=x[tmp[i]];
+        if (x[tmp[i]]==x[tmp[i+1]])
+		{
+			xx[i]=-1;
+			x[tmp[i]]=opt;
+		}
+        else
+		{
+			xx[i]=opt;
+			x[tmp[i]]=opt++;
+		}
+    }
+    for (int i=1;i<=n;i++)
+	{
+        for (int j=y[tmp[i]];j<=n;j+=j&(-j))
+		t[j]++;
+		if (h[i]&&xx[i]!=-1) memcpy(tx[h[i]],t,sizeof(t));
+	}
+	while (1)
+	{
+	    int a1=a[1]+a[2]+a[3],a2=a1+a[4]+a[5]+a[6],a3=a[1]+a[4]+a[7],a4=a3+a[2]+a[5]+a[8];
+		if (check(a3,a1,a[1])&&check(a4,a1,a[1]+a[2])&&check(a3,a2,a[1]+a[4])&&check(a4,a2,a[1]+a[2]+a[4]+a[5]))
+		{
+			printf("%0.10lf %0.10lf\n%0.10lf %0.10lf\n",symx[xx[a3]]+0.5,symx[xx[a4]]+0.5,symy[yx[a1]]+0.5,symy[yx[a2]]+0.5);
+			return 0;
+		}
+		if (!next_permutation(a+1,a+10))
+		{
+			printf("-1\n");
+			return 0;
+		}
+	}
+	return 0;
+}
 ```
