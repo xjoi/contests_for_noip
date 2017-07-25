@@ -154,4 +154,104 @@ int main()
 ```
 *****
 
+## D
+### Problem description
+>有n个技能,给出初始等级和金币m(一金可以给一个技能升一级),求出最大威力.
+威力:满级技能的个数(每个技能满级相同为A)乘mp(给出)+最低等级的技能等级乘mc(给出).
+
+### Data Limit：1 ≤ n ≤ 100 000, 1 ≤ A ≤ 109, 0 ≤ cf, cm ≤ 1000, 0 ≤ m ≤ 1015 Time Limit: 1s
+
+### Solution
+>按等级排序,从后向前枚举升满的技能数,然后二分求出剩下的金币可以做到的最低技能等级的最大值,然后求出此时威力.
+
+### Code
+```cpp
+#include<cstdio>   
+#include<iostream>  
+#include<algorithm>  
+using namespace std;  
+#define MS(x,y) memset(x,y,sizeof(x))  
+#define MC(x,y) memcpy(x,y,sizeof(x))  
+#define MP(x,y) make_pair(x,y)  
+#define ls o<<1  
+#define rs o<<1|1  
+typedef long long LL;  
+typedef unsigned long long UL;  
+typedef unsigned int UI;  
+template <class T1, class T2>inline void gmax(T1 &a, T2 b) { if (b > a)a = b; }  
+template <class T1, class T2>inline void gmin(T1 &a, T2 b) { if (b < a)a = b; }  
+const int N = 1e5 + 10, M = 0, Z = 1e9 + 7, ms63 = 0x3f3f3f3f;  
+int n; LL m;  
+int A; LL cf, cm;  
+LL sum[N];  
+struct Skill  
+{  
+    int v, o;  
+}a[N];  
+bool cmp1(Skill a, Skill b)  
+{  
+    return a.v < b.v;  
+}  
+bool cmp2(Skill a, Skill b)  
+{  
+    return a.o < b.o;  
+}  
+int solve(int R, LL now)  
+{  
+    if (R == 0)return A;  
+    int l = 1;  
+    int r = R;  
+    while (l < r)  
+    {  
+        int mid = (l + r + 1) >> 1;  
+        LL need = (LL)a[mid].v * mid - sum[mid];//»¹ÐèÒª»¨·ÑÕâÃ´¶à²ÅÄÜ´ïµ½µÚmid¸öÈËµÄË®Æ½  
+        if (need > now)r = mid - 1;  
+        else l = mid;  
+    }  
+    LL need = (LL)a[l].v*l - sum[l];  
+    LL more = (now - need) / l;  
+    return min((LL)A, a[l].v + more);  
+}  
+int main()  
+{  
+    while (~scanf("%d%d%lld%lld%lld", &n, &A, &cf, &cm, &m))  
+    {  
+        //µÚÒ»²½£ºÅÅÐò£¬Ê¹µÃ¼¼ÄÜµÈ¼¶ÑÏ¸ñÉýÐò£¬ÒòÎªÊä³ö¸ñÊ½ÐèÒª£¬ÎÒÃÇ»¹Òª¶ÔÓ¦µ½Ã¿¸ö¼¼ÄÜµÄ±àºÅ  
+        for (int i = 1; i <= n; ++i) { scanf("%d", &a[i].v); a[i].o = i; }  
+        sort(a + 1, a + n + 1, cmp1); a[n + 1].v = A;  
+  
+        //µÚ¶þ²¿£ºÎ¬»¤¼¼ÄÜµÈ¼¶Ö®ºÍµÄÇ°×ººÍ£¬ÓÃÓÚºóÀ´¿ìËÙ¼ÆËã¿ÉÌáÉýµÈ¼¶  
+        for (int i = 1; i <= n; ++i)sum[i] = sum[i - 1] + a[i].v;  
+  
+        //µÚÈý²½£¬Ã¶¾ÙÎÒÃÇÊ¹µÃ¶àÉÙÈËµÄ¼¼ÄÜ¼ÓÂú  
+        LL ans = -1;  
+        LL cost = 0;  
+        int v, p;  
+        //Ã¶¾Ù[i+1,n]¼¼ÄÜ¶¼±»ÎÒÃÇÉýµ½¶¥¼¶ÁË,[1,i]±»ÎÒÃÇÎ¬»¤Ò»¸ö¾¡¿ÉÄÜ´óµÄ×îµÍ¼¼ÄÜµÈ¼¶  
+        for (int i = n; i >= 0; --i)  
+        {  
+            cost += A - a[i + 1].v;  
+            if (cost > m)break;  
+            int minv = solve(i, m - cost);  
+            LL tmp = minv*cm + (n - i)*cf;  
+            if (tmp > ans)  
+            {  
+                ans = tmp;  
+                p = i;  
+                v = minv;  
+            }  
+        }  
+  
+        printf("%lld\n", ans);  
+        for (int i = n; i > p; --i)a[i].v = A;  
+        for (int i = 1; i <= p; ++i)gmax(a[i].v, v);  
+        sort(a + 1, a + n + 1, cmp2);  
+        for (int i = 1; i <= n; ++i)printf("%d ", a[i].v); puts("");  
+    }  
+    return 0;  
+} 
+```
+*****
+
+
 
