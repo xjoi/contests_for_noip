@@ -134,3 +134,65 @@ signed main()
 	return 0;
 }
 ```
+## 还有一种线段树的做法。
+```cpp
+#include<bits/stdc++.h>
+#define mid (l+(r-l)/2)
+#define N 110000
+#define ls (rt<<1)
+#define rs (rt<<1|1)
+using namespace std;
+vector<int> v[N<<2];
+int a[N],b[N],c[N],ok=0,n,sx[N],sy[N],fx[N],fy[N],x[N],y[N];
+struct P{int x,y;}p[N];
+bool cmp(P a,P b){return a.x<b.x;}
+
+void build(int l,int r,int rt)
+{
+	for(int i=l;i<=r;i++) v[rt].push_back(p[i].y);
+	if(l==r) return ;
+	sort(v[rt].begin(),v[rt].end());
+	build(l,mid,ls),build(mid+1,r,rs);
+}
+
+int q(int x,int y,int l,int r,int rt)
+{
+	if(p[l].x>x) return 0;
+	if(p[r].x<=x) return upper_bound(v[rt].begin(),v[rt].end(),y)-v[rt].begin();
+	return q(x,y,l,mid,ls)+q(x,y,mid+1,r,rs);
+}
+
+void solve()
+{
+	sx[1]=b[1]+b[4]+b[7],sx[2]=sx[1]+b[2]+b[5]+b[8];
+	sy[1]=b[1]+b[2]+b[3],sy[2]=sy[1]+b[4]+b[5]+b[6];
+	for(int i=1;i<=2;i++)
+		if(x[sx[i]]==x[sx[i]+1]||y[sy[i]]==y[sy[i]+1])return ;
+	for(int i=1;i<=2;i++)
+		fx[i]=x[sx[i]],fy[i]=y[sy[i]];
+	if(q(fx[1],fy[1],1,n,1)!=b[1]
+	||q(fx[1],fy[2],1,n,1)!=b[1]+b[4]
+	||q(fx[2],fy[1],1,n,1)!=b[1]+b[2]
+	||q(fx[2],fy[2],1,n,1)!=b[1]+b[2]+b[4]+b[5]) return ;
+	ok=1;
+	printf("%.8f %.8f\n%.8f %.8f",(double)fx[1]+0.5,(double)fx[2]+0.5,(double)fy[1]+0.5,(double)fy[2]+0.5);
+}
+
+main()
+{
+	cin>>n;
+	for(int i=1;i<=n;i++) 
+		scanf("%d%d",&p[i].x,&p[i].y),x[i]=p[i].x,y[i]=p[i].y;
+	sort(p+1,p+n+1,cmp),sort(x+1,x+n+1);sort(y+1,y+n+1);
+	for(int i=1;i<=9;i++) scanf("%d",&a[i]),c[i]=i;
+	build(1,n,1);
+	for(int i=1;i<=362880&&!ok;i++)
+	{
+		for(int j=1;j<=9;j++) b[j]=a[c[j]];
+		solve();
+		next_permutation(c+1,c+9+1);
+	}
+	if(!ok) puts("-1");
+	return 0;
+}
+````
