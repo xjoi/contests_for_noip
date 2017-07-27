@@ -27,7 +27,6 @@
 
 **Never Give Up**
 
-(这也告诉我们,正义总会战胜邪恶,所以NO PY.2333)
 
 ## About Competition
 
