@@ -26,3 +26,5 @@
 |contest15|Y|Y|Y|A|W|X|X
 |contest17|Y|Y|Y|A|A|X|X
 |contest18|A|Y|A|Y|A|W|X
+|contest19|Y|Y|A|A|A|X|X
+|contest20|Y|Y|A|W|A|Y|W
