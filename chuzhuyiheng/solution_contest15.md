@@ -174,21 +174,153 @@ end.
 
 ## D
 ### Problem description
-> 
-
-### Data Limit：n <= 1e5  Time Limit: 1s
+> 给出一个有向图,求从起始点到各点的最小距离
+有三种边:
+1.从x到y的边
+2.从x到l至r的边
+3.从l至r到y的边
+### Data Limit：1 ≤ n, q ≤ 105, 1 ≤ s ≤ n Time Limit: 2s
 ### Solution
-> 
-
+>暴力连边会超时,又因为是区间连边,所以用线段树
+但要建两颗树,一颗从各点连到树上,另一颗从树上连到各点,然后做SPFA即可.
+注:特判n=1的情况,数组不要开太小.
 ### Code
-```cpp
+```pas
+var
+  n,m,s,q,x,u,v,w,k,h,t,l,r,maxn:int64;
+  i,j:longint;
+  a,c,first,next,last,f,tree,intree,qq,arr:array[-1000000..1000000] of int64;
+  q1:array[1..10000000] of int64;
+  b:array[-1000000..1000000] of boolean;
+function max(a,b:int64):int64;
+begin
+  if a>b then exit(a) else exit(b);
+end;
+procedure add(x,y,z:int64);
+begin
+  //writeln(x,' ',y,' ',z);
+  inc(k); a[k]:=y;;c[k]:=z;
+  if first[x]=0 then first[x]:=k else next[last[x]]:=k;
+  last[x]:=k;
+end;
+procedure build(root:int64;start,ed:int64);
+var
+ mid:longint;
+begin
+  if start=ed then begin tree[root]:=arr[ed];intree[arr[ed]]:=root;exit;end else
+  begin
+    mid:=(start+ed) shr 1;
+    build(root*2,start,mid);
+    build(root*2+1,mid+1,ed);
+  end;
+end;
+procedure push(x:int64);
+begin
+  inc(h);
+  qq[h]:=x;
+end;
+procedure push1(x:int64);
+begin
+  inc(t);
+  q1[t]:=x;
+end;
+procedure add2(root,nstart,nend,ustart,uend,w,hhh:int64);
+var
+  mid:longint;
+begin
+  if (ustart>nend)or(uend<nstart) then exit;
+  if (ustart<=nstart)and(nend<=uend) then
+  begin
+    add(hhh,root,w);// else add(hhh,-root,w);
+    exit;
+  end;
+  mid:=(nstart+nend) shr 1;
+  if root*2<=maxn then add2(root*2,nstart,mid,ustart,uend,w,hhh);
+  if root*2+1<=maxn then add2(root*2+1,mid+1,nend,ustart,uend,w,hhh);
+end;
+procedure add3(root,nstart,nend,ustart,uend,w,hhh:int64);
+var
+  mid:longint;
+begin
+  if (ustart>nend)or(uend<nstart) then exit;
+  if (ustart<=nstart)and(nend<=uend) then
+  begin
+    if tree[root]<>0 then add(root,hhh,w) else add(-root,hhh,w);
+    exit;
+  end;
+  mid:=(nstart+nend) shr 1;
+  if root*2<=maxn then add3(root*2,nstart,mid,ustart,uend,w,hhh);
+  if root*2+1<=maxn then add3(root*2+1,mid+1,nend,ustart,uend,w,hhh);
+end;
+
+begin
+  read(n,q,s);
+  if n=1 then 
+  begin
+    writeln(0);
+    halt;
+  end;
+  for i:=1 to n do arr[i]:=i;
+  build(1,1,n);
+  push(1);
+  repeat
+    inc(t);
+    add(qq[t],qq[t]*2+1,0);
+    if tree[qq[t]*2+1]<>0 then add(qq[t]*2+1,-qq[t],0)
+    else add(-(qq[t]*2+1),-qq[t],0);
+
+    add(qq[t],qq[t]*2,0);
+    if tree[qq[t]*2]<>0 then add(qq[t]*2,-qq[t],0)
+    else add(-qq[t]*2,-qq[t],0);
+
+    maxn:=max(maxn,qq[t]*2+1);
+    if tree[qq[t]*2+1]=0 then
+    begin
+      push(qq[t]*2+1);
+    end;
+    if tree[qq[t]*2]=0 then
+    begin
+      push(qq[t]*2);
+    end;
+  until h<=t;
+  for i:=1 to q do
+  begin
+    read(x);
+    if x=1 then begin read(u,v,w);add(intree[u],intree[v],w);end;
+    if x=2 then begin read(v,l,r,w); add2(1,1,n,l,r,w,intree[v]); end;
+    if x=3 then
+    begin
+    read(v,l,r,w); add3(1,1,n,l,r,w,intree[v]); end;
+  end;
+  for i:=-maxn to maxn do f[i]:=20000000000;
+  f[intree[s]]:=0;    h:=0;t:=0;
+  push1(intree[s]);
+  repeat
+    inc(h);
+    b[q1[h]]:=false;
+    x:=first[q1[h]];
+    while x<>0 do
+    begin
+      if f[q1[h]]+c[x]<f[a[x]] then
+      begin
+        f[a[x]]:=f[q1[h]]+c[x];
+        //writeln('f[',a[x],']=',f[a[x]],' ',x);
+        if not b[a[x]] then push1(a[x]);
+      end;
+      x:=next[x];
+    end;
+  until h>=t;
+  for i:=1 to n do if f[intree[i]]<>20000000000 then write(f[intree[i]],' ')
+  else write('-1 ');
+end.
+
+
 ```
 *****
 
 ## E
 ### Problem description
-> 
-
+>
 ### Data Limit：n <= 1e5  Time Limit: 1s
 
 ### Solution
