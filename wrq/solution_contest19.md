@@ -37,7 +37,7 @@
 ### Solution
 > 因为每条边都连接颜色不同的点，所以黑点的权值和等于白点的权值和。  
 对于一个点，它的权值是周围所有边的权值之和。因此边权<=min(两点的权值)，即决定边权的是权值较小的点。  
-因此
+因此从权值较小的点逐个连接即可
 
 ### Code
 ```cpp
@@ -78,7 +78,7 @@ priority_queue< xint,vector<xint>,cmp > q_white;
 
 # 赛后补题  
 
-## B
+## B Ancient Prophesy
 ### Problem description
 > 给出由数字和‘-’组成的字符串，求在该字符串中出现次数最多的日期。  
 日期格式为dd-mm-yyyy，不足的用0补齐，需保证年份在2013-2015之间
@@ -123,7 +123,7 @@ priority_queue< xint,vector<xint>,cmp > q_white;
 *****
 
 
-## C
+## C Balls and Boxes
 ### Problem description
 > 有n个箱子，每个箱子里都有一定数量的球。  
 现在取出某个箱子里的所有球，从后面一个位置开始，依次在后面的箱子里放入一个球，放完为止。若到第n个还没放完，返回第一个继续放。
@@ -159,7 +159,7 @@ priority_queue< xint,vector<xint>,cmp > q_white;
 ```
 *****
 
-## E
+## E Dividing Kingdom
 ### Problem description
 > 给定平面上n个点和9个数，求两条平行于x轴的直线和两条平行于y轴的直线，使得被直线分成的9个区域中，
 点的数量和给定的9个数对应
@@ -173,5 +173,81 @@ priority_queue< xint,vector<xint>,cmp > q_white;
 
 ### Code
 ```cpp
-//to be continue...还没调出来
+struct Point{
+	int x,y;
+	void read(){
+		scanf("%d%d",&x,&y);
+	}
+	Point(){}
+	Point(int _x,int _y):x(_x),y(_y){}
+	bool operator < (const Point &a){
+		return x<a.x||x==a.x&&y<a.y;
+	}
+}p[100010];
+
+void build(int l,int r,int k){
+	tree[k].clear();
+	for (int i=l;i<=r;++i) tree[k].push_back(p[i].y);
+	if (l==r) return;
+	int mid=(l+r)/2;
+	build(l,mid,k*2); build(mid+1,r,k*2+1);
+	sort(tree[k].begin(),tree[k].end());
+}
+int query(int l,int r,int k,int x,int y,int cnt){
+	if (x<=l&&r<=y){
+		int ll=0,rr=tree[k].size()-1;
+		if (tree[k][0]>cnt||ll>rr) return 0;
+		int ans=0;
+		while (ll<=rr){
+			int mid=(ll+rr)/2;
+			if (tree[k][mid]<=cnt) ll=mid+1,ans=mid; else rr=mid-1;
+		}
+	//	printf("%d\n",ans+1);
+		return ans+1;
+	}
+	int mid=(l+r)/2,ans=0;
+	if (x<=mid) ans+=query(l,mid,k*2,x,y,cnt);
+	if (y>mid) ans+=query(mid+1,r,k*2+1,x,y,cnt);
+	return ans;
+}
+bool check(int x1,int x2,int y1,int y2){
+	if (x1+1>=n||x1+x2+1>=n||y1+1>=n||y1+y2+1>=n) return 0;
+	if (x[x1]==x[x1+1]||x[x1+x2]==x[x1+x2+1]) return 0;
+	if (y[y1]==y[y1+1]||y[y1+y2]==y[y1+y2+1]) return 0;
+	int m=query(1,n,1,1,x1,y[y1]); if (m!=num[1]) return 0;
+	m=query(1,n,1,1,x1,y[y1+y2]); if (m!=num[1]+num[4]) return 0;
+	m=query(1,n,1,x1+1,x1+x2,y[y1]); /*printf("%d %d %d\n",x1+1,x2+x1,m);*/ if (m!=num[2]) return 0;
+	m=query(1,n,1,x1+1,x1+x2,y[y1+y2]); if (m!=num[2]+num[5]) return 0;
+	return 1;
+}
+void dfs(int s){
+	if (flag) return;
+	if (s==9){
+		int y1=num[1]+num[2]+num[3],y2=num[4]+num[5]+num[6];
+		int x1=num[1]+num[4]+num[7],x2=num[2]+num[5]+num[8];
+		if (check(x1,x2,y1,y2)){
+			double ansx1,ansx2,ansy1,ansy2;
+			printf("%.10f %.10f\n",x[x1]+0.5,x[x1+x2]+0.5);
+			printf("%.10f %.10f\n",y[y1]+0.5,y[y1+y2]+0.5);
+			flag=1;
+		}
+		return;
+	}
+	for (int i=1;i<=9;++i)
+		if (!b[i]){
+			b[i]=1; num[s+1]=a[i];
+			dfs(s+1);
+			b[i]=0;
+		}
+}
+
+	for (int i=1;i<=n;++i) p[i].read();
+	for (int i=1;i<=n;++i) x[i]=p[i].x,y[i]=p[i].y;
+	for (int i=1;i<=9;++i) scanf("%d",&a[i]);
+	sort(p+1,p+1+n);
+	sort(x+1,x+1+n);
+	sort(y+1,y+1+n);
+	build(1,n,1);
+	flag=0; dfs(0);
+	if (!flag) printf("-1");
 ```
