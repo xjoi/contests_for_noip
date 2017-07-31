@@ -122,32 +122,149 @@ int main()
 
 ### Code
 ```cpp
-```
-*****
+#include<cstdio>
+int n,i,j,k=0;
+int a[6000][6000];
+bool bo[10000000],ans;
 
 
-## D
-### Problem description
-> 
+void dfs1(int x)
+{
+	if (bo[x])return;
+	bo[x]=true;
+	for (int i=1;i<=n;i++)if (a[i][x]>0)dfs1(i);
+	return;
+}
+void dfs2(int x)
+{
+	if (bo[x])return;
+	bo[x]=true;
+	for (int i=1;i<=n;i++)if (a[x][i]>0)dfs2(i);
+	return;
+}
+int main()
+{
+	scanf("%d",&n);
+	for (i=1;i<=n;i++)
+	for (j=1;j<=n;j++)
+	{
+		scanf("%d",&a[i][j]);
+		//if (a[i][j]>0&&i!=j)
+		//add(i,j);
+	}
+	/*for (i=1;i<=n;i++)
+	{
+		h=0,t=0;
+		for (j=1;j<=n;j++)bo[j]=false;
+		dfs(i);
+		for (j=1;j<=n;j++)if (!bo[j])
+		{
+			puts("NO");
+			return 0;
+		}
+	}*/
+	ans=true;
+	dfs1(1);
+	for (i=1;i<=n;i++)
+	{
+		ans&=bo[i];
+		bo[i]=false;
+	}
+	dfs2(1);
+	for (i=1;i<=n;i++)
+	{
+		ans&=bo[i];
+		bo[i]=false;
+	}
+	if (ans)puts("YES");else puts("NO");
+	return 0;
+}
 
-### Data Limit：n <= 1e5  Time Limit: 1s
-### Solution
-> 
-
-### Code
-```cpp
 ```
 *****
 
 ## E
 ### Problem description
-> 
+>给出一个数列,和m个坏指数,进行几次修改,使所有数的f()值之和最大.
+修改:取一个数r,将1到r的数全除以其最大公约数.
+f():f(1)=0,其他的将原数分解质因数后好质数数-坏质数数=其f值.
 
-### Data Limit：n <= 1e5  Time Limit: 1s
+### Data Limit：1 ≤ n, m ≤ 5000 Time Limit: 1s
 
 ### Solution
-> 
+>从后向前扫,如果在某处修改后对答案有利,就修改,否则不改.
 
 ### Code
 ```cpp
+#include<cstdio>
+int n,m,i,j;
+long long a[10000],b[10000],g[10000],top=0,p[1000000],minii,ans=0,mini,ff[20000000],hhh;
+bool bo[10000000],booo;
+long long gcd(long long a,long long b)
+{
+	if (b>a)return gcd(b,a);
+	if (b==0)return a;else return gcd(b,a%b);
+}
+long long f(long long x)
+{
+	int ttt=x;
+	if (x==1)return 0;
+	if (x<10000000&&ff[x]!=0)return ff[x];
+	long long ans=0,i,j;
+	for (i=1;i<=m;i++)
+	if (x>=b[i])
+	while (x%b[i]==0)
+	{
+		ans--;
+		x=x/b[i];
+		if (x<10000000&&ff[x]!=0)return ff[x]+ans;
+	}
+	for (i=1;i<=top;i++)
+	if (x>=p[i])
+	while (x%p[i]==0)
+	{
+		ans++;
+		x=x/p[i];
+		if (x<10000000&&ff[x]!=0)return ff[x]+ans;
+	}
+	if (x!=1)ans++;
+	if (ttt<10000000)ff[ttt]=ans;
+	return ans;
+	
+}
+int main()
+{
+	scanf("%d%d",&n,&m);
+	for (i=1;i<=n;i++)scanf("%d",&i[a]);
+	for (i=1;i<=m;i++)scanf("%d",&b[i]);g[1]=a[1];
+	for (i=2;i<=n;i++)g[i]=gcd(g[i-1],a[i]);
+	for (i=2;i<=100000;i++)
+	if (!bo[i])
+	{
+		bo[i]=true;
+		for (j=2;j<=100000;j++)
+		if (i*j>100000)break;else bo[i*j]=true;
+		booo=false;
+		for (j=1;j<=m;j++)
+		{
+			if (i==b[j])booo=true;
+		}
+		if (!booo)
+		{
+		    top++;
+		    p[top]=i;
+	    }
+	}
+	int div=1;
+	for (i=n;i>=1;i--)
+	{
+		int tmp=f(g[i]/div);
+        if(tmp<0) div = g[i];
+        a[i] /= div; 
+	}
+	for (i=1;i<=n;i++)
+	ans+=f(a[i]);
+	printf("%d",ans);
+	return 0;
+}
 ```
